@@ -20,10 +20,14 @@ GameManager="*res://globals/GameManager.gd"
 
 [display]
 
-window/size/viewport_width=640
+window/size/viewport_width=180
 window/size/viewport_height=320
 window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/supersprite2d/plugin.cfg")
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
