@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://bg7hmcutdesfl"]
+
+[ext_resource type="Texture2D" uid="uid://cc63t6gnn4dvx" path="res://assets/art/BUDS/Bam/AirAsia Buds-Turnaround_BAM-SIDE.svg" id="1_tu5ap"]
+[ext_resource type="Script" path="res://src/Scripts/PlayableCharacters/sl_bam.gd" id="1_yfyix"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lxil4"]
+size = Vector2(25, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tt7wc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tu5ap")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}]
+
+[node name="SL_Bam" type="Area2D"]
+position = Vector2(25, 18)
+script = ExtResource("1_yfyix")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_lxil4")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 1)
+scale = Vector2(0.0340278, 0.0340278)
+sprite_frames = SubResource("SpriteFrames_tt7wc")
+animation = &"idle"
+frame_progress = 0.646746

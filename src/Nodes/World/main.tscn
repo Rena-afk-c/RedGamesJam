@@ -1,12 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://c61fva6qp43g1"]
+[gd_scene load_steps=8 format=3 uid="uid://c61fva6qp43g1"]
 
 [ext_resource type="PackedScene" uid="uid://bcyx52vo85dkq" path="res://src/Nodes/World/luggage_spawner.tscn" id="1_g3cta"]
+[ext_resource type="PackedScene" uid="uid://bpngs84hwd5fv" path="res://src/Nodes/SelectableCharacters/sl_tappy.tscn" id="2_35b71"]
+[ext_resource type="PackedScene" uid="uid://b6ldiotx6774q" path="res://src/Nodes/SelectableCharacters/sl_biggie.tscn" id="3_4rnlw"]
+[ext_resource type="PackedScene" uid="uid://7s8gjoot1l5u" path="res://src/Nodes/SelectableCharacters/sl_ogu.tscn" id="4_wxhtd"]
+[ext_resource type="PackedScene" uid="uid://bg7hmcutdesfl" path="res://src/Nodes/SelectableCharacters/sl_bam.tscn" id="5_tvgod"]
 
 [sub_resource type="Curve2D" id="Curve2D_7s41v"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 32, 44.4405, 0, 0, 0, 0, 28, 50.5006, 0, 0, 0, 0, 29, 59.5907, 0, 0, 0, 0, 32, 249.473, 0, 0, 0, 0, 31, 304.014, 0, 0, 0, 0, 36, 317.144, 0, 0, 0, 0, 48, 317.144, 0, 0, 0, 0, 76, 322.194, 0, 0, 0, 0, 107, 324.214, 0, 0, 0, 0, 138, 317.144, 0, 0, 0, 0, 139, 138.372, 0, 0, 0, 0, 139, 123.222, 9.60513, 3.03771, -9.60513, -3.03771, 139, 47.4706, 0, 0, 0, 0, 127, 40.4005, 0, 0, 0, 0, 98, 41.4105, 0, 0, 0, 0, 45, 38.3805, 0, 0, 0, 0, 32, 44.4405)
 }
 point_count = 17
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qyfwh"]
+size = Vector2(55, 52)
 
 [node name="Main" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [59.0]
@@ -17,15 +24,34 @@ rotation = 1.5509
 path = NodePath("../ConveyerBelt")
 
 [node name="SpawnPoint" type="Node2D" parent="LuggageSpawner"]
-position = Vector2(90.8427, 8.8092)
+position = Vector2(91.2953, -64.1964)
 
 [node name="Env" type="Node2D" parent="."]
 
 [node name="ConveyerBelt" type="Path2D" parent="."]
-position = Vector2(16, -28)
+position = Vector2(-17, -28)
 scale = Vector2(1, 0.990087)
 curve = SubResource("Curve2D_7s41v")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="ConveyerBelt"]
 position = Vector2(32, 44.4405)
 rotation = 2.15421
+
+[node name="OverFlowArea" type="Area2D" parent="."]
+position = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OverFlowArea"]
+position = Vector2(149, 25)
+shape = SubResource("RectangleShape2D_qyfwh")
+
+[node name="SL_Tappy" parent="." instance=ExtResource("2_35b71")]
+position = Vector2(153, 189)
+
+[node name="SL_Biggie" parent="." instance=ExtResource("3_4rnlw")]
+position = Vector2(152, 117)
+
+[node name="SL_Ogu" parent="." instance=ExtResource("4_wxhtd")]
+position = Vector2(152, 153)
+
+[node name="SL_Bam" parent="." instance=ExtResource("5_tvgod")]
+position = Vector2(153, 82)
