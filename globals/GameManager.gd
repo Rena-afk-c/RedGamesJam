@@ -1,5 +1,4 @@
 extends Node
-
 enum Characters {TAPPY, BIGGIE, BAM, OGU}
 
 var selected_character: Characters = Characters.TAPPY  
@@ -13,7 +12,7 @@ func _ready():
 
 func select_character(character: Characters):
 	selected_character = character
-	character_selected.emit(selected_character)
+	character_selected.emit(character)
 	print("Character selected in GameManager: ", Characters.keys()[selected_character])
 
 func get_selected_character() -> Characters:
