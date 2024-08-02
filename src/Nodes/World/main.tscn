@@ -1,12 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://c61fva6qp43g1"]
+[gd_scene load_steps=18 format=3 uid="uid://c61fva6qp43g1"]
 
 [ext_resource type="FontFile" uid="uid://dr7g5bnuqelmi" path="res://assets/fonts/monogram.ttf" id="1_c6fta"]
 [ext_resource type="PackedScene" uid="uid://bcyx52vo85dkq" path="res://src/Nodes/World/luggage_spawner.tscn" id="1_g3cta"]
 [ext_resource type="Script" path="res://src/Scripts/Controllers/FlightDisplay.gd" id="1_ph16u"]
 [ext_resource type="PackedScene" uid="uid://bpngs84hwd5fv" path="res://src/Nodes/SelectableCharacters/sl_tappy.tscn" id="2_35b71"]
 [ext_resource type="PackedScene" uid="uid://b6ldiotx6774q" path="res://src/Nodes/SelectableCharacters/sl_biggie.tscn" id="3_4rnlw"]
+[ext_resource type="PackedScene" uid="uid://cwevdoftrw2i2" path="res://src/Nodes/PowerUps/Luggage_Automata.tscn" id="3_nv1f4"]
 [ext_resource type="PackedScene" uid="uid://7s8gjoot1l5u" path="res://src/Nodes/SelectableCharacters/sl_ogu.tscn" id="4_wxhtd"]
+[ext_resource type="Script" path="res://src/Scripts/Controllers/WeatherSystem.gd" id="5_6f4pu"]
 [ext_resource type="PackedScene" uid="uid://bg7hmcutdesfl" path="res://src/Nodes/SelectableCharacters/sl_bam.tscn" id="5_tvgod"]
+[ext_resource type="Shader" path="res://assets/shaders/god_rays.gdshader" id="10_7axre"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toyci"]
 bg_color = Color(1, 0.341176, 0.290196, 1)
@@ -33,6 +36,23 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 32, 44.4405, 0, 0, 0, 0, 28, 50.5006, 0, 0, 0, 0, 29, 59.5907, 0, 0, 0, 0, 32, 249.473, 0, 0, 0, 0, 31, 304.014, 0, 0, 0, 0, 36, 317.144, 0, 0, 0, 0, 48, 317.144, 0, 0, 0, 0, 76, 322.194, 0, 0, 0, 0, 107, 324.214, 0, 0, 0, 0, 138, 317.144, 0, 0, 0, 0, 139, 138.372, 0, 0, 0, 0, 139, 123.222, 9.60513, 3.03771, -9.60513, -3.03771, 139, 47.4706, 0, 0, 0, 0, 127, 40.4005, 0, 0, 0, 0, 98, 41.4105, 0, 0, 0, 0, 45, 38.3805, 0, 0, 0, 0, 32, 44.4405)
 }
 point_count = 17
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vqfu4"]
+shader = ExtResource("10_7axre")
+shader_parameter/color = Color(0.631373, 0.780392, 0.952941, 1)
+shader_parameter/angle = -0.3
+shader_parameter/position = -0.2
+shader_parameter/spread = 0.5
+shader_parameter/cutoff = 0.052
+shader_parameter/falloff = 0.2
+shader_parameter/edge_fade = 0.474
+shader_parameter/speed = 1.0
+shader_parameter/ray1_density = 8.0
+shader_parameter/ray2_density = 30.0
+shader_parameter/ray2_intensity = 0.3
+shader_parameter/hdr = true
+shader_parameter/seed = 5.0
+shader_parameter/time_offset = 0.0
 
 [node name="Main" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [59.0]
@@ -82,6 +102,9 @@ theme_override_fonts/font = ExtResource("1_c6fta")
 theme_override_font_sizes/font_size = 32
 text = " 0"
 
+[node name="PU_Luggage_Automata" parent="HUD/C_Flight_Display" instance=ExtResource("3_nv1f4")]
+position = Vector2(-123, 116)
+
 [node name="LuggageSpawner" parent="." node_paths=PackedStringArray("path") instance=ExtResource("1_g3cta")]
 position = Vector2(25, 31)
 rotation = 1.5509
@@ -128,6 +151,12 @@ position = Vector2(91.2953, -64.1964)
 
 [node name="Env" type="Node2D" parent="."]
 
+[node name="WeatherSystem" type="CanvasModulate" parent="Env"]
+position = Vector2(14, 114)
+script = ExtResource("5_6f4pu")
+mid_color = Color(0.717647, 0.286275, 0.290196, 1)
+cycle_duration = 20.0
+
 [node name="Characters" type="Node2D" parent="."]
 position = Vector2(25, 31)
 rotation = 1.5509
@@ -156,6 +185,14 @@ curve = SubResource("Curve2D_7s41v")
 [node name="PathFollow2D" type="PathFollow2D" parent="ConveyerBelt"]
 position = Vector2(32, 44.4405)
 rotation = 2.15421
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_vqfu4")
+offset_left = 25.0
+offset_top = -73.0
+offset_right = 139.0
+offset_bottom = 124.0
+rotation = -0.294067
 
 [connection signal="area_entered" from="LuggageSpawner/CollectPointRoot/BamCollectPoint" to="LuggageSpawner" method="_on_bam_collect_point_area_entered"]
 [connection signal="area_exited" from="LuggageSpawner/CollectPointRoot/BamCollectPoint" to="LuggageSpawner" method="_on_bam_collect_point_area_exited"]

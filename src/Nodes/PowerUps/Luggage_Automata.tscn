@@ -2,28 +2,41 @@
 
 [ext_resource type="Script" path="res://src/Scripts/Controllers/PowerUp_LA.gd" id="1_8q2w8"]
 [ext_resource type="Shader" path="res://assets/shaders/bubble_effect.gdshader" id="2_7aqdx"]
+[ext_resource type="Texture2D" uid="uid://cspjmm2gauyko" path="res://icon.svg" id="2_7jk71"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g65rl"]
+shader = ExtResource("2_7aqdx")
+shader_parameter/bubble_color = Color(0.945098, 0.698039, 0.984314, 0.215686)
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_thickness = 0.03
+shader_parameter/wobble_speed = 1.5
+shader_parameter/wobble_amplitude = 0.02
+shader_parameter/sparkle_speed = 5.0
+shader_parameter/num_sparkles = 3
+shader_parameter/pop_bubble = true
+shader_parameter/pop_progress = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3r17h"]
 radius = 15.0333
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3advc"]
-shader = ExtResource("2_7aqdx")
-shader_parameter/bubble_color = Color(0.701961, 0.8, 1, 0.219608)
-shader_parameter/border_thickness = 0.469
-shader_parameter/wobble_speed = 2.423
-shader_parameter/wobble_amplitude = 0.1
-
-[sub_resource type="SphereMesh" id="SphereMesh_pewq0"]
-
 [node name="PU_Luggage_Automata" type="Area2D"]
+position = Vector2(23, 20)
 script = ExtResource("1_8q2w8")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_3r17h")
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(3, 1)
+scale = Vector2(0.150391, 0.150391)
+texture = ExtResource("2_7jk71")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-modulate = Color(0.890196, 0.0901961, 0.321569, 1)
-material = SubResource("ShaderMaterial_3advc")
-position = Vector2(0, 5.96046e-08)
-scale = Vector2(23.896, 23.896)
-mesh = SubResource("SphereMesh_pewq0")
+[node name="BubbleOverlay" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_g65rl")
+offset_left = -12.0
+offset_top = -14.0
+offset_right = 18.0
+offset_bottom = 16.0
+mouse_filter = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 1)
+shape = SubResource("CircleShape2D_3r17h")
+debug_color = Color(0.756863, 0.270588, 0.898039, 0.419608)

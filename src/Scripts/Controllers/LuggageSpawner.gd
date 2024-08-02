@@ -16,6 +16,8 @@ var luggage_list: Array[PathFollow2D] = []
 }
 var active_collection_point: Area2D
 
+@export var glow_fade_time: float = 0.3  # Time for the glow to fade in/out
+
 func _ready():
 	GameManager.character_selected.connect(_on_character_changed)
 	update_active_collection_point()
@@ -27,6 +29,7 @@ func _process(delta: float) -> void:
 		spawn_timer = 0
 	
 	move_luggage(delta)
+	update_luggage_highlight()
 
 func can_spawn_luggage() -> bool:
 	if luggage_list.is_empty():
@@ -44,6 +47,11 @@ func spawn_luggage() -> void:
 	new_path_follow.progress = 0
 	new_path_follow.rotation = 0
 	new_luggage.position = Vector2.ZERO
+	
+	# Ensure the GlowLight is initially faded out
+	var glow_light = new_luggage.get_node("GlowLight")
+	if glow_light:
+		glow_light.energy = 0
 	
 	luggage_list.append(new_path_follow)
 
@@ -112,6 +120,11 @@ func collect_luggage(luggage: RigidBody2D, path_follow: PathFollow2D) -> void:
 	tween.tween_property(luggage, "scale", Vector2(1, 1), 0.1).set_delay(0.1)
 	tween.tween_property(luggage, "modulate:a", 0, 0.5).set_delay(0.2)
 	
+	# Fade out the GlowLight when collecting
+	var glow_light = luggage.get_node("GlowLight")
+	if glow_light:
+		tween.tween_property(glow_light, "energy", 0, glow_fade_time)
+	
 	tween.tween_callback(func():
 		if is_instance_valid(path_follow) and path_follow.is_inside_tree():
 			luggage_list.erase(path_follow)
@@ -136,3 +149,28 @@ func update_active_collection_point() -> void:
 func _on_character_changed(character: GameManager.Characters) -> void:
 	update_active_collection_point()
 	print("LuggageSpawner: Character changed to ", GameManager.Characters.keys()[character])
+
+func update_luggage_highlight() -> void:
+	for path_follow in luggage_list:
+		if path_follow.get_child_count() > 0:
+			var luggage = path_follow.get_child(0)
+			if luggage is RigidBody2D and is_instance_valid(luggage) and luggage.is_inside_tree():
+				var luggage_area = luggage.get_node_or_null("CollectionPointArea")
+				var glow_light = luggage.get_node("GlowLight")
+				if luggage_area and active_collection_point and luggage_area.overlaps_area(active_collection_point):
+					if can_collect_luggage(luggage):
+						fade_in_glow_light(glow_light)
+					else:
+						fade_out_glow_light(glow_light)
+				else:
+					fade_out_glow_light(glow_light)
+
+func fade_in_glow_light(glow_light: PointLight2D) -> void:
+	if glow_light and glow_light.energy < 1.0:
+		var tween = create_tween()
+		tween.tween_property(glow_light, "energy", 1.0, glow_fade_time)
+
+func fade_out_glow_light(glow_light: PointLight2D) -> void:
+	if glow_light and glow_light.energy > 0.0:
+		var tween = create_tween()
+		tween.tween_property(glow_light, "energy", 0.0, glow_fade_time)
