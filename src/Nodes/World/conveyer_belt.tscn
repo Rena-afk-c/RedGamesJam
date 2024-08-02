@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1ahiw7op56li"]
+
+[ext_resource type="Script" path="res://src/Scripts/Controllers/ConveyerBeltBehavior.gd" id="1_xaat8"]
+
+[sub_resource type="Curve2D" id="Curve2D_7s41v"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 25, 31, 0, 0, 0, 0, 29, 232, 0, 0, 0, 0, 42, 285, 0, 0, 0, 0, 75, 289, 0, 0, 0, 0, 108, 279, 0, 0, 0, 0, 127, 254, 0, 0, 0, 0, 125, 225, 0, 0, 0, 0, 121, 186, 0, 0, 0, 0, 125, 64, 0, 0, 0, 0, 122, 28, 0, 0, 0, 0, 106, 15, 0, 0, 0, 0, 74, 7, 0, 0, 0, 0, 49, 13, 0, 0, 0, 0, 26, 20, 0, 0, 0, 0, 25, 33, 0, 0, 0, 0, 25, 31)
+}
+point_count = 16
+
+[node name="ConveyerBelt" type="Path2D"]
+curve = SubResource("Curve2D_7s41v")
+script = ExtResource("1_xaat8")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(25, 31)
+rotation = 1.5509

@@ -1,0 +1,73 @@
+[gd_scene load_steps=4 format=3 uid="uid://465cxs8ebhd6"]
+
+[ext_resource type="Texture2D" uid="uid://cspjmm2gauyko" path="res://icon.svg" id="2_s3rgb"]
+
+[sub_resource type="GDScript" id="GDScript_7m2dc"]
+script/source = "extends Area2D
+
+@onready var prompt_icon = $PromptIcon
+
+var player_in_area = false
+var tween: Tween
+
+func _ready():
+	prompt_icon.modulate.a = 0
+	prompt_icon.scale = Vector2.ZERO
+
+func _process(delta):
+	if player_in_area and Input.is_action_just_pressed(\"interact\"):
+		show_pressed_effect()
+
+func _on_body_entered(body):
+	if body.is_in_group(\"playable_character\"):
+		player_in_area = true
+		show_prompt()
+
+func _on_body_exited(body):
+	if body.is_in_group(\"playable_character\"):
+		player_in_area = false
+		hide_prompt()
+
+func show_prompt():
+	if tween:
+		tween.kill()
+	tween = create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(prompt_icon, \"modulate:a\", 1.0, 0.3)
+	tween.tween_property(prompt_icon, \"scale\", Vector2(1, 1), 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+func hide_prompt():
+	if tween:
+		tween.kill()
+	tween = create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(prompt_icon, \"modulate:a\", 0.0, 0.3)
+	tween.tween_property(prompt_icon, \"scale\", Vector2.ZERO, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+
+func show_pressed_effect():
+	if tween:
+		tween.kill()
+	tween = create_tween()
+	tween.tween_property(prompt_icon, \"scale\", Vector2(0.8, 0.8), 0.1)
+	tween.tween_property(prompt_icon, \"scale\", Vector2(1, 1), 0.1)
+
+func _exit_tree():
+	if tween and tween.is_valid():
+		tween.kill()
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yh076"]
+size = Vector2(33, 34)
+
+[node name="InteractionArea" type="Area2D"]
+script = SubResource("GDScript_7m2dc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_yh076")
+
+[node name="PromptIcon" type="Sprite2D" parent="."]
+modulate = Color(0.807843, 0.168627, 0.427451, 1)
+position = Vector2(1, -67)
+scale = Vector2(0.179688, 0.179688)
+texture = ExtResource("2_s3rgb")

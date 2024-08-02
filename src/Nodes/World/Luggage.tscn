@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bm738csh4iacf"]
+
+[ext_resource type="Script" path="res://src/Scripts/Controllers/LuggageBehavior.gd" id="1_orohw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l25uf"]
+size = Vector2(34, 47)
+
+[node name="Luggage" type="Area2D"]
+script = ExtResource("1_orohw")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 14.0
+offset_top = 21.0
+offset_right = 47.0
+offset_bottom = 68.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(31, 44)
+shape = SubResource("RectangleShape2D_l25uf")

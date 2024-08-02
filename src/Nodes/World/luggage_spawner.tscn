@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcyx52vo85dkq"]
+
+[ext_resource type="Script" path="res://src/Scripts/Controllers/LuggageSpawner.gd" id="1_0poc1"]
+
+[node name="LuggageSpawner" type="Node2D"]
+script = ExtResource("1_0poc1")
+
+[node name="Timer" type="Timer" parent="."]

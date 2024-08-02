@@ -1,6 +1,14 @@
 [gd_scene load_steps=2 format=3 uid="uid://c61fva6qp43g1"]
 
-[ext_resource type="Script" path="res://src/Scripts/Controllers/Main_Controller.gd" id="1_xhiks"]
+[sub_resource type="GDScript" id="GDScript_c58fm"]
+script/source = "extends Node2D
+
+
+func _ready():
+	GameManager.collect_seeds(20)
+"
 
 [node name="Main" type="Node2D"]
-script = ExtResource("1_xhiks")
+script = SubResource("GDScript_c58fm")
+
+[node name="Env" type="Node2D" parent="."]
