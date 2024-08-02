@@ -1,10 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://c61fva6qp43g1"]
+[gd_scene load_steps=12 format=3 uid="uid://c61fva6qp43g1"]
 
+[ext_resource type="FontFile" uid="uid://dr7g5bnuqelmi" path="res://assets/fonts/monogram.ttf" id="1_c6fta"]
 [ext_resource type="PackedScene" uid="uid://bcyx52vo85dkq" path="res://src/Nodes/World/luggage_spawner.tscn" id="1_g3cta"]
+[ext_resource type="Script" path="res://src/Scripts/Controllers/FlightDisplay.gd" id="1_ph16u"]
 [ext_resource type="PackedScene" uid="uid://bpngs84hwd5fv" path="res://src/Nodes/SelectableCharacters/sl_tappy.tscn" id="2_35b71"]
 [ext_resource type="PackedScene" uid="uid://b6ldiotx6774q" path="res://src/Nodes/SelectableCharacters/sl_biggie.tscn" id="3_4rnlw"]
 [ext_resource type="PackedScene" uid="uid://7s8gjoot1l5u" path="res://src/Nodes/SelectableCharacters/sl_ogu.tscn" id="4_wxhtd"]
 [ext_resource type="PackedScene" uid="uid://bg7hmcutdesfl" path="res://src/Nodes/SelectableCharacters/sl_bam.tscn" id="5_tvgod"]
+[ext_resource type="Script" path="res://src/Scripts/Controllers/CollectPointRoot.gd" id="8_ahxm7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toyci"]
+bg_color = Color(1, 0.341176, 0.290196, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="Curve2D" id="Curve2D_7s41v"]
 _data = {
@@ -12,11 +23,56 @@ _data = {
 }
 point_count = 17
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qyfwh"]
-size = Vector2(55, 52)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w7akx"]
+size = Vector2(28, 38)
 
 [node name="Main" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [59.0]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="C_Flight_Display" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 133.0
+offset_bottom = -278.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ph16u")
+
+[node name="Base" type="Panel" parent="HUD/C_Flight_Display"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.5
+offset_top = -19.0
+offset_right = 21.5
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_toyci")
+
+[node name="CounterLabel" type="Label" parent="HUD/C_Flight_Display/Base"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -29.0
+offset_top = -14.5
+offset_right = 19.0
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_c6fta")
+theme_override_font_sizes/font_size = 32
+text = " 0"
 
 [node name="LuggageSpawner" parent="." node_paths=PackedStringArray("path") instance=ExtResource("1_g3cta")]
 position = Vector2(25, 31)
@@ -37,13 +93,6 @@ curve = SubResource("Curve2D_7s41v")
 position = Vector2(32, 44.4405)
 rotation = 2.15421
 
-[node name="OverFlowArea" type="Area2D" parent="."]
-position = Vector2(1, -1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OverFlowArea"]
-position = Vector2(149, 25)
-shape = SubResource("RectangleShape2D_qyfwh")
-
 [node name="SL_Tappy" parent="." instance=ExtResource("2_35b71")]
 position = Vector2(153, 189)
 
@@ -55,3 +104,38 @@ position = Vector2(152, 153)
 
 [node name="SL_Bam" parent="." instance=ExtResource("5_tvgod")]
 position = Vector2(153, 82)
+
+[node name="CollectPointRoot" type="Node2D" parent="."]
+script = ExtResource("8_ahxm7")
+
+[node name="BamCollectPoint" type="Area2D" parent="CollectPointRoot"]
+position = Vector2(149, 83)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectPointRoot/BamCollectPoint"]
+position = Vector2(-27, 2)
+shape = SubResource("RectangleShape2D_w7akx")
+debug_color = Color(0.992157, 0, 0.239216, 0.419608)
+
+[node name="BiggieCollectPoint" type="Area2D" parent="CollectPointRoot"]
+position = Vector2(149, 116)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectPointRoot/BiggieCollectPoint"]
+position = Vector2(-27, 2)
+shape = SubResource("RectangleShape2D_w7akx")
+debug_color = Color(0.992157, 0, 0.239216, 0.419608)
+
+[node name="OguCollectPoint" type="Area2D" parent="CollectPointRoot"]
+position = Vector2(149, 152)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectPointRoot/OguCollectPoint"]
+position = Vector2(-27, 2)
+shape = SubResource("RectangleShape2D_w7akx")
+debug_color = Color(0.992157, 0, 0.239216, 0.419608)
+
+[node name="TappyCollectPoint" type="Area2D" parent="CollectPointRoot"]
+position = Vector2(149, 186)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectPointRoot/TappyCollectPoint"]
+position = Vector2(-27, 2)
+shape = SubResource("RectangleShape2D_w7akx")
+debug_color = Color(0.992157, 0, 0.239216, 0.419608)
