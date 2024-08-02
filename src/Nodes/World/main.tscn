@@ -22,7 +22,7 @@ position = Vector2(90.8427, 8.8092)
 [node name="Env" type="Node2D" parent="."]
 
 [node name="ConveyerBelt" type="Path2D" parent="."]
-position = Vector2(-11, -28)
+position = Vector2(16, -28)
 scale = Vector2(1, 0.990087)
 curve = SubResource("Curve2D_7s41v")
 
