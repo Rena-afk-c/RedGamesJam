@@ -81,6 +81,7 @@ theme_override_font_sizes/font_size = 6
 text = "Made by Miisan & Vincexodus "
 
 [node name="Settings" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

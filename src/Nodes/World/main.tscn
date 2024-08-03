@@ -1,5 +1,6 @@
-[gd_scene load_steps=21 format=3 uid="uid://c61fva6qp43g1"]
+[gd_scene load_steps=24 format=3 uid="uid://c61fva6qp43g1"]
 
+[ext_resource type="Script" path="res://src/Nodes/World/main.gd" id="1_04crg"]
 [ext_resource type="FontFile" uid="uid://dr7g5bnuqelmi" path="res://assets/fonts/monogram.ttf" id="1_c6fta"]
 [ext_resource type="PackedScene" uid="uid://bcyx52vo85dkq" path="res://src/Nodes/World/luggage_spawner.tscn" id="1_g3cta"]
 [ext_resource type="Script" path="res://src/Scripts/Controllers/FlightDisplay.gd" id="1_ph16u"]
@@ -13,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bjt7cwcbutfj8" path="res://src/Nodes/PowerUps/Time Slow.tscn" id="6_7ag05"]
 [ext_resource type="PackedScene" uid="uid://di4klb6ej4o01" path="res://src/Nodes/PowerUps/Point Frenzy.tscn" id="7_vhsrq"]
 [ext_resource type="PackedScene" uid="uid://b4hq8wo1csnsn" path="res://src/Nodes/PowerUps/luggage Free-For-All.tscn" id="8_rorva"]
+[ext_resource type="Script" path="res://src/Nodes/World/MainCamera.gd" id="14_tldhf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toyci"]
 bg_color = Color(1, 0.341176, 0.290196, 1)
@@ -37,6 +39,9 @@ size = Vector2(35, 38)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_abett"]
 size = Vector2(51.5, 24)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bt860"]
+size = Vector2(165.307, 41.1581)
+
 [sub_resource type="Curve2D" id="Curve2D_7s41v"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 32, 44.4405, 0, 0, 0, 0, 28, 50.5006, 0, 0, 0, 0, 29, 59.5907, 0, 0, 0, 0, 32, 249.473, 0, 0, 0, 0, 31, 304.014, 0, 0, 0, 0, 36, 317.144, 0, 0, 0, 0, 48, 317.144, 0, 0, 0, 0, 76, 322.194, 0, 0, 0, 0, 107, 324.214, 0, 0, 0, 0, 138, 317.144, 0, 0, 0, 0, 139, 138.372, 0, 0, 0, 0, 139, 123.222, 9.60513, 3.03771, -9.60513, -3.03771, 139, 47.4706, 0, 0, 0, 0, 127, 40.4005, 0, 0, 0, 0, 98, 41.4105, 0, 0, 0, 0, 45, 38.3805, 0, 0, 0, 0, 32, 44.4405)
@@ -44,6 +49,7 @@ _data = {
 point_count = 17
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_04crg")
 metadata/_edit_horizontal_guides_ = [59.0]
 
 [node name="HUD" type="CanvasLayer" parent="."]
@@ -135,7 +141,7 @@ debug_color = Color(0.992157, 0, 0.239216, 0.419608)
 [node name="SpawnPoint" type="Node2D" parent="SpawnerRoot"]
 position = Vector2(91.2953, -64.1964)
 
-[node name="PowerUpPoints" type="Node2D" parent="." node_paths=PackedStringArray("path")]
+[node name="PowerUpSpawner" type="Node2D" parent="." node_paths=PackedStringArray("path")]
 position = Vector2(25, 31)
 rotation = 1.5509
 script = ExtResource("4_sfqwm")
@@ -144,57 +150,27 @@ luggage_free_for_all_scene = ExtResource("8_rorva")
 luggage_automata_scene = ExtResource("3_nv1f4")
 time_slow_scene = ExtResource("6_7ag05")
 path = NodePath("../ConveyerBelt")
-spawn_interval = 2.0
+spawn_interval = 1.0
 move_speed = 100.0
 fade_duration = 1.0
 
-[node name="CollectPointRoot" type="Node2D" parent="PowerUpPoints"]
+[node name="PU_DetectionZone" type="Area2D" parent="PowerUpSpawner"]
 position = Vector2(-31.4912, 24.3783)
 rotation = -1.5509
 
-[node name="BamCollectPoint" type="Area2D" parent="PowerUpPoints/CollectPointRoot"]
-position = Vector2(149, 83)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PowerUpPoints/CollectPointRoot/BamCollectPoint"]
-position = Vector2(-30.5, 0)
-shape = SubResource("RectangleShape2D_ubt85")
-debug_color = Color(0.992157, 0, 0.239216, 0.419608)
-
-[node name="BiggieCollectPoint" type="Area2D" parent="PowerUpPoints/CollectPointRoot"]
-position = Vector2(149, 116)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PowerUpPoints/CollectPointRoot/BiggieCollectPoint"]
-position = Vector2(-30.5, 1.5)
-shape = SubResource("RectangleShape2D_hqkd0")
-debug_color = Color(0.992157, 0, 0.239216, 0.419608)
-
-[node name="OguCollectPoint" type="Area2D" parent="PowerUpPoints/CollectPointRoot"]
-position = Vector2(149, 152)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PowerUpPoints/CollectPointRoot/OguCollectPoint"]
-position = Vector2(-30.5, 0)
-shape = SubResource("RectangleShape2D_pe1al")
-debug_color = Color(0.992157, 0, 0.239216, 0.419608)
-
-[node name="TappyCollectPoint" type="Area2D" parent="PowerUpPoints/CollectPointRoot"]
-position = Vector2(149, 186)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PowerUpPoints/CollectPointRoot/TappyCollectPoint"]
-position = Vector2(-30.5, 2)
-shape = SubResource("RectangleShape2D_1pjvf")
-debug_color = Color(0.992157, 0, 0.239216, 0.419608)
-
-[node name="SpawnPoint" type="Node2D" parent="PowerUpPoints"]
-position = Vector2(89.7634, 12.7884)
-
-[node name="PU_DetectionZone" type="Area2D" parent="PowerUpPoints"]
-position = Vector2(-31.4912, 24.3783)
-rotation = -1.5509
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PowerUpPoints/PU_DetectionZone"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PowerUpSpawner/PU_DetectionZone"]
 position = Vector2(79.75, 14)
 shape = SubResource("RectangleShape2D_abett")
 debug_color = Color(0.976471, 0, 0.407843, 0.419608)
+
+[node name="CollectPowerUpZone" type="Area2D" parent="PowerUpSpawner"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PowerUpSpawner/CollectPowerUpZone"]
+position = Vector2(101.791, -88.9925)
+shape = SubResource("RectangleShape2D_bt860")
+
+[node name="SpawnPoint" type="Node2D" parent="PowerUpSpawner"]
+position = Vector2(89.7634, 12.7884)
 
 [node name="Env" type="Node2D" parent="."]
 
@@ -209,20 +185,25 @@ position = Vector2(33, 7)
 rotation = 1.5509
 
 [node name="SL_Tappy" parent="Characters" instance=ExtResource("2_35b71")]
-position = Vector2(184.311, -114.355)
+position = Vector2(184.391, -118.355)
 rotation = -1.5509
 
 [node name="SL_Bam" parent="Characters" instance=ExtResource("5_tvgod")]
-position = Vector2(77.3328, -116.484)
+position = Vector2(77.4124, -120.484)
 rotation = -1.5509
 
 [node name="SL_Biggie" parent="Characters" instance=ExtResource("3_4rnlw")]
-position = Vector2(112.306, -114.788)
+position = Vector2(112.386, -118.788)
 rotation = -1.5509
 
 [node name="SL_Ogu" parent="Characters" instance=ExtResource("4_wxhtd")]
-position = Vector2(148.299, -114.072)
+position = Vector2(148.379, -118.072)
 rotation = -1.5509
+
+[node name="MainCamera" type="Camera2D" parent="."]
+position = Vector2(90, 160)
+rotation = 1.5509
+script = ExtResource("14_tldhf")
 
 [node name="ConveyerBelt" type="Path2D" parent="."]
 position = Vector2(-17, -28)
@@ -241,11 +222,3 @@ rotation = 2.15421
 [connection signal="area_exited" from="SpawnerRoot/CollectPointRoot/OguCollectPoint" to="SpawnerRoot" method="_on_ogu_collect_point_area_exited"]
 [connection signal="area_entered" from="SpawnerRoot/CollectPointRoot/TappyCollectPoint" to="SpawnerRoot" method="_on_tappy_collect_point_area_entered"]
 [connection signal="area_exited" from="SpawnerRoot/CollectPointRoot/TappyCollectPoint" to="SpawnerRoot" method="_on_tappy_collect_point_area_exited"]
-[connection signal="area_entered" from="PowerUpPoints/CollectPointRoot/BamCollectPoint" to="SpawnerRoot" method="_on_bam_collect_point_area_entered"]
-[connection signal="area_exited" from="PowerUpPoints/CollectPointRoot/BamCollectPoint" to="SpawnerRoot" method="_on_bam_collect_point_area_exited"]
-[connection signal="area_entered" from="PowerUpPoints/CollectPointRoot/BiggieCollectPoint" to="SpawnerRoot" method="_on_biggie_collect_point_area_entered"]
-[connection signal="area_exited" from="PowerUpPoints/CollectPointRoot/BiggieCollectPoint" to="SpawnerRoot" method="_on_biggie_collect_point_area_exited"]
-[connection signal="area_entered" from="PowerUpPoints/CollectPointRoot/OguCollectPoint" to="SpawnerRoot" method="_on_ogu_collect_point_area_entered"]
-[connection signal="area_exited" from="PowerUpPoints/CollectPointRoot/OguCollectPoint" to="SpawnerRoot" method="_on_ogu_collect_point_area_exited"]
-[connection signal="area_entered" from="PowerUpPoints/CollectPointRoot/TappyCollectPoint" to="SpawnerRoot" method="_on_tappy_collect_point_area_entered"]
-[connection signal="area_exited" from="PowerUpPoints/CollectPointRoot/TappyCollectPoint" to="SpawnerRoot" method="_on_tappy_collect_point_area_exited"]

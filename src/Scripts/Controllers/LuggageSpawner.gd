@@ -21,6 +21,9 @@ var active_collection_point: Area2D
 func _ready():
 	GameManager.character_selected.connect(_on_character_changed)
 	update_active_collection_point()
+	PowerUpEffects.connect("luggage_free_for_all_activated", Callable(self, "_on_luggage_free_for_all_activated"))
+	PowerUpEffects.connect("luggage_free_for_all_deactivated", Callable(self, "_on_luggage_free_for_all_deactivated"))
+
 
 func _process(delta: float) -> void:
 	spawn_timer += delta
@@ -106,7 +109,13 @@ func is_point_inside_collision(collision_shape: CollisionShape2D, point: Vector2
 
 func can_collect_luggage(luggage: RigidBody2D) -> bool:
 	var selected_character = GameManager.get_selected_character()
-	return luggage.luggage_type == selected_character
+	return PowerUpEffects.active_powerups[PowerUpManager.PowerUpType.LUGGAGE_FREE_FOR_ALL] or luggage.luggage_type == selected_character
+
+func _on_luggage_free_for_all_activated():
+	print("Luggage Free-For-All activated in LuggageSpawner")
+
+func _on_luggage_free_for_all_deactivated():
+	print("Luggage Free-For-All deactivated in LuggageSpawner")
 
 func collect_luggage(luggage: RigidBody2D, path_follow: PathFollow2D) -> void:
 	if luggage.get_meta("is_being_collected", false):
@@ -118,7 +127,7 @@ func collect_luggage(luggage: RigidBody2D, path_follow: PathFollow2D) -> void:
 	tween.set_parallel(true)
 	tween.tween_property(luggage, "scale", Vector2(1.2, 1.2), 0.1)
 	tween.tween_property(luggage, "scale", Vector2(1, 1), 0.1).set_delay(0.1)
-	tween.tween_property(luggage, "modulate:a", 0, 0.5).set_delay(0.2)
+	tween.tween_property(luggage, "modulate:a", 0, 0.5).set_delay(0.2)	
 	
 	# Fade out the GlowLight when collecting
 	var glow_light = luggage.get_node("GlowLight")

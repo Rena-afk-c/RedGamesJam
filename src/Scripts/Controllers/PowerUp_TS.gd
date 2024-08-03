@@ -4,6 +4,7 @@ extends Area2D
 @export var fade_duration: float = 1.0
 @export var scale_up_factor: float = 1.2
 @export var scale_duration: float = 0.5
+@export var rotation_speed: float = 1.0  # Rotation speed in radians per second
 
 @onready var icon = $Icon
 @onready var bubble_overlay = $BubbleOverlay
@@ -19,9 +20,15 @@ var fade_timer = 0.0
 var scale_timer = 0.0
 var original_positions = {}
 var original_scale: Vector2
+var target_rotation: float = 0.0
+
+var collect_zone: Area2D
+var in_collection_zone: bool = false
 
 func _ready():
-	input_event.connect(_on_input_event)
+	input_pickable = true  # Ensure the Area2D can receive input events
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
 	
 	if bubble_overlay.material is ShaderMaterial:
 		bubble_overlay.material.set_shader_parameter("pop_bubble", false)
@@ -32,12 +39,28 @@ func _ready():
 		"bubble_overlay": bubble_overlay.position
 	}
 	original_scale = scale
+	
+	# Find the CollectPowerUpZone
+	collect_zone = get_node("/root").find_child("CollectPowerUpZone", true, false)
+	if not collect_zone:
+		push_error("CollectPowerUpZone not found in the scene!")
+	else:
+		# Connect to the CollectPowerUpZone's signals
+		collect_zone.area_entered.connect(_on_entered_collection_zone)
+		collect_zone.area_exited.connect(_on_exited_collection_zone)
 
 func _process(delta):
 	if is_popping:
 		process_popping(delta)
 	elif is_fading:
 		process_fading(delta)
+	else:
+		process_idle_animation(delta)
+
+func process_idle_animation(delta):
+	# Smooth rotation
+	target_rotation += rotation_speed * delta
+	rotation = lerp_angle(rotation, target_rotation, 0.1)
 
 func process_popping(delta):
 	pop_progress += delta * pop_speed
@@ -54,19 +77,37 @@ func process_fading(delta):
 	fade_timer += delta
 	var fade_progress = fade_timer / fade_duration
 	modulate.a = 1.0 - fade_progress
-
+	
 	scale_timer += delta
 	var scale_progress = min(scale_timer / scale_duration, 1.0)
 	var current_scale = original_scale.lerp(original_scale * scale_up_factor, scale_progress)
 	scale = current_scale
-
+	
 	if fade_timer >= fade_duration:
 		queue_free()
 
-func _on_input_event(_viewport, event, _shape_idx):
+func _on_mouse_entered():
+	if in_collection_zone and can_activate_powerup():
+		Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
+
+func _on_mouse_exited():
+	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
+
+func _input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		if can_activate_powerup():
+		if in_collection_zone and can_activate_powerup():
 			start_pop_effect()
+			GameManager.power_up_used = true
+			GameManager.power_up_used = false
+
+func _on_entered_collection_zone(area):
+	if area == self:
+		in_collection_zone = true
+
+func _on_exited_collection_zone(area):
+	if area == self:
+		in_collection_zone = false
+		Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 
 func can_activate_powerup() -> bool:
 	return convert_character_type(GameManager.get_selected_character()) == powerup_type

@@ -20,7 +20,7 @@ shader_parameter/pop_progress = 0.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_3r17h"]
 radius = 15.0333
 
-[node name="PU_Luggage Free-For-All" type="Area2D"]
+[node name="PU_Luggage Free-For-All" type="Area2D" groups=["powerups"]]
 position = Vector2(23, 20)
 script = ExtResource("1_5tfq8")
 powerup_type = 3
