@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c61fva6qp43g1"]
+[gd_scene load_steps=21 format=3 uid="uid://c61fva6qp43g1"]
 
 [ext_resource type="FontFile" uid="uid://dr7g5bnuqelmi" path="res://assets/fonts/monogram.ttf" id="1_c6fta"]
 [ext_resource type="PackedScene" uid="uid://bcyx52vo85dkq" path="res://src/Nodes/World/luggage_spawner.tscn" id="1_g3cta"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bpngs84hwd5fv" path="res://src/Nodes/SelectableCharacters/sl_tappy.tscn" id="2_35b71"]
 [ext_resource type="PackedScene" uid="uid://b6ldiotx6774q" path="res://src/Nodes/SelectableCharacters/sl_biggie.tscn" id="3_4rnlw"]
 [ext_resource type="PackedScene" uid="uid://cwevdoftrw2i2" path="res://src/Nodes/PowerUps/Luggage_Automata.tscn" id="3_nv1f4"]
+[ext_resource type="Script" path="res://src/Scripts/Controllers/PowerUpSpawner.gd" id="4_sfqwm"]
 [ext_resource type="PackedScene" uid="uid://7s8gjoot1l5u" path="res://src/Nodes/SelectableCharacters/sl_ogu.tscn" id="4_wxhtd"]
 [ext_resource type="Script" path="res://src/Scripts/Controllers/WeatherSystem.gd" id="5_6f4pu"]
 [ext_resource type="PackedScene" uid="uid://bg7hmcutdesfl" path="res://src/Nodes/SelectableCharacters/sl_bam.tscn" id="5_tvgod"]
@@ -32,6 +33,9 @@ size = Vector2(35, 34)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1pjvf"]
 size = Vector2(35, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_abett"]
+size = Vector2(51.5, 24)
 
 [sub_resource type="Curve2D" id="Curve2D_7s41v"]
 _data = {
@@ -87,73 +91,110 @@ theme_override_fonts/font = ExtResource("1_c6fta")
 theme_override_font_sizes/font_size = 32
 text = " 0"
 
-[node name="PowerUp_Duration_Display" type="Control" parent="HUD"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="DurationBar" type="ProgressBar" parent="HUD/PowerUp_Duration_Display"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = 288.0
-offset_right = 114.0
-offset_bottom = 315.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.546732, 0.285864)
-value = 40.0
-show_percentage = false
-
-[node name="LuggageSpawner" parent="." node_paths=PackedStringArray("path") instance=ExtResource("1_g3cta")]
-visible = false
+[node name="SpawnerRoot" parent="." node_paths=PackedStringArray("path") instance=ExtResource("1_g3cta")]
 position = Vector2(25, 31)
 rotation = 1.5509
 path = NodePath("../ConveyerBelt")
 
-[node name="CollectPointRoot" type="Node2D" parent="LuggageSpawner"]
+[node name="CollectPointRoot" type="Node2D" parent="SpawnerRoot"]
 position = Vector2(-31.4912, 24.3783)
 rotation = -1.5509
 
-[node name="BamCollectPoint" type="Area2D" parent="LuggageSpawner/CollectPointRoot"]
+[node name="BamCollectPoint" type="Area2D" parent="SpawnerRoot/CollectPointRoot"]
 position = Vector2(149, 83)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LuggageSpawner/CollectPointRoot/BamCollectPoint"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnerRoot/CollectPointRoot/BamCollectPoint"]
 position = Vector2(-30.5, 0)
 shape = SubResource("RectangleShape2D_ubt85")
 debug_color = Color(0.992157, 0, 0.239216, 0.419608)
 
-[node name="BiggieCollectPoint" type="Area2D" parent="LuggageSpawner/CollectPointRoot"]
+[node name="BiggieCollectPoint" type="Area2D" parent="SpawnerRoot/CollectPointRoot"]
 position = Vector2(149, 116)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LuggageSpawner/CollectPointRoot/BiggieCollectPoint"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnerRoot/CollectPointRoot/BiggieCollectPoint"]
 position = Vector2(-30.5, 1.5)
 shape = SubResource("RectangleShape2D_hqkd0")
 debug_color = Color(0.992157, 0, 0.239216, 0.419608)
 
-[node name="OguCollectPoint" type="Area2D" parent="LuggageSpawner/CollectPointRoot"]
+[node name="OguCollectPoint" type="Area2D" parent="SpawnerRoot/CollectPointRoot"]
 position = Vector2(149, 152)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LuggageSpawner/CollectPointRoot/OguCollectPoint"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnerRoot/CollectPointRoot/OguCollectPoint"]
 position = Vector2(-30.5, 0)
 shape = SubResource("RectangleShape2D_pe1al")
 debug_color = Color(0.992157, 0, 0.239216, 0.419608)
 
-[node name="TappyCollectPoint" type="Area2D" parent="LuggageSpawner/CollectPointRoot"]
+[node name="TappyCollectPoint" type="Area2D" parent="SpawnerRoot/CollectPointRoot"]
 position = Vector2(149, 186)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LuggageSpawner/CollectPointRoot/TappyCollectPoint"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnerRoot/CollectPointRoot/TappyCollectPoint"]
 position = Vector2(-30.5, 2)
 shape = SubResource("RectangleShape2D_1pjvf")
 debug_color = Color(0.992157, 0, 0.239216, 0.419608)
 
-[node name="SpawnPoint" type="Node2D" parent="LuggageSpawner"]
+[node name="SpawnPoint" type="Node2D" parent="SpawnerRoot"]
 position = Vector2(91.2953, -64.1964)
+
+[node name="PowerUpPoints" type="Node2D" parent="." node_paths=PackedStringArray("path")]
+position = Vector2(25, 31)
+rotation = 1.5509
+script = ExtResource("4_sfqwm")
+point_frenzy_scene = ExtResource("7_vhsrq")
+luggage_free_for_all_scene = ExtResource("8_rorva")
+luggage_automata_scene = ExtResource("3_nv1f4")
+time_slow_scene = ExtResource("6_7ag05")
+path = NodePath("../ConveyerBelt")
+spawn_interval = 2.0
+move_speed = 100.0
+fade_duration = 1.0
+
+[node name="CollectPointRoot" type="Node2D" parent="PowerUpPoints"]
+position = Vector2(-31.4912, 24.3783)
+rotation = -1.5509
+
+[node name="BamCollectPoint" type="Area2D" parent="PowerUpPoints/CollectPointRoot"]
+position = Vector2(149, 83)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PowerUpPoints/CollectPointRoot/BamCollectPoint"]
+position = Vector2(-30.5, 0)
+shape = SubResource("RectangleShape2D_ubt85")
+debug_color = Color(0.992157, 0, 0.239216, 0.419608)
+
+[node name="BiggieCollectPoint" type="Area2D" parent="PowerUpPoints/CollectPointRoot"]
+position = Vector2(149, 116)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PowerUpPoints/CollectPointRoot/BiggieCollectPoint"]
+position = Vector2(-30.5, 1.5)
+shape = SubResource("RectangleShape2D_hqkd0")
+debug_color = Color(0.992157, 0, 0.239216, 0.419608)
+
+[node name="OguCollectPoint" type="Area2D" parent="PowerUpPoints/CollectPointRoot"]
+position = Vector2(149, 152)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PowerUpPoints/CollectPointRoot/OguCollectPoint"]
+position = Vector2(-30.5, 0)
+shape = SubResource("RectangleShape2D_pe1al")
+debug_color = Color(0.992157, 0, 0.239216, 0.419608)
+
+[node name="TappyCollectPoint" type="Area2D" parent="PowerUpPoints/CollectPointRoot"]
+position = Vector2(149, 186)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PowerUpPoints/CollectPointRoot/TappyCollectPoint"]
+position = Vector2(-30.5, 2)
+shape = SubResource("RectangleShape2D_1pjvf")
+debug_color = Color(0.992157, 0, 0.239216, 0.419608)
+
+[node name="SpawnPoint" type="Node2D" parent="PowerUpPoints"]
+position = Vector2(89.7634, 12.7884)
+
+[node name="PU_DetectionZone" type="Area2D" parent="PowerUpPoints"]
+position = Vector2(-31.4912, 24.3783)
+rotation = -1.5509
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PowerUpPoints/PU_DetectionZone"]
+position = Vector2(79.75, 14)
+shape = SubResource("RectangleShape2D_abett")
+debug_color = Color(0.976471, 0, 0.407843, 0.419608)
 
 [node name="Env" type="Node2D" parent="."]
 
@@ -164,7 +205,7 @@ mid_color = Color(0.717647, 0.286275, 0.290196, 1)
 cycle_duration = 20.0
 
 [node name="Characters" type="Node2D" parent="."]
-position = Vector2(25, 31)
+position = Vector2(33, 7)
 rotation = 1.5509
 
 [node name="SL_Tappy" parent="Characters" instance=ExtResource("2_35b71")]
@@ -192,23 +233,19 @@ curve = SubResource("Curve2D_7s41v")
 position = Vector2(32, 44.4405)
 rotation = 2.15421
 
-[node name="PU_Luggage Free-For-All" parent="." instance=ExtResource("8_rorva")]
-position = Vector2(54, 143)
-
-[node name="PU_Luggage_Automata" parent="." instance=ExtResource("3_nv1f4")]
-position = Vector2(69, 89)
-
-[node name="PU_Point_Frenzy" parent="." instance=ExtResource("7_vhsrq")]
-position = Vector2(59, 216)
-
-[node name="PU_Time_Slow" parent="." instance=ExtResource("6_7ag05")]
-position = Vector2(60, 178)
-
-[connection signal="area_entered" from="LuggageSpawner/CollectPointRoot/BamCollectPoint" to="LuggageSpawner" method="_on_bam_collect_point_area_entered"]
-[connection signal="area_exited" from="LuggageSpawner/CollectPointRoot/BamCollectPoint" to="LuggageSpawner" method="_on_bam_collect_point_area_exited"]
-[connection signal="area_entered" from="LuggageSpawner/CollectPointRoot/BiggieCollectPoint" to="LuggageSpawner" method="_on_biggie_collect_point_area_entered"]
-[connection signal="area_exited" from="LuggageSpawner/CollectPointRoot/BiggieCollectPoint" to="LuggageSpawner" method="_on_biggie_collect_point_area_exited"]
-[connection signal="area_entered" from="LuggageSpawner/CollectPointRoot/OguCollectPoint" to="LuggageSpawner" method="_on_ogu_collect_point_area_entered"]
-[connection signal="area_exited" from="LuggageSpawner/CollectPointRoot/OguCollectPoint" to="LuggageSpawner" method="_on_ogu_collect_point_area_exited"]
-[connection signal="area_entered" from="LuggageSpawner/CollectPointRoot/TappyCollectPoint" to="LuggageSpawner" method="_on_tappy_collect_point_area_entered"]
-[connection signal="area_exited" from="LuggageSpawner/CollectPointRoot/TappyCollectPoint" to="LuggageSpawner" method="_on_tappy_collect_point_area_exited"]
+[connection signal="area_entered" from="SpawnerRoot/CollectPointRoot/BamCollectPoint" to="SpawnerRoot" method="_on_bam_collect_point_area_entered"]
+[connection signal="area_exited" from="SpawnerRoot/CollectPointRoot/BamCollectPoint" to="SpawnerRoot" method="_on_bam_collect_point_area_exited"]
+[connection signal="area_entered" from="SpawnerRoot/CollectPointRoot/BiggieCollectPoint" to="SpawnerRoot" method="_on_biggie_collect_point_area_entered"]
+[connection signal="area_exited" from="SpawnerRoot/CollectPointRoot/BiggieCollectPoint" to="SpawnerRoot" method="_on_biggie_collect_point_area_exited"]
+[connection signal="area_entered" from="SpawnerRoot/CollectPointRoot/OguCollectPoint" to="SpawnerRoot" method="_on_ogu_collect_point_area_entered"]
+[connection signal="area_exited" from="SpawnerRoot/CollectPointRoot/OguCollectPoint" to="SpawnerRoot" method="_on_ogu_collect_point_area_exited"]
+[connection signal="area_entered" from="SpawnerRoot/CollectPointRoot/TappyCollectPoint" to="SpawnerRoot" method="_on_tappy_collect_point_area_entered"]
+[connection signal="area_exited" from="SpawnerRoot/CollectPointRoot/TappyCollectPoint" to="SpawnerRoot" method="_on_tappy_collect_point_area_exited"]
+[connection signal="area_entered" from="PowerUpPoints/CollectPointRoot/BamCollectPoint" to="SpawnerRoot" method="_on_bam_collect_point_area_entered"]
+[connection signal="area_exited" from="PowerUpPoints/CollectPointRoot/BamCollectPoint" to="SpawnerRoot" method="_on_bam_collect_point_area_exited"]
+[connection signal="area_entered" from="PowerUpPoints/CollectPointRoot/BiggieCollectPoint" to="SpawnerRoot" method="_on_biggie_collect_point_area_entered"]
+[connection signal="area_exited" from="PowerUpPoints/CollectPointRoot/BiggieCollectPoint" to="SpawnerRoot" method="_on_biggie_collect_point_area_exited"]
+[connection signal="area_entered" from="PowerUpPoints/CollectPointRoot/OguCollectPoint" to="SpawnerRoot" method="_on_ogu_collect_point_area_entered"]
+[connection signal="area_exited" from="PowerUpPoints/CollectPointRoot/OguCollectPoint" to="SpawnerRoot" method="_on_ogu_collect_point_area_exited"]
+[connection signal="area_entered" from="PowerUpPoints/CollectPointRoot/TappyCollectPoint" to="SpawnerRoot" method="_on_tappy_collect_point_area_entered"]
+[connection signal="area_exited" from="PowerUpPoints/CollectPointRoot/TappyCollectPoint" to="SpawnerRoot" method="_on_tappy_collect_point_area_exited"]

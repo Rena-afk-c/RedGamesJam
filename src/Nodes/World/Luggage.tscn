@@ -9,7 +9,7 @@ size = Vector2(23, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xit3y"]
 size = Vector2(23, 32)
 
-[node name="Luggage" type="RigidBody2D"]
+[node name="Luggage" type="RigidBody2D" groups=["luggage"]]
 script = ExtResource("1_orohw")
 
 [node name="ColorRect" type="ColorRect" parent="."]
