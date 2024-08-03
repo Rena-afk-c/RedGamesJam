@@ -400,8 +400,6 @@ position = Vector2(90, 160)
 process_callback = 0
 position_smoothing_enabled = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
 [node name="GiftHud" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -547,6 +545,8 @@ z_index = 3
 position = Vector2(-8, 3)
 scale = Vector2(0.0232, 0.0232)
 texture_normal = SubResource("AtlasTexture_f4fio")
+
+[node name="FG" type="CanvasLayer" parent="."]
 
 [connection signal="pressed" from="Main/BtnContainer/TPlayBtn" to="ButtonBehavior" method="_on_t_play_btn_pressed"]
 [connection signal="pressed" from="Main/BtnContainer/TSettingsBtn" to="." method="_on_t_settings_btn_pressed"]

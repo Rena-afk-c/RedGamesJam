@@ -1,24 +1,28 @@
 extends Node2D
 
 var luggage_scene = preload("res://src/Nodes/World/Luggage.tscn")
+
 @export var path: Path2D
 @onready var spawn_point = $SpawnPoint
 var spawn_timer: float = 0.0
-var spawn_interval: float = 2.0
+@export var spawn_interval: float = 2.0
 var move_speed: float = 50.0
 var min_distance: float = 100.0
 var luggage_list: Array[PathFollow2D] = []
+
+@onready var game_over = $"../GameOver"
 @onready var collection_points = {
 	GameManager.Characters.TAPPY: $CollectPointRoot/TappyCollectPoint,
 	GameManager.Characters.BIGGIE: $CollectPointRoot/BiggieCollectPoint,
 	GameManager.Characters.BAM: $CollectPointRoot/BamCollectPoint,
 	GameManager.Characters.OGU: $CollectPointRoot/OguCollectPoint
 }
-var active_collection_point: Area2D
 
-@export var glow_fade_time: float = 0.3  # Time for the glow to fade in/out
+var active_collection_point: Area2D
+@export var glow_fade_time: float = 0.3  
 
 func _ready():
+	game_over.hide()
 	GameManager.character_selected.connect(_on_character_changed)
 	update_active_collection_point()
 	PowerUpEffects.connect("luggage_free_for_all_activated", Callable(self, "_on_luggage_free_for_all_activated"))
@@ -34,13 +38,11 @@ func _process(delta: float) -> void:
 	move_luggage(delta)
 	update_luggage_highlight()
 	
-	print("Current number of luggages: ", luggage_list.size())
-	
-	# Check if we need to restart
-	if luggage_list.size() >= 20:
-		print("Maximum luggage count reached. Restarting game...")
-		GameManager.restart_game()
-
+	if luggage_list.size() >= 5:
+		game_over.show()
+		game_over.Game_Over_Utilize(1,1)
+		
+		
 func can_spawn_luggage() -> bool:
 	if luggage_list.is_empty():
 		return true

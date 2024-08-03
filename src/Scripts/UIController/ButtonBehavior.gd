@@ -72,7 +72,7 @@ func _on_t_play_btn_pressed():
 	timer.connect("timeout", _on_play_button_animation_finished)
 
 func _on_play_button_animation_finished():
-	get_tree().change_scene_to_file("res://src/Nodes/World/main.tscn")
+	get_tree().change_scene_to_file("res://src/Nodes/World/main_2.tscn")
 
 
 

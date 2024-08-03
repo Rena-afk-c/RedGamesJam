@@ -23,6 +23,9 @@ const BASE_SCALE = Vector2(0.05, 0.05)
 const LABEL_SCALE = Vector2(0.8, 0.8)
 
 func _ready():
+	# Set the Control node (self) to ignore mouse events
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
 	# Set initial scales and visibility
 	color_rect.modulate.a = 0
 	game_over_sprite.scale = Vector2.ZERO
@@ -30,10 +33,25 @@ func _ready():
 	close_btn.scale = Vector2.ZERO
 	score_sprite.scale = Vector2.ZERO
 	ticket_sprite.scale = Vector2.ZERO
+	ticketsbase.hide()
+	base.hide()
 	
-	animate_game_over()
+	# Disable buttons initially
+	restart_btn.visible = false
+	close_btn.visible = false
+	
 	restart_btn.pressed.connect(on_restart_pressed)
 	close_btn.pressed.connect(on_close_pressed)
+
+func Game_Over_Utilize(final_score: int, final_tickets: int):
+	set_score(final_score)
+	set_tickets(final_tickets)
+	animate_game_over()
+	ticketsbase.show()
+	base.show()
+	
+	# Enable touch input for the entire Control when game over screen is shown
+	mouse_filter = Control.MOUSE_FILTER_STOP
 
 func animate_game_over():
 	tween = create_tween().set_parallel()
@@ -47,6 +65,12 @@ func animate_game_over():
 	# Animate score and ticket sprites
 	tween.tween_property(score_sprite, "scale", SCORE_SPRITE_SCALE, 0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	tween.tween_property(ticket_sprite, "scale", TICKET_SPRITE_SCALE, 0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+	
+	# Make buttons visible after animation
+	tween.tween_callback(func(): 
+		restart_btn.visible = true
+		close_btn.visible = true
+	)
 
 func on_restart_pressed():
 	await get_tree().create_timer(0.15).timeout
@@ -55,7 +79,6 @@ func on_restart_pressed():
 func on_close_pressed():
 	await get_tree().create_timer(0.15).timeout
 	get_tree().change_scene_to_file("res://src/Nodes/GUI/MainMenu.tscn")
-
 
 func set_score(score: int):
 	score_label.text = str(score)

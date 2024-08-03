@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c61fva6qp43g1"]
+[gd_scene load_steps=40 format=3 uid="uid://c61fva6qp43g1"]
 
 [ext_resource type="Script" path="res://src/Nodes/World/main.gd" id="1_04crg"]
 [ext_resource type="FontFile" uid="uid://dr7g5bnuqelmi" path="res://assets/fonts/monogram.ttf" id="1_c6fta"]
@@ -20,6 +20,12 @@
 [ext_resource type="Texture2D" uid="uid://ba8uirt1mikud" path="res://assets/art/BUDS/Tappy/AirAsia Buds-Turnaround_TAPPY-FRONT.svg" id="8_pva7u"]
 [ext_resource type="PackedScene" uid="uid://b4hq8wo1csnsn" path="res://src/Nodes/PowerUps/luggage Free-For-All.tscn" id="8_rorva"]
 [ext_resource type="Texture2D" uid="uid://cfwh4d3ne6ycy" path="res://assets/art/BUDS/Ogu/AirAsia Buds-Turnaround_OGU-FRONT.svg" id="9_83inw"]
+[ext_resource type="Script" path="res://globals/Scenes/Game_Over_Behavior.gd" id="21_2tmx6"]
+[ext_resource type="Texture2D" uid="uid://j20q72mxg6w5" path="res://assets/ui/ALL_HUD/10.png" id="21_826tf"]
+[ext_resource type="Texture2D" uid="uid://cmr67lnr3t2jn" path="res://assets/ui/ALL_HUD/9.png" id="22_ukach"]
+[ext_resource type="Texture2D" uid="uid://8pi2kf1xf564" path="res://assets/ui/ALL_HUD/8.png" id="23_dwi52"]
+[ext_resource type="Texture2D" uid="uid://dblevra23wb7f" path="res://assets/ui/ALL_HUD/7.png" id="24_6d6h8"]
+[ext_resource type="Texture2D" uid="uid://decqnjuvaab1u" path="res://assets/ui/ALL_HUD/3.png" id="25_ff22t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toyci"]
 bg_color = Color(1, 0.341176, 0.290196, 1)
@@ -53,19 +59,42 @@ _data = {
 }
 point_count = 49
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dl5pv"]
+bg_color = Color(0.933333, 0.254902, 0.270588, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+anti_aliasing = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b34hu"]
+atlas = ExtResource("24_6d6h8")
+region = Rect2(256, 344, 608, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6g64"]
+atlas = ExtResource("24_6d6h8")
+region = Rect2(928, 336, 616, 608)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6k8m4"]
+atlas = ExtResource("25_ff22t")
+region = Rect2(280, 296, 608, 616)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vnpnt"]
+atlas = ExtResource("25_ff22t")
+region = Rect2(968, 296, 608, 616)
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_04crg")
 metadata/_edit_horizontal_guides_ = [59.0]
 
-[node name="Floor" type="ColorRect" parent="."]
-offset_right = 179.0
-offset_bottom = 318.0
-color = Color(0.278431, 0.176471, 0.262745, 1)
-
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="C_Flight_Display" type="Control" parent="HUD"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -75,6 +104,7 @@ offset_bottom = -278.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ph16u")
+metadata/_edit_use_anchors_ = true
 
 [node name="Base" type="Panel" parent="HUD/C_Flight_Display"]
 layout_mode = 1
@@ -122,6 +152,7 @@ tappy_progress_bar = NodePath("TappyProgressBar/ProgressBar")
 bam_progress_bar = NodePath("BamProgressBar/Progressbar")
 biggie_progress_bar = NodePath("BiggieProgressBar/Progressbar")
 ogu_progress_bar = NodePath("OguProgressBar/Progressbar")
+metadata/_edit_use_anchors_ = true
 
 [node name="BamProgressBar" type="Control" parent="HUD/PowerUpDurationIndicator"]
 layout_mode = 1
@@ -229,38 +260,6 @@ tint_progress = Color(0.94902, 0.384314, 0, 1)
 
 [node name="EntryPoint" type="Marker2D" parent="HUD"]
 position = Vector2(68, 103)
-
-[node name="Pause" type="Control" parent="HUD"]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Pause"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -40.5
-offset_top = -121.0
-offset_right = 40.5
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="ResumeBtn" type="Button" parent="HUD/Pause/VBoxContainer"]
-layout_mode = 2
-text = "Resume"
-
-[node name="PauseQuitBtn" type="Button" parent="HUD/Pause/VBoxContainer"]
-layout_mode = 2
-text = "Quit"
 
 [node name="SpawnerRoot" parent="." node_paths=PackedStringArray("path") instance=ExtResource("1_g3cta")]
 position = Vector2(25, 31)
@@ -373,6 +372,128 @@ rotation = -1.5509
 [node name="SL_Ogu" parent="Characters" instance=ExtResource("4_wxhtd")]
 position = Vector2(148.379, -118.072)
 rotation = -1.5509
+
+[node name="GameOver" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+mouse_force_pass_scroll_events = false
+script = ExtResource("21_2tmx6")
+metadata/_edit_use_anchors_ = true
+
+[node name="Root" type="Control" parent="GameOver"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 139.0
+offset_bottom = 281.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="GameOver/Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.682353)
+metadata/_edit_use_anchors_ = true
+
+[node name="Base" type="Panel" parent="GameOver/Root"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -53.0
+offset_right = 102.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dl5pv")
+metadata/_edit_use_anchors_ = true
+
+[node name="ScoreSprite" type="Sprite2D" parent="GameOver/Root/Base"]
+position = Vector2(37, 15)
+scale = Vector2(0.0384, 0.0384)
+texture = ExtResource("21_826tf")
+
+[node name="ScoreLabel" type="Label" parent="GameOver/Root/Base"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.00480769
+anchor_top = 0.0405405
+anchor_right = 0.00480769
+anchor_bottom = 0.0405405
+offset_left = 70.0
+offset_top = 2.0
+offset_right = 82.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(1, 0.972549, 0.776471, 1)
+theme_override_fonts/font = ExtResource("1_c6fta")
+theme_override_font_sizes/font_size = 32
+text = "7"
+metadata/_edit_use_anchors_ = true
+
+[node name="Ticketsbase" type="Panel" parent="GameOver/Root"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -11.0
+offset_right = 102.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dl5pv")
+metadata/_edit_use_anchors_ = true
+
+[node name="TicketSprie" type="Sprite2D" parent="GameOver/Root/Ticketsbase"]
+position = Vector2(37, 18)
+scale = Vector2(0.0384, 0.0384)
+texture = ExtResource("22_ukach")
+
+[node name="TicketLabel" type="Label" parent="GameOver/Root/Ticketsbase"]
+layout_mode = 0
+offset_left = 73.0
+offset_top = 2.0
+offset_right = 85.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(1, 0.972549, 0.776471, 1)
+theme_override_fonts/font = ExtResource("1_c6fta")
+theme_override_font_sizes/font_size = 32
+text = "7"
+metadata/_edit_use_anchors_ = true
+
+[node name="GameOverSprite" type="Sprite2D" parent="GameOver/Root"]
+position = Vector2(80, 73)
+scale = Vector2(0.0592001, 0.0592001)
+texture = ExtResource("23_dwi52")
+
+[node name="RestartBtn" type="TouchScreenButton" parent="GameOver/Root"]
+position = Vector2(32, 110)
+scale = Vector2(0.0566667, 0.0566667)
+texture_normal = SubResource("AtlasTexture_b34hu")
+texture_pressed = SubResource("AtlasTexture_b6g64")
+
+[node name="CloseBtn" type="TouchScreenButton" parent="GameOver/Root"]
+position = Vector2(32, 148)
+scale = Vector2(0.0566667, 0.0566667)
+texture_normal = SubResource("AtlasTexture_6k8m4")
+texture_pressed = SubResource("AtlasTexture_vnpnt")
 
 [connection signal="area_entered" from="SpawnerRoot/CollectPointRoot/BamCollectPoint" to="SpawnerRoot" method="_on_bam_collect_point_area_entered"]
 [connection signal="area_exited" from="SpawnerRoot/CollectPointRoot/BamCollectPoint" to="SpawnerRoot" method="_on_bam_collect_point_area_exited"]
