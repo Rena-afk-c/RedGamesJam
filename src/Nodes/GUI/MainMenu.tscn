@@ -23,7 +23,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Main"]
+[node name="BtnContainer" type="VBoxContainer" parent="CanvasLayer/Main"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -36,49 +36,17 @@ offset_right = 40.5
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="PlayBtn" type="Button" parent="CanvasLayer/Main/VBoxContainer"]
+[node name="PlayBtn" type="Button" parent="CanvasLayer/Main/BtnContainer"]
 layout_mode = 2
 text = "Play"
 
-[node name="SettingsBtn" type="Button" parent="CanvasLayer/Main/VBoxContainer"]
+[node name="SettingsBtn" type="Button" parent="CanvasLayer/Main/BtnContainer"]
 layout_mode = 2
 text = "Settings"
 
-[node name="QuitBtn" type="Button" parent="CanvasLayer/Main/VBoxContainer"]
+[node name="QuitBtn" type="Button" parent="CanvasLayer/Main/BtnContainer"]
 layout_mode = 2
 text = "Quit"
-
-[node name="GameTitle" type="Label" parent="CanvasLayer/Main"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -37.0
-offset_top = -62.5
-offset_right = 37.0
-offset_bottom = -13.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Conveyor
-Buds"
-horizontal_alignment = 1
-
-[node name="Label" type="Label" parent="CanvasLayer/Main"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -44.0
-offset_top = -9.0
-offset_right = 44.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_font_sizes/font_size = 6
-text = "Made by Miisan & Vincexodus "
 
 [node name="Settings" type="Control" parent="CanvasLayer"]
 visible = false
@@ -91,41 +59,41 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="VSplitContainer" type="HSplitContainer" parent="CanvasLayer/Settings"]
+[node name="Music_Slider" type="HSplitContainer" parent="CanvasLayer/Settings"]
 layout_mode = 2
 offset_left = 34.0
 offset_top = 99.0
 offset_right = 147.0
 offset_bottom = 122.0
 
-[node name="Label" type="Label" parent="CanvasLayer/Settings/VSplitContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/Settings/Music_Slider"]
 layout_mode = 2
 text = "Music"
 
-[node name="MusicSlider" type="HSlider" parent="CanvasLayer/Settings/VSplitContainer"]
+[node name="MusicSlider" type="HSlider" parent="CanvasLayer/Settings/Music_Slider"]
 layout_mode = 2
 size_flags_vertical = 4
 max_value = 40.0
 value = 40.0
 
-[node name="VSplitContainer2" type="HSplitContainer" parent="CanvasLayer/Settings"]
+[node name="Sfx_Slider" type="HSplitContainer" parent="CanvasLayer/Settings"]
 layout_mode = 2
 offset_left = 52.0
 offset_top = 123.0
 offset_right = 147.0
 offset_bottom = 146.0
 
-[node name="Label" type="Label" parent="CanvasLayer/Settings/VSplitContainer2"]
+[node name="Label" type="Label" parent="CanvasLayer/Settings/Sfx_Slider"]
 layout_mode = 2
 text = "SFX"
 
-[node name="SFXSlider" type="HSlider" parent="CanvasLayer/Settings/VSplitContainer2"]
+[node name="SFXSlider" type="HSlider" parent="CanvasLayer/Settings/Sfx_Slider"]
 layout_mode = 2
 size_flags_vertical = 4
 max_value = 40.0
 value = 40.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Settings"]
+[node name="BtnContainer" type="VBoxContainer" parent="CanvasLayer/Settings"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -138,11 +106,7 @@ offset_right = 40.5
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="SpeedUp" type="Button" parent="CanvasLayer/Settings/VBoxContainer"]
-layout_mode = 2
-text = "Speed"
-
-[node name="SettingsBack" type="Button" parent="CanvasLayer/Settings/VBoxContainer"]
+[node name="BackBtn" type="Button" parent="CanvasLayer/Settings/BtnContainer"]
 layout_mode = 2
 text = "Back"
 
@@ -162,9 +126,8 @@ grow_vertical = 2
 text = "Settings"
 horizontal_alignment = 1
 
-[connection signal="pressed" from="CanvasLayer/Main/VBoxContainer/PlayBtn" to="CanvasLayer" method="_on_play_btn_pressed"]
-[connection signal="pressed" from="CanvasLayer/Main/VBoxContainer/SettingsBtn" to="CanvasLayer" method="_on_settings_btn_pressed"]
-[connection signal="pressed" from="CanvasLayer/Main/VBoxContainer/QuitBtn" to="CanvasLayer" method="_on_quit_btn_pressed"]
-[connection signal="value_changed" from="CanvasLayer/Settings/VSplitContainer/MusicSlider" to="CanvasLayer" method="_on_music_slider_value_changed"]
-[connection signal="value_changed" from="CanvasLayer/Settings/VSplitContainer2/SFXSlider" to="CanvasLayer" method="_on_sfx_slider_value_changed"]
-[connection signal="pressed" from="CanvasLayer/Settings/VBoxContainer/SpeedUp" to="CanvasLayer" method="_on_speed_up_pressed"]
+[connection signal="pressed" from="CanvasLayer/Main/BtnContainer/PlayBtn" to="CanvasLayer" method="_on_play_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/Main/BtnContainer/SettingsBtn" to="CanvasLayer" method="_on_settings_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/Main/BtnContainer/QuitBtn" to="CanvasLayer" method="_on_quit_btn_pressed"]
+[connection signal="value_changed" from="CanvasLayer/Settings/Music_Slider/MusicSlider" to="CanvasLayer" method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/Settings/Sfx_Slider/SFXSlider" to="CanvasLayer" method="_on_sfx_slider_value_changed"]

@@ -24,6 +24,8 @@ animations = [{
 "speed": 2.0
 }]
 
+
+
 [node name="SL_Bam" type="Area2D"]
 position = Vector2(25, 18)
 script = ExtResource("1_yfyix")
