@@ -50,9 +50,9 @@ size = Vector2(165.307, 41.1581)
 
 [sub_resource type="Curve2D" id="Curve2D_7s41v"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 32, 44.4405, 0, 0, 0, 0, 28, 50.5006, 0, 0, 0, 0, 29, 59.5907, 0, 0, 0, 0, 32, 249.473, 0, 0, 0, 0, 31, 304.014, 0, 0, 0, 0, 36, 317.144, 0, 0, 0, 0, 48, 317.144, 0, 0, 0, 0, 76, 322.194, 0, 0, 0, 0, 107, 324.214, 0, 0, 0, 0, 138, 317.144, 0, 0, 0, 0, 139, 138.372, 0, 0, 0, 0, 139, 123.222, 9.60513, 3.03771, -9.60513, -3.03771, 139, 47.4706, 0, 0, 0, 0, 127, 40.4005, 0, 0, 0, 0, 98, 41.4105, 0, 0, 0, 0, 45, 38.3805, 0, 0, 0, 0, 32, 44.4405)
+"points": PackedVector2Array(0, 0, 0, 0, 32, 44.4405, 0, 0, 0, 0, 28, 50.5006, 0, 0, 0, 0, 24, 59.5907, 0, 0, 0, 0, 23, 92.9211, 0, 0, 0, 0, 24, 137.362, 0, 0, 0, 0, 25, 189.882, 0, 0, 0, 0, 25, 249.473, 0, 0, 0, 0, 27, 284.823, 0, 0, 0, 0, 25, 305.024, 0, 0, 0, 0, 30, 315.124, 0, 0, 0, 0, 29, 316.134, 0, 0, 0, 0, 29, 319.164, 0, 0, 0, 0, 33, 321.184, 0, 0, 0, 0, 39, 321.184, 0, 0, 0, 0, 43, 323.204, 0, 0, 0, 0, 46, 321.184, 0, 0, 0, 0, 47, 322.194, 0, 0, 0, 0, 76, 322.194, 0, 0, 0, 0, 107, 324.214, 0, 0, 0, 0, 152, 323.204, 0, 0, 0, 0, 156, 321.184, 0, 0, 0, 0, 159, 318.154, 0, 0, 0, 0, 159, 316.134, 0, 0, 0, 0, 161, 312.094, 0, 0, 0, 0, 164, 306.034, 0, 0, 0, 0, 164, 284.823, 0, 0, 0, 0, 165, 229.273, 0, 0, 0, 0, 160, 150.492, 0, 0, 0, 0, 161, 130.292, 0, 0, 0, 0, 160, 114.131, 0, 0, 0, 0, 161, 68.6808, 0, 0, 0, 0, 158, 52.5206, 0, 0, 0, 0, 153, 46.4606, 9.60513, 3.03771, -9.60513, -3.03771, 148, 42.4205, 0, 0, 0, 0, 140, 41.4105, 0, 0, 0, 0, 130, 40.4005, 0, 0, 0, 0, 127, 40.4005, 0, 0, 0, 0, 114, 40.4005, 0, 0, 0, 0, 99, 39.3905, 0, 0, 0, 0, 89, 39.3905, 0, 0, 0, 0, 45, 38.3805, 0, 0, 0, 0, 40, 39.3905, 0, 0, 0, 0, 39, 40.4005, 0, 0, 0, 0, 35, 41.4105, 0, 0, 0, 0, 32, 44.4405)
 }
-point_count = 17
+point_count = 45
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_04crg")
@@ -61,6 +61,7 @@ metadata/_edit_horizontal_guides_ = [59.0]
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="C_Flight_Display" type="Control" parent="HUD"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -222,7 +223,17 @@ texture_progress = ExtResource("6_u1vh7")
 tint_under = Color(0, 0, 0, 0)
 tint_progress = Color(0.94902, 0.384314, 0, 1)
 
+[node name="EntryPoint" type="Marker2D" parent="HUD"]
+position = Vector2(68, 103)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 48.0
+offset_top = 89.0
+offset_right = 88.0
+offset_bottom = 298.0
+
 [node name="SpawnerRoot" parent="." node_paths=PackedStringArray("path") instance=ExtResource("1_g3cta")]
+visible = false
 position = Vector2(25, 31)
 rotation = 1.5509
 path = NodePath("../ConveyerBelt")
@@ -267,6 +278,7 @@ debug_color = Color(0.992157, 0, 0.239216, 0.419608)
 position = Vector2(91.2953, -64.1964)
 
 [node name="PowerUpSpawner" type="Node2D" parent="." node_paths=PackedStringArray("path")]
+visible = false
 position = Vector2(25, 31)
 rotation = 1.5509
 script = ExtResource("4_sfqwm")
@@ -305,6 +317,15 @@ script = ExtResource("5_6f4pu")
 mid_color = Color(0.717647, 0.286275, 0.290196, 1)
 cycle_duration = 20.0
 
+[node name="ConveyerBelt" type="Path2D" parent="."]
+position = Vector2(-11, -27)
+scale = Vector2(0.885699, 0.979109)
+curve = SubResource("Curve2D_7s41v")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="ConveyerBelt"]
+position = Vector2(32, 44.4405)
+rotation = 2.15421
+
 [node name="Characters" type="Node2D" parent="."]
 position = Vector2(33, 7)
 rotation = 1.5509
@@ -329,15 +350,6 @@ rotation = -1.5509
 position = Vector2(90, 160)
 rotation = 1.5509
 script = ExtResource("14_tldhf")
-
-[node name="ConveyerBelt" type="Path2D" parent="."]
-position = Vector2(-17, -28)
-scale = Vector2(1, 0.990087)
-curve = SubResource("Curve2D_7s41v")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="ConveyerBelt"]
-position = Vector2(32, 44.4405)
-rotation = 2.15421
 
 [connection signal="area_entered" from="SpawnerRoot/CollectPointRoot/BamCollectPoint" to="SpawnerRoot" method="_on_bam_collect_point_area_entered"]
 [connection signal="area_exited" from="SpawnerRoot/CollectPointRoot/BamCollectPoint" to="SpawnerRoot" method="_on_bam_collect_point_area_exited"]
