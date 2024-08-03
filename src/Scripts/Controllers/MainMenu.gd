@@ -29,3 +29,4 @@ func _on_music_slider_value_changed(value):
 
 func _on_sfx_slider_value_changed(value):
 	AudioManager.adjust_sfx_volume(value)
+

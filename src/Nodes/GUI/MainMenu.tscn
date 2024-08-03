@@ -1,6 +1,187 @@
-[gd_scene load_steps=2 format=3 uid="uid://cquyih57budum"]
+[gd_scene load_steps=45 format=3 uid="uid://cquyih57budum"]
 
-[ext_resource type="Script" path="res://src/Scripts/Controllers/MainMenu.gd" id="1_8b0qk"]
+[ext_resource type="Script" path="res://src/Scripts/UIController/MenuBackground.gd" id="1_8t3b5"]
+[ext_resource type="Texture2D" uid="uid://cyfyk4uoye475" path="res://assets/ui/ALL_HUD/18.png" id="2_7pn4b"]
+[ext_resource type="Texture2D" uid="uid://bs6qwoypb2e4i" path="res://assets/ui/ALL_HUD/12.png" id="2_246mw"]
+[ext_resource type="Texture2D" uid="uid://c522x3ppuf7f2" path="res://assets/ui/ALL_HUD/6.png" id="2_a1amg"]
+[ext_resource type="Texture2D" uid="uid://ca7qlenifc2mg" path="res://assets/ui/ALL_HUD/19.png" id="3_6jpss"]
+[ext_resource type="Script" path="res://src/Scripts/UIController/MenuBackground_Character.gd" id="3_r5co7"]
+[ext_resource type="Texture2D" uid="uid://cxkaf714pdpws" path="res://assets/art/BUDS/Bam/AirAsia Buds-Turnaround_BAM-QUARTER.svg" id="4_wsapn"]
+[ext_resource type="Texture2D" uid="uid://cc63t6gnn4dvx" path="res://assets/art/BUDS/Bam/AirAsia Buds-Turnaround_BAM-SIDE.svg" id="5_2amt5"]
+[ext_resource type="Texture2D" uid="uid://4bsrh66ekswd" path="res://assets/ui/ALL_HUD/Artboard 1.png" id="5_2jfhb"]
+[ext_resource type="Texture2D" uid="uid://c0vqp71mbqbbk" path="res://assets/ui/ALL_HUD/2.png" id="5_cqwk5"]
+[ext_resource type="Texture2D" uid="uid://d2sfplfe0mtyn" path="res://assets/ui/ALL_HUD/1.png" id="6_hd1j0"]
+[ext_resource type="Texture2D" uid="uid://bhwsvsbwghh4d" path="res://assets/art/BUDS/Biggie/AirAsia Buds-Turnaround_BIGGIE-SIDE.svg" id="6_ij6kq"]
+[ext_resource type="Texture2D" uid="uid://decqnjuvaab1u" path="res://assets/ui/ALL_HUD/3.png" id="7_47tb7"]
+[ext_resource type="Texture2D" uid="uid://djnnxyl6rvani" path="res://assets/art/BUDS/Biggie/AirAsia Buds-Turnaround_BIGGIE -QUARTER.svg" id="7_ay7ob"]
+[ext_resource type="Texture2D" uid="uid://fj0d1sas3eyt" path="res://assets/art/BUDS/Tappy/AirAsia Buds-Turnaround_TAPPY-SIDE.svg" id="8_0msbb"]
+[ext_resource type="Texture2D" uid="uid://xl4fre5dlu34" path="res://assets/art/BUDS/Tappy/AirAsia Buds-Turnaround_TAPPY-QUARTER.svg" id="9_oodtk"]
+[ext_resource type="Texture2D" uid="uid://e2t7sfvmx46i" path="res://assets/art/BUDS/Ogu/AirAsia Buds-Turnaround_OGU-QUARTER.svg" id="10_e1ph0"]
+[ext_resource type="Texture2D" uid="uid://daloy0k3o7qmm" path="res://assets/art/BUDS/Ogu/AirAsia Buds-Turnaround_OGU-SIDE.svg" id="11_tctym"]
+[ext_resource type="Script" path="res://src/Scripts/UIController/GiftHudBehavior.gd" id="19_o7hdd"]
+[ext_resource type="Texture2D" uid="uid://v5dfmdkn6fxa" path="res://assets/ui/ALL_HUD/27.png" id="20_01yvg"]
+[ext_resource type="Texture2D" uid="uid://blapbo25bh1bs" path="res://assets/ui/ALL_HUD/21.png" id="20_pekuj"]
+[ext_resource type="Script" path="res://src/Scripts/UIController/ButtonBehavior.gd" id="20_vyt8b"]
+[ext_resource type="Texture2D" uid="uid://c15a2xoedbu1m" path="res://assets/ui/ALL_HUD/22.png" id="21_gc024"]
+[ext_resource type="FontFile" uid="uid://dr7g5bnuqelmi" path="res://assets/fonts/monogram.ttf" id="21_uhieq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lklt4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_wsapn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2amt5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sr2wb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ij6kq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ay7ob")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0jfhy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_oodtk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_0msbb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lsb6g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_e1ph0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_tctym")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bky7u"]
+atlas = ExtResource("5_cqwk5")
+region = Rect2(280, 296, 608, 616)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kaqb"]
+atlas = ExtResource("5_cqwk5")
+region = Rect2(992, 296, 616, 616)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e7d1h"]
+atlas = ExtResource("6_hd1j0")
+region = Rect2(248, 304, 616, 608)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vss76"]
+atlas = ExtResource("6_hd1j0")
+region = Rect2(984, 296, 616, 616)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lotv8"]
+atlas = ExtResource("7_47tb7")
+region = Rect2(272, 296, 616, 616)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xybn5"]
+atlas = ExtResource("7_47tb7")
+region = Rect2(960, 296, 616, 616)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wpw5t"]
+bg_color = Color(1, 0.270588, 0.270588, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_bottom_left = 10
+anti_aliasing = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5qydy"]
+atlas = ExtResource("2_a1amg")
+region = Rect2(256, 360, 616, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ffrv7"]
+atlas = ExtResource("2_a1amg")
+region = Rect2(968, 368, 608, 616)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vh4mv"]
+bg_color = Color(0.933333, 0.254902, 0.270588, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6swng"]
+bg_color = Color(1, 0.972549, 0.776471, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
+
+[sub_resource type="Theme" id="Theme_rysvp"]
+default_font = ExtResource("21_uhieq")
+default_font_size = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ireol"]
+bg_color = Color(1, 0.972549, 0.776471, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1w2wu"]
+bg_color = Color(0.984314, 0.564706, 0.207843, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uf2d2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1psmi"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -10,11 +191,139 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-script = ExtResource("1_8b0qk")
+[node name="Background" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8t3b5")
 
-[node name="Main" type="Control" parent="CanvasLayer"]
-layout_mode = 3
+[node name="ColorRect" type="ColorRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CloudRoot" type="Node2D" parent="Background"]
+
+[node name="Cloud_1" type="Sprite2D" parent="Background/CloudRoot"]
+position = Vector2(-20, 68)
+scale = Vector2(0.1424, 0.1424)
+texture = ExtResource("2_7pn4b")
+
+[node name="Cloud_2" type="Sprite2D" parent="Background/CloudRoot"]
+position = Vector2(208, 173)
+scale = Vector2(0.1424, 0.1424)
+texture = ExtResource("2_7pn4b")
+
+[node name="BoundaryRight2" type="Marker2D" parent="Background/CloudRoot"]
+position = Vector2(-133, 142)
+
+[node name="BoundaryRight" type="Marker2D" parent="Background/CloudRoot"]
+position = Vector2(371, 142)
+
+[node name="CharacterRoot" type="Node2D" parent="Background"]
+script = ExtResource("3_r5co7")
+
+[node name="Bam" type="AnimatedSprite2D" parent="Background/CharacterRoot"]
+position = Vector2(151.5, 253.5)
+scale = Vector2(0.141667, 0.141667)
+sprite_frames = SubResource("SpriteFrames_lklt4")
+frame_progress = 0.694418
+
+[node name="Biggie" type="AnimatedSprite2D" parent="Background/CharacterRoot"]
+position = Vector2(157, 251)
+scale = Vector2(0.138889, 0.138889)
+sprite_frames = SubResource("SpriteFrames_sr2wb")
+frame_progress = 0.770318
+
+[node name="Tappy" type="AnimatedSprite2D" parent="Background/CharacterRoot"]
+position = Vector2(160, 269)
+scale = Vector2(0.149074, 0.149074)
+sprite_frames = SubResource("SpriteFrames_0jfhy")
+frame_progress = 0.270125
+
+[node name="Ogu" type="AnimatedSprite2D" parent="Background/CharacterRoot"]
+position = Vector2(161, 267)
+scale = Vector2(0.136574, 0.136574)
+sprite_frames = SubResource("SpriteFrames_lsb6g")
+frame_progress = 0.150329
+
+[node name="CharacterBoundaryLeft" type="Marker2D" parent="Background/CharacterRoot"]
+position = Vector2(-42, 249)
+
+[node name="CharacterBoundaryRight" type="Marker2D" parent="Background/CharacterRoot"]
+position = Vector2(236, 249)
+
+[node name="SuitCaseRoot" type="Node2D" parent="Background"]
+position = Vector2(0, 13)
+
+[node name="SuitCase3" type="Sprite2D" parent="Background/SuitCaseRoot"]
+modulate = Color(0.278431, 0.0509804, 0, 0.721569)
+position = Vector2(122, 311.5)
+scale = Vector2(0.0808, 0.0808)
+texture = ExtResource("3_6jpss")
+
+[node name="SuitCase6" type="Sprite2D" parent="Background/SuitCaseRoot"]
+modulate = Color(0.0705882, 0.137255, 0.286275, 0.721569)
+position = Vector2(70, 311.5)
+scale = Vector2(0.0808, 0.0808)
+texture = ExtResource("3_6jpss")
+
+[node name="SuitCase7" type="Sprite2D" parent="Background/SuitCaseRoot"]
+modulate = Color(0.0705882, 0.137255, 0.286275, 0.721569)
+position = Vector2(86.375, 300.75)
+scale = Vector2(0.0748, 0.0748)
+texture = ExtResource("3_6jpss")
+
+[node name="SuitCase5" type="Sprite2D" parent="Background/SuitCaseRoot"]
+modulate = Color(1, 0.321569, 0.372549, 1)
+position = Vector2(87, 305.5)
+scale = Vector2(0.07, 0.07)
+texture = ExtResource("3_6jpss")
+
+[node name="SuitCase" type="Sprite2D" parent="Background/SuitCaseRoot"]
+modulate = Color(0.913725, 0.4, 0.537255, 1)
+position = Vector2(44, 305.5)
+scale = Vector2(0.0724, 0.0724)
+texture = ExtResource("3_6jpss")
+
+[node name="SuitCase4" type="Sprite2D" parent="Background/SuitCaseRoot"]
+modulate = Color(0, 0.701961, 0.521569, 1)
+position = Vector2(136.625, 307.25)
+scale = Vector2(0.074, 0.074)
+texture = ExtResource("3_6jpss")
+
+[node name="SuitCase8" type="Sprite2D" parent="Background/SuitCaseRoot"]
+modulate = Color(0, 0.109804, 0.0705882, 1)
+position = Vector2(126, 325)
+scale = Vector2(0.1282, 0.1282)
+texture = ExtResource("3_6jpss")
+
+[node name="BoundaryLeft" type="Marker2D" parent="Background/SuitCaseRoot"]
+position = Vector2(-54, 276)
+
+[node name="BoundaryRight" type="Marker2D" parent="Background/SuitCaseRoot"]
+position = Vector2(219, 276)
+
+[node name="GameLogo" type="Sprite2D" parent="Background"]
+z_index = 1
+position = Vector2(91, 107)
+scale = Vector2(0.0944, 0.0944)
+texture = ExtResource("2_246mw")
+
+[node name="AirAsialogo" type="Sprite2D" parent="Background"]
+z_index = 1
+position = Vector2(47, 73)
+scale = Vector2(0.0944, 0.0944)
+texture = ExtResource("5_2jfhb")
+
+[node name="Main" type="Control" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,7 +332,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="BtnContainer" type="VBoxContainer" parent="CanvasLayer/Main"]
+[node name="BtnContainer" type="VBoxContainer" parent="Main"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -36,21 +345,27 @@ offset_right = 40.5
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="PlayBtn" type="Button" parent="CanvasLayer/Main/BtnContainer"]
-layout_mode = 2
-text = "Play"
+[node name="TPlayBtn" type="TouchScreenButton" parent="Main/BtnContainer"]
+position = Vector2(-45.5, -60)
+scale = Vector2(0.0904605, 0.0904605)
+texture_normal = SubResource("AtlasTexture_bky7u")
+texture_pressed = SubResource("AtlasTexture_5kaqb")
 
-[node name="SettingsBtn" type="Button" parent="CanvasLayer/Main/BtnContainer"]
-layout_mode = 2
-text = "Settings"
+[node name="TSettingsBtn" type="TouchScreenButton" parent="Main/BtnContainer"]
+position = Vector2(-45.5, -1)
+scale = Vector2(0.0904605, 0.0904605)
+texture_normal = SubResource("AtlasTexture_e7d1h")
+texture_pressed = SubResource("AtlasTexture_vss76")
 
-[node name="QuitBtn" type="Button" parent="CanvasLayer/Main/BtnContainer"]
-layout_mode = 2
-text = "Quit"
+[node name="TCloseBtn" type="TouchScreenButton" parent="Main/BtnContainer"]
+position = Vector2(-45.5, 57)
+scale = Vector2(0.0904605, 0.0904605)
+texture_normal = SubResource("AtlasTexture_lotv8")
+texture_pressed = SubResource("AtlasTexture_xybn5")
 
-[node name="Settings" type="Control" parent="CanvasLayer"]
+[node name="Settings" type="Control" parent="."]
 visible = false
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -59,41 +374,41 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Music_Slider" type="HSplitContainer" parent="CanvasLayer/Settings"]
+[node name="Music_Slider" type="HSplitContainer" parent="Settings"]
 layout_mode = 2
 offset_left = 34.0
 offset_top = 99.0
 offset_right = 147.0
 offset_bottom = 122.0
 
-[node name="Label" type="Label" parent="CanvasLayer/Settings/Music_Slider"]
+[node name="Label" type="Label" parent="Settings/Music_Slider"]
 layout_mode = 2
 text = "Music"
 
-[node name="MusicSlider" type="HSlider" parent="CanvasLayer/Settings/Music_Slider"]
+[node name="MusicSlider" type="HSlider" parent="Settings/Music_Slider"]
 layout_mode = 2
 size_flags_vertical = 4
 max_value = 40.0
 value = 40.0
 
-[node name="Sfx_Slider" type="HSplitContainer" parent="CanvasLayer/Settings"]
+[node name="Sfx_Slider" type="HSplitContainer" parent="Settings"]
 layout_mode = 2
 offset_left = 52.0
 offset_top = 123.0
 offset_right = 147.0
 offset_bottom = 146.0
 
-[node name="Label" type="Label" parent="CanvasLayer/Settings/Sfx_Slider"]
+[node name="Label" type="Label" parent="Settings/Sfx_Slider"]
 layout_mode = 2
 text = "SFX"
 
-[node name="SFXSlider" type="HSlider" parent="CanvasLayer/Settings/Sfx_Slider"]
+[node name="SFXSlider" type="HSlider" parent="Settings/Sfx_Slider"]
 layout_mode = 2
 size_flags_vertical = 4
 max_value = 40.0
 value = 40.0
 
-[node name="BtnContainer" type="VBoxContainer" parent="CanvasLayer/Settings"]
+[node name="BtnContainer" type="VBoxContainer" parent="Settings"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -106,11 +421,11 @@ offset_right = 40.5
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="BackBtn" type="Button" parent="CanvasLayer/Settings/BtnContainer"]
+[node name="BackBtn" type="Button" parent="Settings/BtnContainer"]
 layout_mode = 2
 text = "Back"
 
-[node name="SettingsLabel" type="Label" parent="CanvasLayer/Settings"]
+[node name="SettingsLabel" type="Label" parent="Settings"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -126,8 +441,99 @@ grow_vertical = 2
 text = "Settings"
 horizontal_alignment = 1
 
-[connection signal="pressed" from="CanvasLayer/Main/BtnContainer/PlayBtn" to="CanvasLayer" method="_on_play_btn_pressed"]
-[connection signal="pressed" from="CanvasLayer/Main/BtnContainer/SettingsBtn" to="CanvasLayer" method="_on_settings_btn_pressed"]
-[connection signal="pressed" from="CanvasLayer/Main/BtnContainer/QuitBtn" to="CanvasLayer" method="_on_quit_btn_pressed"]
-[connection signal="value_changed" from="CanvasLayer/Settings/Music_Slider/MusicSlider" to="CanvasLayer" method="_on_music_slider_value_changed"]
-[connection signal="value_changed" from="CanvasLayer/Settings/Sfx_Slider/SFXSlider" to="CanvasLayer" method="_on_sfx_slider_value_changed"]
+[node name="ButtonBehavior" type="Node" parent="."]
+script = ExtResource("20_vyt8b")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GiftHud" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("19_o7hdd")
+
+[node name="GiftPanel" type="Panel" parent="CanvasLayer/GiftHud"]
+layout_mode = 0
+offset_left = 138.0
+offset_top = 4.0
+offset_right = 192.0
+offset_bottom = 32.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_wpw5t")
+
+[node name="TDailyGiftBtn" type="TouchScreenButton" parent="CanvasLayer/GiftHud/GiftPanel"]
+position = Vector2(4, 1)
+scale = Vector2(0.038961, 0.038961)
+texture_normal = SubResource("AtlasTexture_5qydy")
+texture_pressed = SubResource("AtlasTexture_ffrv7")
+
+[node name="GiftHud" type="Panel" parent="CanvasLayer/GiftHud"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.0
+offset_top = -49.0
+offset_right = 50.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vh4mv")
+
+[node name="Body" type="Panel" parent="CanvasLayer/GiftHud/GiftHud"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.5
+offset_top = -46.5
+offset_right = 38.5
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6swng")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/GiftHud/GiftHud/Body"]
+position = Vector2(39, 28.4375)
+scale = Vector2(0.0489, 0.0489)
+texture = ExtResource("20_01yvg")
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer/GiftHud/GiftHud/Body"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 50.0
+offset_right = 67.0
+offset_bottom = 76.0
+theme = SubResource("Theme_rysvp")
+text = "TIMER"
+
+[node name="ClaimBtnBase" type="Button" parent="CanvasLayer/GiftHud/GiftHud"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 87.0
+offset_right = 88.0
+offset_bottom = 110.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_ireol")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ireol")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1w2wu")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_uf2d2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1psmi")
+
+[node name="TClaimBtn" type="TouchScreenButton" parent="CanvasLayer/GiftHud/GiftHud"]
+position = Vector2(11, 74)
+scale = Vector2(0.0408, 0.0408)
+texture_normal = ExtResource("20_pekuj")
+texture_pressed = ExtResource("21_gc024")
+
+[connection signal="pressed" from="Main/BtnContainer/TPlayBtn" to="ButtonBehavior" method="_on_t_play_btn_pressed"]
+[connection signal="pressed" from="Main/BtnContainer/TSettingsBtn" to="ButtonBehavior" method="_on_t_settings_btn_pressed"]
+[connection signal="pressed" from="Main/BtnContainer/TCloseBtn" to="ButtonBehavior" method="_on_t_close_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/GiftHud/GiftPanel/TDailyGiftBtn" to="CanvasLayer/GiftHud" method="_on_t_daily_gift_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/GiftHud/GiftHud/TClaimBtn" to="CanvasLayer/GiftHud" method="_on_t_claim_btn_pressed"]

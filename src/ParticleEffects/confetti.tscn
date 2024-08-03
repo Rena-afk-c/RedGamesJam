@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://djeska5wq8hu7"]
+[gd_scene load_steps=6 format=3 uid="uid://d1u314ouaqbpd"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4k4vn"]
 
@@ -15,11 +15,10 @@ colors = PackedColorArray(0.879106, 0.241277, 0.272998, 1, 0.695505, 0.198567, 0
 [sub_resource type="Gradient" id="Gradient_xal4t"]
 colors = PackedColorArray(0.988235, 0.772549, 0.294118, 1, 0.676272, 0.507593, 0.0613995, 1)
 
-[node name="Node2D" type="Node2D"]
+[node name="Confetti_Particles" type="Node2D"]
 
 [node name="red" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_4k4vn")
-position = Vector2(-2, -2)
 amount = 25
 explosiveness = 0.2
 lifetime_randomness = 0.5
@@ -34,7 +33,6 @@ color_ramp = SubResource("Gradient_g1dfi")
 
 [node name="green" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_4k4vn")
-position = Vector2(-2, -2)
 amount = 25
 explosiveness = 0.2
 lifetime_randomness = 0.5
@@ -49,7 +47,6 @@ color_ramp = SubResource("Gradient_jryg8")
 
 [node name="yellow" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_4k4vn")
-position = Vector2(-2, -2)
 amount = 25
 explosiveness = 0.2
 lifetime_randomness = 0.5

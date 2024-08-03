@@ -42,3 +42,4 @@ scale = Vector2(0.0340278, 0.0340278)
 sprite_frames = SubResource("SpriteFrames_tt7wc")
 animation = &"idle"
 frame_progress = 0.646746
+
