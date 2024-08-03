@@ -9,6 +9,7 @@ var spawn_timer: float = 0.0
 var move_speed: float = 50.0
 var min_distance: float = 100.0
 var luggage_list: Array[PathFollow2D] = []
+@export var pause_spawner:bool = false
 
 @onready var game_over = $"../GameOver"
 @onready var collection_points = {
@@ -37,12 +38,14 @@ func _process(delta: float) -> void:
 	
 	move_luggage(delta)
 	update_luggage_highlight()
-	
-	if luggage_list.size() >= 5:
+	if luggage_list.size() >= 30:
 		game_over.show()
 		game_over.Game_Over_Utilize(1,1)
-		
-		
+
+func Pause_Spawner():
+	pass
+	
+	
 func can_spawn_luggage() -> bool:
 	if luggage_list.is_empty():
 		return true
@@ -128,6 +131,7 @@ func _on_luggage_free_for_all_activated():
 func _on_luggage_free_for_all_deactivated():
 	print("Luggage Free-For-All deactivated in LuggageSpawner")
 
+
 func collect_luggage(luggage: RigidBody2D, path_follow: PathFollow2D) -> void:
 	if luggage.get_meta("is_being_collected", false):
 		return
@@ -136,14 +140,26 @@ func collect_luggage(luggage: RigidBody2D, path_follow: PathFollow2D) -> void:
 	
 	var tween = create_tween()
 	tween.set_parallel(true)
-	tween.tween_property(luggage, "scale", Vector2(1.2, 1.2), 0.1)
-	tween.tween_property(luggage, "scale", Vector2(1, 1), 0.1).set_delay(0.1)
-	tween.tween_property(luggage, "modulate:a", 0, 0.5).set_delay(0.2)	
 	
-	# Fade out the GlowLight when collecting
-	var glow_light = luggage.get_node("GlowLight")
-	if glow_light:
-		tween.tween_property(glow_light, "energy", 0, glow_fade_time)
+	# Pop-up effect
+	tween.tween_property(luggage, "scale", Vector2(1.3, 1.3), 0.15).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+	tween.tween_property(luggage, "scale", Vector2(0.1, 0.1), 0.35).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK).set_delay(0.15)
+	
+	# Rotation effect
+	tween.tween_property(luggage, "rotation", randf_range(-PI, PI), 0.5).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
+	
+	# Fade out
+	tween.tween_property(luggage, "modulate:a", 0, 0.35).set_delay(0.15)
+	
+	# Move towards collection point
+	var collection_point_pos = active_collection_point.global_position
+	tween.tween_property(luggage, "global_position", collection_point_pos, 0.5).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
+	
+	
+	# Fade out the GlowLight
+	var glow_light = luggage.get_node_or_null("GlowLight")
+	if glow_light and glow_light is PointLight2D:
+		tween.tween_property(glow_light, "energy", 0, 0.25)
 	
 	tween.tween_callback(func():
 		if is_instance_valid(path_follow) and path_follow.is_inside_tree():
@@ -151,7 +167,7 @@ func collect_luggage(luggage: RigidBody2D, path_follow: PathFollow2D) -> void:
 			path_follow.queue_free()
 		GameManager.collect_luggage()
 		GameManager.decrement_luggage_count()
-	).set_delay(0.7)
+	).set_delay(0.5)
 
 func update_active_collection_point() -> void:
 	var selected_character = GameManager.get_selected_character()
