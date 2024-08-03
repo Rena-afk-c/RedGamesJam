@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://djeska5wq8hu7"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4k4vn"]
+
+[sub_resource type="Curve" id="Curve_nxjhm"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_g1dfi"]
+colors = PackedColorArray(0.265463, 0.43878, 0.196022, 1, 0.28428, 0.41656, 0.154141, 1)
+
+[sub_resource type="Gradient" id="Gradient_jryg8"]
+colors = PackedColorArray(0.879106, 0.241277, 0.272998, 1, 0.695505, 0.198567, 0.155031, 1)
+
+[sub_resource type="Gradient" id="Gradient_xal4t"]
+colors = PackedColorArray(0.988235, 0.772549, 0.294118, 1, 0.676272, 0.507593, 0.0613995, 1)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="red" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_4k4vn")
+position = Vector2(-2, -2)
+amount = 25
+explosiveness = 0.2
+lifetime_randomness = 0.5
+direction = Vector2(0, -1)
+gravity = Vector2(0, 100)
+initial_velocity_min = 60.0
+initial_velocity_max = 80.0
+angular_velocity_min = 280.0
+angular_velocity_max = 280.0
+scale_amount_curve = SubResource("Curve_nxjhm")
+color_ramp = SubResource("Gradient_g1dfi")
+
+[node name="green" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_4k4vn")
+position = Vector2(-2, -2)
+amount = 25
+explosiveness = 0.2
+lifetime_randomness = 0.5
+direction = Vector2(0, -1)
+gravity = Vector2(0, 100)
+initial_velocity_min = 60.0
+initial_velocity_max = 80.0
+angular_velocity_min = 280.0
+angular_velocity_max = 280.0
+scale_amount_curve = SubResource("Curve_nxjhm")
+color_ramp = SubResource("Gradient_jryg8")
+
+[node name="yellow" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_4k4vn")
+position = Vector2(-2, -2)
+amount = 25
+explosiveness = 0.2
+lifetime_randomness = 0.5
+direction = Vector2(0, -1)
+gravity = Vector2(0, 100)
+initial_velocity_min = 60.0
+initial_velocity_max = 80.0
+angular_velocity_min = 280.0
+angular_velocity_max = 280.0
+scale_amount_curve = SubResource("Curve_nxjhm")
+color_ramp = SubResource("Gradient_xal4t")

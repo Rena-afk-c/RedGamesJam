@@ -15,6 +15,7 @@ const POINT_LOST = preload("res://assets/audio/point_lost.mp3")
 const PICK_UP_POWER_UP = preload("res://assets/audio/power_up.mp3")
 const UPGRADE_NOTI = preload("res://assets/audio/upgrade_noti.mp3")
 
+
 var pitch_scale_speed = 1.0
 
 func play_bg_music():
