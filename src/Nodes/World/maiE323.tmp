@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c61fva6qp43g1"]
+[gd_scene load_steps=17 format=3 uid="uid://c61fva6qp43g1"]
 
 [ext_resource type="FontFile" uid="uid://dr7g5bnuqelmi" path="res://assets/fonts/monogram.ttf" id="1_c6fta"]
 [ext_resource type="PackedScene" uid="uid://bcyx52vo85dkq" path="res://src/Nodes/World/luggage_spawner.tscn" id="1_g3cta"]
@@ -8,10 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://cwevdoftrw2i2" path="res://src/Nodes/PowerUps/Luggage_Automata.tscn" id="3_nv1f4"]
 [ext_resource type="PackedScene" uid="uid://7s8gjoot1l5u" path="res://src/Nodes/SelectableCharacters/sl_ogu.tscn" id="4_wxhtd"]
 [ext_resource type="Script" path="res://src/Scripts/Controllers/WeatherSystem.gd" id="5_6f4pu"]
+[ext_resource type="Script" path="res://src/Scripts/Controllers/PowerupSpawner.gd" id="5_g5rhp"]
 [ext_resource type="PackedScene" uid="uid://bg7hmcutdesfl" path="res://src/Nodes/SelectableCharacters/sl_bam.tscn" id="5_tvgod"]
-[ext_resource type="PackedScene" uid="uid://bjt7cwcbutfj8" path="res://src/Nodes/PowerUps/Time Slow.tscn" id="6_7ag05"]
-[ext_resource type="PackedScene" uid="uid://di4klb6ej4o01" path="res://src/Nodes/PowerUps/Point Frenzy.tscn" id="7_vhsrq"]
-[ext_resource type="PackedScene" uid="uid://b4hq8wo1csnsn" path="res://src/Nodes/PowerUps/luggage Free-For-All.tscn" id="8_rorva"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toyci"]
 bg_color = Color(1, 0.341176, 0.290196, 1)
@@ -87,31 +85,10 @@ theme_override_fonts/font = ExtResource("1_c6fta")
 theme_override_font_sizes/font_size = 32
 text = " 0"
 
-[node name="PowerUp_Duration_Display" type="Control" parent="HUD"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="DurationBar" type="ProgressBar" parent="HUD/PowerUp_Duration_Display"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = 288.0
-offset_right = 114.0
-offset_bottom = 315.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.546732, 0.285864)
-value = 40.0
-show_percentage = false
+[node name="PU_Luggage_Automata" parent="HUD/C_Flight_Display" instance=ExtResource("3_nv1f4")]
+position = Vector2(-123, 116)
 
 [node name="LuggageSpawner" parent="." node_paths=PackedStringArray("path") instance=ExtResource("1_g3cta")]
-visible = false
 position = Vector2(25, 31)
 rotation = 1.5509
 path = NodePath("../ConveyerBelt")
@@ -155,6 +132,13 @@ debug_color = Color(0.992157, 0, 0.239216, 0.419608)
 [node name="SpawnPoint" type="Node2D" parent="LuggageSpawner"]
 position = Vector2(91.2953, -64.1964)
 
+[node name="PowerupSpawner" type="Node2D" parent="."]
+script = ExtResource("5_g5rhp")
+
+[node name="SpawnPoint" type="Node2D" parent="PowerupSpawner"]
+position = Vector2(12, 55)
+rotation = 1.5509
+
 [node name="Env" type="Node2D" parent="."]
 
 [node name="WeatherSystem" type="CanvasModulate" parent="Env"]
@@ -168,19 +152,19 @@ position = Vector2(25, 31)
 rotation = 1.5509
 
 [node name="SL_Tappy" parent="Characters" instance=ExtResource("2_35b71")]
-position = Vector2(184.311, -114.355)
+position = Vector2(160.515, -124.831)
 rotation = -1.5509
 
 [node name="SL_Bam" parent="Characters" instance=ExtResource("5_tvgod")]
-position = Vector2(77.3328, -116.484)
+position = Vector2(53.5364, -126.96)
 rotation = -1.5509
 
 [node name="SL_Biggie" parent="Characters" instance=ExtResource("3_4rnlw")]
-position = Vector2(112.306, -114.788)
+position = Vector2(88.5096, -125.264)
 rotation = -1.5509
 
 [node name="SL_Ogu" parent="Characters" instance=ExtResource("4_wxhtd")]
-position = Vector2(148.299, -114.072)
+position = Vector2(124.503, -124.548)
 rotation = -1.5509
 
 [node name="ConveyerBelt" type="Path2D" parent="."]
@@ -191,18 +175,6 @@ curve = SubResource("Curve2D_7s41v")
 [node name="PathFollow2D" type="PathFollow2D" parent="ConveyerBelt"]
 position = Vector2(32, 44.4405)
 rotation = 2.15421
-
-[node name="PU_Luggage Free-For-All" parent="." instance=ExtResource("8_rorva")]
-position = Vector2(54, 143)
-
-[node name="PU_Luggage_Automata" parent="." instance=ExtResource("3_nv1f4")]
-position = Vector2(69, 89)
-
-[node name="PU_Point_Frenzy" parent="." instance=ExtResource("7_vhsrq")]
-position = Vector2(59, 216)
-
-[node name="PU_Time_Slow" parent="." instance=ExtResource("6_7ag05")]
-position = Vector2(60, 178)
 
 [connection signal="area_entered" from="LuggageSpawner/CollectPointRoot/BamCollectPoint" to="LuggageSpawner" method="_on_bam_collect_point_area_entered"]
 [connection signal="area_exited" from="LuggageSpawner/CollectPointRoot/BamCollectPoint" to="LuggageSpawner" method="_on_bam_collect_point_area_exited"]
