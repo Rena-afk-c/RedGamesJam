@@ -1,10 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://7s8gjoot1l5u"]
+[gd_scene load_steps=7 format=3 uid="uid://7s8gjoot1l5u"]
 
 [ext_resource type="Script" path="res://src/Scripts/PlayableCharacters/sl_ogu.gd" id="1_sl7bs"]
 [ext_resource type="Texture2D" uid="uid://daloy0k3o7qmm" path="res://assets/art/BUDS/Ogu/AirAsia Buds-Turnaround_OGU-SIDE.svg" id="2_1mrl5"]
+[ext_resource type="Shader" path="res://assets/shaders/outline.gdshader" id="2_eadn1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lxil4"]
 size = Vector2(25, 32)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rttte"]
+shader = ExtResource("2_eadn1")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 10.0
+shader_parameter/outline_opacity = 0.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tt7wc"]
 animations = [{
@@ -27,6 +34,7 @@ position = Vector2(0.5, 1)
 shape = SubResource("RectangleShape2D_lxil4")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_rttte")
 position = Vector2(0, 1)
 scale = Vector2(0.0340278, 0.0340278)
 sprite_frames = SubResource("SpriteFrames_tt7wc")

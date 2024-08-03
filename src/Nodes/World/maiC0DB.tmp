@@ -1,0 +1,194 @@
+[gd_scene load_steps=20 format=3 uid="uid://c61fva6qp43g1"]
+
+[ext_resource type="FontFile" uid="uid://dr7g5bnuqelmi" path="res://assets/fonts/monogram.ttf" id="1_c6fta"]
+[ext_resource type="PackedScene" uid="uid://bcyx52vo85dkq" path="res://src/Nodes/World/luggage_spawner.tscn" id="1_g3cta"]
+[ext_resource type="Script" path="res://src/Scripts/Controllers/FlightDisplay.gd" id="1_ph16u"]
+[ext_resource type="PackedScene" uid="uid://bpngs84hwd5fv" path="res://src/Nodes/SelectableCharacters/sl_tappy.tscn" id="2_35b71"]
+[ext_resource type="PackedScene" uid="uid://b6ldiotx6774q" path="res://src/Nodes/SelectableCharacters/sl_biggie.tscn" id="3_4rnlw"]
+[ext_resource type="PackedScene" uid="uid://cwevdoftrw2i2" path="res://src/Nodes/PowerUps/Luggage_Automata.tscn" id="3_nv1f4"]
+[ext_resource type="PackedScene" uid="uid://7s8gjoot1l5u" path="res://src/Nodes/SelectableCharacters/sl_ogu.tscn" id="4_wxhtd"]
+[ext_resource type="Script" path="res://src/Scripts/Controllers/WeatherSystem.gd" id="5_6f4pu"]
+[ext_resource type="Script" path="res://src/Scripts/Controllers/PowerupSpawner.gd" id="5_g5rhp"]
+[ext_resource type="PackedScene" uid="uid://bg7hmcutdesfl" path="res://src/Nodes/SelectableCharacters/sl_bam.tscn" id="5_tvgod"]
+[ext_resource type="PackedScene" uid="uid://bjt7cwcbutfj8" path="res://src/Nodes/PowerUps/Time Slow.tscn" id="6_7ag05"]
+[ext_resource type="PackedScene" uid="uid://di4klb6ej4o01" path="res://src/Nodes/PowerUps/Point Frenzy.tscn" id="7_vhsrq"]
+[ext_resource type="PackedScene" uid="uid://b4hq8wo1csnsn" path="res://src/Nodes/PowerUps/luggage Free-For-All.tscn" id="8_rorva"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toyci"]
+bg_color = Color(1, 0.341176, 0.290196, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ubt85"]
+size = Vector2(35, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqkd0"]
+size = Vector2(35, 35)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pe1al"]
+size = Vector2(35, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1pjvf"]
+size = Vector2(35, 38)
+
+[sub_resource type="Curve2D" id="Curve2D_7s41v"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 32, 44.4405, 0, 0, 0, 0, 28, 50.5006, 0, 0, 0, 0, 29, 59.5907, 0, 0, 0, 0, 32, 249.473, 0, 0, 0, 0, 31, 304.014, 0, 0, 0, 0, 36, 317.144, 0, 0, 0, 0, 48, 317.144, 0, 0, 0, 0, 76, 322.194, 0, 0, 0, 0, 107, 324.214, 0, 0, 0, 0, 138, 317.144, 0, 0, 0, 0, 139, 138.372, 0, 0, 0, 0, 139, 123.222, 9.60513, 3.03771, -9.60513, -3.03771, 139, 47.4706, 0, 0, 0, 0, 127, 40.4005, 0, 0, 0, 0, 98, 41.4105, 0, 0, 0, 0, 45, 38.3805, 0, 0, 0, 0, 32, 44.4405)
+}
+point_count = 17
+
+[node name="Main" type="Node2D"]
+metadata/_edit_horizontal_guides_ = [59.0]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="C_Flight_Display" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 133.0
+offset_bottom = -278.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ph16u")
+
+[node name="Base" type="Panel" parent="HUD/C_Flight_Display"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.5
+offset_top = -19.0
+offset_right = 21.5
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_toyci")
+
+[node name="CounterLabel" type="Label" parent="HUD/C_Flight_Display/Base"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -29.0
+offset_top = -14.5
+offset_right = 19.0
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_c6fta")
+theme_override_font_sizes/font_size = 32
+text = " 0"
+
+[node name="PU_Luggage_Automata" parent="HUD/C_Flight_Display" instance=ExtResource("3_nv1f4")]
+position = Vector2(-123, 116)
+
+[node name="LuggageSpawner" parent="." node_paths=PackedStringArray("path") instance=ExtResource("1_g3cta")]
+position = Vector2(25, 31)
+rotation = 1.5509
+path = NodePath("../ConveyerBelt")
+
+[node name="CollectPointRoot" type="Node2D" parent="LuggageSpawner"]
+position = Vector2(-31.4912, 24.3783)
+rotation = -1.5509
+
+[node name="BamCollectPoint" type="Area2D" parent="LuggageSpawner/CollectPointRoot"]
+position = Vector2(149, 83)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LuggageSpawner/CollectPointRoot/BamCollectPoint"]
+position = Vector2(-30.5, 0)
+shape = SubResource("RectangleShape2D_ubt85")
+debug_color = Color(0.992157, 0, 0.239216, 0.419608)
+
+[node name="BiggieCollectPoint" type="Area2D" parent="LuggageSpawner/CollectPointRoot"]
+position = Vector2(149, 116)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LuggageSpawner/CollectPointRoot/BiggieCollectPoint"]
+position = Vector2(-30.5, 1.5)
+shape = SubResource("RectangleShape2D_hqkd0")
+debug_color = Color(0.992157, 0, 0.239216, 0.419608)
+
+[node name="OguCollectPoint" type="Area2D" parent="LuggageSpawner/CollectPointRoot"]
+position = Vector2(149, 152)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LuggageSpawner/CollectPointRoot/OguCollectPoint"]
+position = Vector2(-30.5, 0)
+shape = SubResource("RectangleShape2D_pe1al")
+debug_color = Color(0.992157, 0, 0.239216, 0.419608)
+
+[node name="TappyCollectPoint" type="Area2D" parent="LuggageSpawner/CollectPointRoot"]
+position = Vector2(149, 186)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LuggageSpawner/CollectPointRoot/TappyCollectPoint"]
+position = Vector2(-30.5, 2)
+shape = SubResource("RectangleShape2D_1pjvf")
+debug_color = Color(0.992157, 0, 0.239216, 0.419608)
+
+[node name="SpawnPoint" type="Node2D" parent="LuggageSpawner"]
+position = Vector2(91.2953, -64.1964)
+
+[node name="PowerupSpawner" type="Node2D" parent="." node_paths=PackedStringArray("path")]
+script = ExtResource("5_g5rhp")
+path = NodePath("../ConveyerBelt")
+luggage_automata_scene = ExtResource("3_nv1f4")
+time_slow_scene = ExtResource("6_7ag05")
+point_frenzy_scene = ExtResource("7_vhsrq")
+luggage_free_for_all_scene = ExtResource("8_rorva")
+
+[node name="SpawnPoint" type="Node2D" parent="PowerupSpawner"]
+position = Vector2(12, 55)
+rotation = 1.5509
+
+[node name="Env" type="Node2D" parent="."]
+
+[node name="WeatherSystem" type="CanvasModulate" parent="Env"]
+position = Vector2(14, 114)
+script = ExtResource("5_6f4pu")
+mid_color = Color(0.717647, 0.286275, 0.290196, 1)
+cycle_duration = 20.0
+
+[node name="Characters" type="Node2D" parent="."]
+position = Vector2(25, 31)
+rotation = 1.5509
+
+[node name="SL_Tappy" parent="Characters" instance=ExtResource("2_35b71")]
+position = Vector2(160.515, -124.831)
+rotation = -1.5509
+
+[node name="SL_Bam" parent="Characters" instance=ExtResource("5_tvgod")]
+position = Vector2(53.5364, -126.96)
+rotation = -1.5509
+
+[node name="SL_Biggie" parent="Characters" instance=ExtResource("3_4rnlw")]
+position = Vector2(88.5096, -125.264)
+rotation = -1.5509
+
+[node name="SL_Ogu" parent="Characters" instance=ExtResource("4_wxhtd")]
+position = Vector2(124.503, -124.548)
+rotation = -1.5509
+
+[node name="ConveyerBelt" type="Path2D" parent="."]
+position = Vector2(-17, -28)
+scale = Vector2(1, 0.990087)
+curve = SubResource("Curve2D_7s41v")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="ConveyerBelt"]
+position = Vector2(32, 44.4405)
+rotation = 2.15421
+
+[connection signal="area_entered" from="LuggageSpawner/CollectPointRoot/BamCollectPoint" to="LuggageSpawner" method="_on_bam_collect_point_area_entered"]
+[connection signal="area_exited" from="LuggageSpawner/CollectPointRoot/BamCollectPoint" to="LuggageSpawner" method="_on_bam_collect_point_area_exited"]
+[connection signal="area_entered" from="LuggageSpawner/CollectPointRoot/BiggieCollectPoint" to="LuggageSpawner" method="_on_biggie_collect_point_area_entered"]
+[connection signal="area_exited" from="LuggageSpawner/CollectPointRoot/BiggieCollectPoint" to="LuggageSpawner" method="_on_biggie_collect_point_area_exited"]
+[connection signal="area_entered" from="LuggageSpawner/CollectPointRoot/OguCollectPoint" to="LuggageSpawner" method="_on_ogu_collect_point_area_entered"]
+[connection signal="area_exited" from="LuggageSpawner/CollectPointRoot/OguCollectPoint" to="LuggageSpawner" method="_on_ogu_collect_point_area_exited"]
+[connection signal="area_entered" from="LuggageSpawner/CollectPointRoot/TappyCollectPoint" to="LuggageSpawner" method="_on_tappy_collect_point_area_entered"]
+[connection signal="area_exited" from="LuggageSpawner/CollectPointRoot/TappyCollectPoint" to="LuggageSpawner" method="_on_tappy_collect_point_area_exited"]

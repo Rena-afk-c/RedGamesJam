@@ -1,10 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6ldiotx6774q"]
+[gd_scene load_steps=7 format=3 uid="uid://b6ldiotx6774q"]
 
 [ext_resource type="Texture2D" uid="uid://bhwsvsbwghh4d" path="res://assets/art/BUDS/Biggie/AirAsia Buds-Turnaround_BIGGIE-SIDE.svg" id="1_235xn"]
 [ext_resource type="Script" path="res://src/Scripts/PlayableCharacters/sl_biggie.gd" id="1_llmm8"]
+[ext_resource type="Shader" path="res://assets/shaders/outline.gdshader" id="2_lycwu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lxil4"]
 size = Vector2(25, 32)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w44mk"]
+shader = ExtResource("2_lycwu")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 10.0
+shader_parameter/outline_opacity = 0.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tt7wc"]
 animations = [{
@@ -27,6 +34,7 @@ position = Vector2(0.5, 1)
 shape = SubResource("RectangleShape2D_lxil4")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_w44mk")
 position = Vector2(0, 1)
 scale = Vector2(0.0340278, 0.0340278)
 sprite_frames = SubResource("SpriteFrames_tt7wc")

@@ -25,3 +25,7 @@ func update_counter(amount: int):
 	tween.parallel().tween_property(counter_label, "rotation_degrees", 0, 0.1)
 	
 	counter_label.text = " " + str(amount)  
+
+
+func _on_bam_collect_point_area_exited(area):
+	pass # Replace with function body.
