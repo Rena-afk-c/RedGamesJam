@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://dh1hh3582ol8"]
+
+[ext_resource type="Script" path="res://src/Scripts/UIController/TransitionManager.gd" id="1_dvlwt"]
+[ext_resource type="Texture2D" uid="uid://kjcs61led2iu" path="res://assets/ui/TeamLogo.png" id="2_bjue4"]
+[ext_resource type="FontFile" uid="uid://dr7g5bnuqelmi" path="res://assets/fonts/monogram.ttf" id="3_ku8iy"]
+
+[node name="TransitionManager" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dvlwt")
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TeamLogo" type="Sprite2D" parent="."]
+position = Vector2(86, 168)
+scale = Vector2(0.215808, 0.215808)
+texture = ExtResource("2_bjue4")
+region_enabled = true
+region_rect = Rect2(88.7845, 244.077, 372.984, 422.287)
+
+[node name="RenaLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 208.0
+offset_right = 112.0
+offset_bottom = 234.0
+theme_override_fonts/font = ExtResource("3_ku8iy")
+theme_override_font_sizes/font_size = 32
+text = "RENA"
