@@ -8,6 +8,8 @@ enum CharacterType {
 	OGU
 }
 
+
+
 # Enum for powerup types
 enum PowerUpType {
 	NONE,
@@ -66,13 +68,6 @@ func upgrade_powerup(powerup_type: PowerUpType) -> void:
 	if upgrade_levels[powerup_type] < 10:  
 		upgrade_levels[powerup_type] += 1
 
-func activate_powerup(character_type: CharacterType) -> void:
-	var powerup_data = powerups[character_type]
-	var duration = get_powerup_duration(character_type)
-	active_powerup = powerup_data["type"]
-	active_powerup_time_left = duration
-	emit_signal("powerup_activated", active_powerup, duration)
-	print("Activating " + powerup_data["name"] + " for " + str(duration) + " seconds")
 
 func is_powerup_active(powerup_type: PowerUpType) -> bool:
 	return active_powerup == powerup_type
@@ -90,12 +85,23 @@ func _process(delta: float) -> void:
 		if active_powerup_time_left <= 0:
 			deactivate_powerup()
 
+func activate_powerup(character_type: CharacterType) -> void:
+	var powerup_data = powerups[character_type]
+	var duration = get_powerup_duration(character_type)
+	active_powerup = powerup_data["type"]
+	active_powerup_time_left = duration
+	PowerUpEffects.activate_powerup(active_powerup)
+	emit_signal("powerup_activated", active_powerup, duration)
+	print("Activating " + powerup_data["name"] + " for " + str(duration) + " seconds")
+
 func deactivate_powerup() -> void:
 	var deactivated_powerup = active_powerup
 	active_powerup = PowerUpType.NONE
 	active_powerup_time_left = 0
+	PowerUpEffects.deactivate_powerup(deactivated_powerup)
 	emit_signal("powerup_deactivated", deactivated_powerup)
 	print("Powerup deactivated")
+
 
 func get_active_powerup_time_left() -> float:
 	return active_powerup_time_left

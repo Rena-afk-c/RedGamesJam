@@ -14,10 +14,14 @@ func _ready():
 	
 	# Initialize the outline opacity to 0
 	set_outline_opacity(0.0)
+	
+	# Add this character to the "player" group
+	add_to_group("player")
 
 func _on_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		select_character()
+
 
 func select_character():
 	GameManager.select_character(character_type)

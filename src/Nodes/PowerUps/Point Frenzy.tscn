@@ -20,7 +20,7 @@ radius = 15.0333
 
 [sub_resource type="SphereMesh" id="SphereMesh_n11g4"]
 
-[node name="PU_Point_Frenzy" type="Area2D"]
+[node name="PU_Point_Frenzy" type="Area2D" groups=["powerups"]]
 position = Vector2(23, 20)
 script = ExtResource("1_npbci")
 powerup_type = 2

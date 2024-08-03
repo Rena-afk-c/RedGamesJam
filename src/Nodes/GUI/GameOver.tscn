@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/Scripts/Controllers/GameOver.gd" id="1_xm885"]
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu2" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

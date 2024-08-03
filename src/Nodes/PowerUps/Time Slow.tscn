@@ -20,7 +20,7 @@ radius = 15.0333
 
 [sub_resource type="SphereMesh" id="SphereMesh_2ovwl"]
 
-[node name="PU_Time_Slow" type="Area2D"]
+[node name="PU_Time_Slow" type="Area2D" groups=["powerups"]]
 position = Vector2(23, 20)
 script = ExtResource("1_itd1o")
 powerup_type = 1

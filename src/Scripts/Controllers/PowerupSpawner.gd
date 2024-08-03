@@ -100,7 +100,8 @@ func move_powerups(delta: float) -> void:
 		path_follow.queue_free()
 
 func _on_powerup_detected(area: Area2D) -> void:
-	if area.get_parent() in powerup_list and not area.has_meta("fading"):
+	var parent = area.get_parent()
+	if parent is PathFollow2D and parent in powerup_list and not area.has_meta("fading"):
 		start_flicker_fade_out(area)
 
 func start_flicker_fade_out(powerup: Area2D) -> void:
