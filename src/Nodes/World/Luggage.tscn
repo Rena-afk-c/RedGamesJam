@@ -1,21 +1,35 @@
-[gd_scene load_steps=3 format=3 uid="uid://bm738csh4iacf"]
+[gd_scene load_steps=5 format=3 uid="uid://bm738csh4iacf"]
 
 [ext_resource type="Script" path="res://src/Scripts/Controllers/LuggageBehavior.gd" id="1_orohw"]
+[ext_resource type="Texture2D" uid="uid://bieyotbryoy2f" path="res://assets/shaders/LightSource.tres" id="2_k4qs2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l25uf"]
-size = Vector2(22, 32.5)
+size = Vector2(23, 32)
 
-[node name="Luggage" type="Area2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xit3y"]
+size = Vector2(23, 32)
+
+[node name="Luggage" type="RigidBody2D" groups=["luggage"]]
 script = ExtResource("1_orohw")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-6, -7.25)
-shape = SubResource("RectangleShape2D_l25uf")
-
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -17.0
+offset_left = -18.0
 offset_top = -23.0
-offset_right = 16.0
+offset_right = 15.0
 offset_bottom = 24.0
 scale = Vector2(0.681616, 0.681616)
-color = Color(1, 0.478431, 0.462745, 1)
+mouse_filter = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-6.5, -7)
+shape = SubResource("RectangleShape2D_l25uf")
+
+[node name="CollectionPointArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectionPointArea"]
+position = Vector2(-6.5, -7)
+shape = SubResource("RectangleShape2D_xit3y")
+
+[node name="GlowLight" type="PointLight2D" parent="."]
+position = Vector2(-8, -6)
+texture = ExtResource("2_k4qs2")

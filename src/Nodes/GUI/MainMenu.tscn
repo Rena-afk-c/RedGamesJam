@@ -137,6 +137,10 @@ offset_right = 40.5
 grow_horizontal = 2
 grow_vertical = 0
 
+[node name="SpeedUp" type="Button" parent="CanvasLayer/Settings/VBoxContainer"]
+layout_mode = 2
+text = "Speed"
+
 [node name="SettingsBack" type="Button" parent="CanvasLayer/Settings/VBoxContainer"]
 layout_mode = 2
 text = "Back"
@@ -162,3 +166,4 @@ horizontal_alignment = 1
 [connection signal="pressed" from="CanvasLayer/Main/VBoxContainer/QuitBtn" to="CanvasLayer" method="_on_quit_btn_pressed"]
 [connection signal="value_changed" from="CanvasLayer/Settings/VSplitContainer/MusicSlider" to="CanvasLayer" method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="CanvasLayer/Settings/VSplitContainer2/SFXSlider" to="CanvasLayer" method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="CanvasLayer/Settings/VBoxContainer/SpeedUp" to="CanvasLayer" method="_on_speed_up_pressed"]
