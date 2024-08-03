@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ehcbna2tcarw"]
+[gd_scene load_steps=14 format=3 uid="uid://pj07pgrssj0o"]
 
 [ext_resource type="FontFile" uid="uid://dr7g5bnuqelmi" path="res://assets/fonts/monogram.ttf" id="2_hlqgi"]
 [ext_resource type="Script" path="res://src/Scripts/UIController/PowerUpUI.gd" id="3_y74gl"]
@@ -292,16 +292,17 @@ libraries = {
 
 [node name="PowerUp Indicator HUD" type="CanvasLayer" parent="."]
 
-[node name="Control" type="Control" parent="PowerUp Indicator HUD"]
+[node name="PowerUpDurationIndicator" type="Control" parent="PowerUp Indicator HUD"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -284.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("7_m2nxm")
 
-[node name="Control2" type="Control" parent="PowerUp Indicator HUD/Control"]
+[node name="Control2" type="Control" parent="PowerUp Indicator HUD/PowerUpDurationIndicator"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -310,12 +311,12 @@ offset_left = -30.0
 offset_right = -30.0
 grow_horizontal = 2
 
-[node name="Sprite2" type="Sprite2D" parent="PowerUp Indicator HUD/Control/Control2"]
+[node name="Sprite2" type="Sprite2D" parent="PowerUp Indicator HUD/PowerUpDurationIndicator/Control2"]
 position = Vector2(9, 20)
 scale = Vector2(0.02, 0.02)
 texture = ExtResource("5_vauk3")
 
-[node name="ProgressBar2" type="TextureProgressBar" parent="PowerUp Indicator HUD/Control/Control2"]
+[node name="ProgressBar2" type="TextureProgressBar" parent="PowerUp Indicator HUD/PowerUpDurationIndicator/Control2"]
 layout_mode = 0
 offset_left = -5.00001
 offset_top = 4.03616
@@ -330,18 +331,19 @@ texture_progress = ExtResource("8_1m1qy")
 tint_under = Color(0, 0, 0, 0)
 tint_progress = Color(0.772549, 0.878431, 1, 1)
 
-[node name="Control3" type="Control" parent="PowerUp Indicator HUD/Control"]
+[node name="Control3" type="Control" parent="PowerUp Indicator HUD/PowerUpDurationIndicator"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 84.0
 offset_right = 84.0
 
-[node name="Sprite3" type="Sprite2D" parent="PowerUp Indicator HUD/Control/Control3"]
+[node name="Sprite3" type="Sprite2D" parent="PowerUp Indicator HUD/PowerUpDurationIndicator/Control3"]
 position = Vector2(23, 20)
 scale = Vector2(0.02, 0.02)
 texture = ExtResource("6_tnyfb")
 
-[node name="ProgressBar3" type="TextureProgressBar" parent="PowerUp Indicator HUD/Control/Control3"]
+[node name="ProgressBar3" type="TextureProgressBar" parent="PowerUp Indicator HUD/PowerUpDurationIndicator/Control3"]
+layout_mode = 0
 offset_left = 7.99998
 offset_top = 4.03616
 offset_right = 308.0
@@ -355,18 +357,19 @@ texture_progress = ExtResource("8_1m1qy")
 tint_under = Color(0, 0, 0, 0)
 tint_progress = Color(0.964706, 0, 0.180392, 1)
 
-[node name="Control1" type="Control" parent="PowerUp Indicator HUD/Control"]
+[node name="Control1" type="Control" parent="PowerUp Indicator HUD/PowerUpDurationIndicator"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 52.0
 offset_right = 52.0
 
-[node name="Sprite1" type="Sprite2D" parent="PowerUp Indicator HUD/Control/Control1"]
+[node name="Sprite1" type="Sprite2D" parent="PowerUp Indicator HUD/PowerUpDurationIndicator/Control1"]
 position = Vector2(-13, 20)
 scale = Vector2(0.02, 0.02)
 texture = ExtResource("4_17n06")
 
-[node name="ProgressBar1" type="TextureProgressBar" parent="PowerUp Indicator HUD/Control/Control1"]
+[node name="ProgressBar1" type="TextureProgressBar" parent="PowerUp Indicator HUD/PowerUpDurationIndicator/Control1"]
+layout_mode = 0
 offset_left = -29.0
 offset_top = 4.03616
 offset_right = 271.0
@@ -380,26 +383,27 @@ texture_progress = ExtResource("8_1m1qy")
 tint_under = Color(0, 0, 0, 0)
 tint_progress = Color(0.552941, 0.596078, 0.639216, 1)
 
-[node name="Control4" type="Control" parent="PowerUp Indicator HUD/Control"]
+[node name="Control4" type="Control" parent="PowerUp Indicator HUD/PowerUpDurationIndicator"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 85.0
 offset_right = 125.0
 offset_bottom = 40.0
 
-[node name="Sprite4" type="Sprite2D" parent="PowerUp Indicator HUD/Control/Control4"]
+[node name="Sprite4" type="Sprite2D" parent="PowerUp Indicator HUD/PowerUpDurationIndicator/Control4"]
 position = Vector2(56, 20)
 scale = Vector2(0.02, 0.02)
 texture = ExtResource("7_7p62g")
 
-[node name="ProgressBar4" type="TextureProgressBar" parent="PowerUp Indicator HUD/Control/Control4"]
+[node name="ProgressBar4" type="TextureProgressBar" parent="PowerUp Indicator HUD/PowerUpDurationIndicator/Control4"]
+layout_mode = 0
 offset_left = 41.0
 offset_top = 4.03616
 offset_right = 341.0
 offset_bottom = 304.036
 rotation = -0.00120531
 scale = Vector2(0.1, 0.1)
-value = 50.0
+value = 100.0
 fill_mode = 4
 texture_under = ExtResource("8_1m1qy")
 texture_progress = ExtResource("8_1m1qy")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c61fva6qp43g1"]
+[gd_scene load_steps=30 format=3 uid="uid://c61fva6qp43g1"]
 
 [ext_resource type="Script" path="res://src/Nodes/World/main.gd" id="1_04crg"]
 [ext_resource type="FontFile" uid="uid://dr7g5bnuqelmi" path="res://assets/fonts/monogram.ttf" id="1_c6fta"]
@@ -7,13 +7,19 @@
 [ext_resource type="PackedScene" uid="uid://bpngs84hwd5fv" path="res://src/Nodes/SelectableCharacters/sl_tappy.tscn" id="2_35b71"]
 [ext_resource type="PackedScene" uid="uid://b6ldiotx6774q" path="res://src/Nodes/SelectableCharacters/sl_biggie.tscn" id="3_4rnlw"]
 [ext_resource type="PackedScene" uid="uid://cwevdoftrw2i2" path="res://src/Nodes/PowerUps/Luggage_Automata.tscn" id="3_nv1f4"]
+[ext_resource type="Script" path="res://src/Scripts/UIController/PowerUpIndicator.gd" id="4_c7xlg"]
 [ext_resource type="Script" path="res://src/Scripts/Controllers/PowerUpSpawner.gd" id="4_sfqwm"]
 [ext_resource type="PackedScene" uid="uid://7s8gjoot1l5u" path="res://src/Nodes/SelectableCharacters/sl_ogu.tscn" id="4_wxhtd"]
 [ext_resource type="Script" path="res://src/Scripts/Controllers/WeatherSystem.gd" id="5_6f4pu"]
+[ext_resource type="Texture2D" uid="uid://cqs60tvr0jxi1" path="res://assets/art/BUDS/Bam/AirAsia Buds-Turnaround_BAM-FRONT.svg" id="5_s1r6v"]
 [ext_resource type="PackedScene" uid="uid://bg7hmcutdesfl" path="res://src/Nodes/SelectableCharacters/sl_bam.tscn" id="5_tvgod"]
 [ext_resource type="PackedScene" uid="uid://bjt7cwcbutfj8" path="res://src/Nodes/PowerUps/Time Slow.tscn" id="6_7ag05"]
+[ext_resource type="Texture2D" uid="uid://bo7ivwe8opfhh" path="res://assets/ui/CircularProgressBar.png" id="6_u1vh7"]
+[ext_resource type="Texture2D" uid="uid://dcbtovkr1waq4" path="res://assets/art/BUDS/Biggie/AirAsia Buds-Turnaround_BIGGIE-FRONT.svg" id="7_rsuyh"]
 [ext_resource type="PackedScene" uid="uid://di4klb6ej4o01" path="res://src/Nodes/PowerUps/Point Frenzy.tscn" id="7_vhsrq"]
+[ext_resource type="Texture2D" uid="uid://ba8uirt1mikud" path="res://assets/art/BUDS/Tappy/AirAsia Buds-Turnaround_TAPPY-FRONT.svg" id="8_pva7u"]
 [ext_resource type="PackedScene" uid="uid://b4hq8wo1csnsn" path="res://src/Nodes/PowerUps/luggage Free-For-All.tscn" id="8_rorva"]
+[ext_resource type="Texture2D" uid="uid://cfwh4d3ne6ycy" path="res://assets/art/BUDS/Ogu/AirAsia Buds-Turnaround_OGU-FRONT.svg" id="9_83inw"]
 [ext_resource type="Script" path="res://src/Nodes/World/MainCamera.gd" id="14_tldhf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toyci"]
@@ -96,6 +102,125 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_c6fta")
 theme_override_font_sizes/font_size = 32
 text = " 0"
+
+[node name="PowerUpDurationIndicator" type="Control" parent="HUD" node_paths=PackedStringArray("tappy_progress_bar", "bam_progress_bar", "biggie_progress_bar", "ogu_progress_bar")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 282.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_c7xlg")
+tappy_progress_bar = NodePath("TappyProgressBar/ProgressBar")
+bam_progress_bar = NodePath("BamProgressBar/Progressbar")
+biggie_progress_bar = NodePath("BiggieProgressBar/Progressbar")
+ogu_progress_bar = NodePath("OguProgressBar/Progressbar")
+
+[node name="BamProgressBar" type="Control" parent="HUD/PowerUpDurationIndicator"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -30.0
+offset_right = -30.0
+grow_horizontal = 2
+
+[node name="sprite" type="Sprite2D" parent="HUD/PowerUpDurationIndicator/BamProgressBar"]
+position = Vector2(9, 20)
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("5_s1r6v")
+
+[node name="Progressbar" type="TextureProgressBar" parent="HUD/PowerUpDurationIndicator/BamProgressBar"]
+layout_mode = 0
+offset_left = -5.00001
+offset_top = 4.03616
+offset_right = 295.0
+offset_bottom = 304.036
+rotation = -0.00120531
+scale = Vector2(0.1, 0.1)
+fill_mode = 4
+texture_under = ExtResource("6_u1vh7")
+texture_progress = ExtResource("6_u1vh7")
+tint_under = Color(0, 0, 0, 0)
+tint_progress = Color(0.772549, 0.878431, 1, 1)
+
+[node name="BiggieProgressBar" type="Control" parent="HUD/PowerUpDurationIndicator"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 84.0
+offset_right = 84.0
+
+[node name="sprite" type="Sprite2D" parent="HUD/PowerUpDurationIndicator/BiggieProgressBar"]
+position = Vector2(23, 20)
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("7_rsuyh")
+
+[node name="Progressbar" type="TextureProgressBar" parent="HUD/PowerUpDurationIndicator/BiggieProgressBar"]
+layout_mode = 0
+offset_left = 7.99998
+offset_top = 4.03616
+offset_right = 308.0
+offset_bottom = 304.036
+rotation = -0.00120531
+scale = Vector2(0.1, 0.1)
+fill_mode = 4
+texture_under = ExtResource("6_u1vh7")
+texture_progress = ExtResource("6_u1vh7")
+tint_under = Color(0, 0, 0, 0)
+tint_progress = Color(0.964706, 0, 0.180392, 1)
+
+[node name="TappyProgressBar" type="Control" parent="HUD/PowerUpDurationIndicator"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 52.0
+offset_right = 52.0
+
+[node name="sprite" type="Sprite2D" parent="HUD/PowerUpDurationIndicator/TappyProgressBar"]
+position = Vector2(-13, 20)
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("8_pva7u")
+
+[node name="ProgressBar" type="TextureProgressBar" parent="HUD/PowerUpDurationIndicator/TappyProgressBar"]
+layout_mode = 0
+offset_left = -29.0
+offset_top = 4.03616
+offset_right = 271.0
+offset_bottom = 304.036
+rotation = -0.00120531
+scale = Vector2(0.1, 0.1)
+fill_mode = 4
+texture_under = ExtResource("6_u1vh7")
+texture_progress = ExtResource("6_u1vh7")
+tint_under = Color(0, 0, 0, 0)
+tint_progress = Color(0.552941, 0.596078, 0.639216, 1)
+
+[node name="OguProgressBar" type="Control" parent="HUD/PowerUpDurationIndicator"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 85.0
+offset_right = 125.0
+offset_bottom = 40.0
+
+[node name="sprite" type="Sprite2D" parent="HUD/PowerUpDurationIndicator/OguProgressBar"]
+position = Vector2(56, 20)
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("9_83inw")
+
+[node name="Progressbar" type="TextureProgressBar" parent="HUD/PowerUpDurationIndicator/OguProgressBar"]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 4.03616
+offset_right = 341.0
+offset_bottom = 304.036
+rotation = -0.00120531
+scale = Vector2(0.1, 0.1)
+fill_mode = 4
+texture_under = ExtResource("6_u1vh7")
+texture_progress = ExtResource("6_u1vh7")
+tint_under = Color(0, 0, 0, 0)
+tint_progress = Color(0.94902, 0.384314, 0, 1)
 
 [node name="SpawnerRoot" parent="." node_paths=PackedStringArray("path") instance=ExtResource("1_g3cta")]
 position = Vector2(25, 31)

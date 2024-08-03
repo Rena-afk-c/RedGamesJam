@@ -1,80 +1,83 @@
 extends Control
 
-@onready var sprite1 = $Control1/Sprite1
-@onready var progressBar1 = $Control1/ProgressBar1
-@onready var sprite2 = $Control2/Sprite2
-@onready var progressBar2 = $Control2/ProgressBar2
-@onready var sprite3 = $Control3/Sprite3
-@onready var progressBar3 = $Control3/ProgressBar3
-@onready var sprite4 = $Control4/Sprite4
-@onready var progressBar4 = $Control4/ProgressBar4
+@export var tappy_progress_bar: TextureProgressBar
+@export var bam_progress_bar: TextureProgressBar
+@export var biggie_progress_bar: TextureProgressBar
+@export var ogu_progress_bar: TextureProgressBar
 
-var coolDownDuration1 = 5.0
-var coolDownDuration2 = 5.0
-var coolDownDuration3 = 5.0
-var coolDownDuration4 = 5.0
+@onready var bam_sprite = $BamProgressBar/sprite
+@onready var biggie_sprite = $BiggieProgressBar/sprite
+@onready var tappy_sprite = $TappyProgressBar/sprite
+@onready var ogu_sprite = $OguProgressBar/sprite
 
-var coolDownTimer1 = 0.0
-var coolDownTimer2 = 0.0
-var coolDownTimer3 = 0.0
-var coolDownTimer4 = 0.0
-
-var onCooldown1 = false
-var onCooldown2 = false
-var onCooldown3 = false
-var onCooldown4 = false
+var active_tween: Tween
+const SPRITE_SCALE = Vector2(0.02, 0.02)
+const INACTIVE_MODULATE = Color(1, 1, 1, 0.5)  # Adjust alpha for inactive sprite visibility
 
 func _ready():
-	# Initialize progress bars to full value
-	progressBar1.value = 100
-	progressBar2.value = 100
-	progressBar3.value = 100
-	progressBar4.value = 100
+	PowerUpManager.connect("powerup_activated", Callable(self, "_on_powerup_activated"))
+	PowerUpManager.connect("powerup_deactivated", Callable(self, "_on_powerup_deactivated"))
+	
+	for progress_bar in [tappy_progress_bar, bam_progress_bar, biggie_progress_bar, ogu_progress_bar]:
+		if progress_bar:
+			progress_bar.value = 0
+			progress_bar.hide()  # Hide progress bars initially
+	
+	for sprite in [bam_sprite, biggie_sprite, tappy_sprite, ogu_sprite]:
+		if sprite:
+			sprite.modulate = Color(1, 1, 1, 0)
+			sprite.scale = SPRITE_SCALE
 
-	# Optionally, hide sprites at the start if they should be hidden initially
-	sprite1.hide()
-	sprite2.hide()
-	sprite3.hide()
-	sprite4.hide()
+func _process(delta):
+	update_progress_bars()
 
-func _physics_process(delta):
-	# Update cooldowns and progress bars
-	update_cooldown(progressBar1, coolDownTimer1, coolDownDuration1, onCooldown1, sprite1, delta)
-	update_cooldown(progressBar2, coolDownTimer2, coolDownDuration2, onCooldown2, sprite2, delta)
-	update_cooldown(progressBar3, coolDownTimer3, coolDownDuration3, onCooldown3, sprite3, delta)
-	update_cooldown(progressBar4, coolDownTimer4, coolDownDuration4, onCooldown4, sprite4, delta)
+func update_progress_bars():
+	var active_powerup = PowerUpManager.get_active_powerup_type()
+	var time_left = PowerUpManager.get_active_powerup_time_left()
+	
+	update_single_powerup(tappy_progress_bar, tappy_sprite, PowerUpManager.PowerUpType.LUGGAGE_AUTOMATA, active_powerup, time_left, PowerUpManager.get_powerup_duration(PowerUpManager.CharacterType.TAPPY))
+	update_single_powerup(bam_progress_bar, bam_sprite, PowerUpManager.PowerUpType.TIME_SLOW, active_powerup, time_left, PowerUpManager.get_powerup_duration(PowerUpManager.CharacterType.BAM))
+	update_single_powerup(biggie_progress_bar, biggie_sprite, PowerUpManager.PowerUpType.POINT_FRENZY, active_powerup, time_left, PowerUpManager.get_powerup_duration(PowerUpManager.CharacterType.BIGGIE))
+	update_single_powerup(ogu_progress_bar, ogu_sprite, PowerUpManager.PowerUpType.LUGGAGE_FREE_FOR_ALL, active_powerup, time_left, PowerUpManager.get_powerup_duration(PowerUpManager.CharacterType.OGU))
 
-func update_cooldown(progressBar: ProgressBar, timer: float, duration: float, on_cooldown: bool, sprite: Sprite2D, delta: float):
-	if on_cooldown:
-		timer -= delta
-		progressBar.value = max(0, (timer / duration) * 100) # Update progress bar value
-		if timer <= 0:
-			timer = 0
-			on_cooldown = false
-			sprite.hide() # Hide sprite when cooldown is complete
-			progressBar.value = 0
-	else:
-		progressBar.value = 100 # Reset progress bar if not on cooldown
+func update_single_powerup(progress_bar: TextureProgressBar, sprite: Sprite2D, powerup_type: int, active_powerup: int, time_left: float, total_duration: float):
+	if progress_bar and sprite:
+		if active_powerup != PowerUpManager.PowerUpType.NONE:
+			show_sprite(sprite)
+			progress_bar.show()  # Show progress bar when a powerup is active
+			if powerup_type == active_powerup:
+				sprite.modulate = Color(1, 1, 1, 1)
+				var progress = (time_left / total_duration) * 100
+				tween_progress_bar(progress_bar, progress)
+			else:
+				sprite.modulate = INACTIVE_MODULATE
+				tween_progress_bar(progress_bar, 100)  # Keep inactive bars full
+		else:
+			hide_sprite(sprite)
+			progress_bar.hide()  # Hide progress bar when no powerup is active
+		
+		progress_bar.value = progress_bar.value
 
-func start_cooldown(cooldown_id: int):
-	match cooldown_id:
-		1:
-			if not onCooldown1:
-				coolDownTimer1 = coolDownDuration1
-				onCooldown1 = true
-				sprite1.show() # Show sprite when cooldown starts
-		2:
-			if not onCooldown2:
-				coolDownTimer2 = coolDownDuration2
-				onCooldown2 = true
-				sprite2.show() # Show sprite when cooldown starts
-		3:
-			if not onCooldown3:
-				coolDownTimer3 = coolDownDuration3
-				onCooldown3 = true
-				sprite3.show() # Show sprite when cooldown starts
-		4:
-			if not onCooldown4:
-				coolDownTimer4 = coolDownDuration4
-				onCooldown4 = true
-				sprite4.show() # Show sprite when cooldown starts
+func tween_progress_bar(progress_bar: TextureProgressBar, target_value: float):
+	if progress_bar:
+		if active_tween and active_tween.is_valid():
+			active_tween.kill()
+		progress_bar.value = target_value  # Set value immediately
+		active_tween = create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+		active_tween.tween_property(progress_bar, "value", target_value, 0.1)  # Shorter tween time
+
+func show_sprite(sprite: Sprite2D):
+	if sprite and sprite.modulate.a == 0:
+		var tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		tween.tween_property(sprite, "modulate:a", 1.0, 0.3)
+
+func hide_sprite(sprite: Sprite2D):
+	if sprite and sprite.modulate.a > 0:
+		var tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+		tween.tween_property(sprite, "modulate:a", 0.0, 0.3)
+
+func _on_powerup_activated(powerup_type: int):
+	update_progress_bars()
+
+func _on_powerup_deactivated():
+	update_progress_bars()
