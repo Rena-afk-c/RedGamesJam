@@ -7,6 +7,11 @@ var current_point_multiplier: float = 1.0
 
 signal character_selected(character: Characters)
 signal currency_updated(new_amount: int)
+signal game_over
+
+var luggage_count: int = 0
+var max_luggage: int = 20  
+
 
 var power_up_used:bool = false
 
@@ -16,6 +21,23 @@ func _ready():
 	print("GameManager initialized. Default character: ", Characters.keys()[selected_character])
 	power_up_effects.connect("point_frenzy_activated", Callable(self, "_on_point_frenzy_activated"))
 	power_up_effects.connect("point_frenzy_deactivated", Callable(self, "_on_point_frenzy_deactivated"))
+
+
+func increment_luggage_count():
+	luggage_count += 1
+	check_end_game_condition()
+
+func decrement_luggage_count():
+	luggage_count -= 1
+
+func check_end_game_condition():
+	if luggage_count >= max_luggage:
+		emit_signal("game_over")
+		
+func restart_game():
+	luggage_count = 0
+	var current_scene = get_tree().current_scene
+	get_tree().reload_current_scene()
 
 func select_character(character: Characters):
 	selected_character = character

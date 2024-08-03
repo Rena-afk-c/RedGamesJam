@@ -23,7 +23,7 @@ func _ready():
 	update_active_collection_point()
 	PowerUpEffects.connect("luggage_free_for_all_activated", Callable(self, "_on_luggage_free_for_all_activated"))
 	PowerUpEffects.connect("luggage_free_for_all_deactivated", Callable(self, "_on_luggage_free_for_all_deactivated"))
-
+	GameManager.connect("game_over", Callable(self, "_on_game_over"))
 
 func _process(delta: float) -> void:
 	spawn_timer += delta
@@ -33,6 +33,13 @@ func _process(delta: float) -> void:
 	
 	move_luggage(delta)
 	update_luggage_highlight()
+	
+	print("Current number of luggages: ", luggage_list.size())
+	
+	# Check if we need to restart
+	if luggage_list.size() >= 20:
+		print("Maximum luggage count reached. Restarting game...")
+		GameManager.restart_game()
 
 func can_spawn_luggage() -> bool:
 	if luggage_list.is_empty():
@@ -57,6 +64,7 @@ func spawn_luggage() -> void:
 		glow_light.energy = 0
 	
 	luggage_list.append(new_path_follow)
+	GameManager.increment_luggage_count()
 
 func move_luggage(delta: float) -> void:
 	for path_follow in luggage_list:
@@ -69,6 +77,7 @@ func move_luggage(delta: float) -> void:
 		
 		if path_follow.progress_ratio >= 1:
 			luggage_list.erase(path_follow)
+			GameManager.decrement_luggage_count()
 			path_follow.queue_free()
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -139,6 +148,7 @@ func collect_luggage(luggage: RigidBody2D, path_follow: PathFollow2D) -> void:
 			luggage_list.erase(path_follow)
 			path_follow.queue_free()
 		GameManager.collect_luggage()
+		GameManager.decrement_luggage_count()
 	).set_delay(0.7)
 
 func update_active_collection_point() -> void:
@@ -183,3 +193,19 @@ func fade_out_glow_light(glow_light: PointLight2D) -> void:
 	if glow_light and glow_light.energy > 0.0:
 		var tween = create_tween()
 		tween.tween_property(glow_light, "energy", 0.0, glow_fade_time)
+
+func _on_game_over():
+	# Stop spawning new luggage
+	set_process(false)
+	
+	# Optional: You can add visual feedback here, like fading out existing luggage
+	for path_follow in luggage_list:
+		if path_follow.get_child_count() > 0:
+			var luggage = path_follow.get_child(0)
+			if luggage is RigidBody2D:
+				var tween = create_tween()
+				tween.tween_property(luggage, "modulate:a", 0, 1.0)
+	
+	# Wait a moment before restarting
+	await get_tree().create_timer(2.0).timeout
+	GameManager.restart_game()

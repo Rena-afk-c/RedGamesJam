@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://c61fva6qp43g1"]
+[gd_scene load_steps=29 format=3 uid="uid://c61fva6qp43g1"]
 
 [ext_resource type="Script" path="res://src/Nodes/World/main.gd" id="1_04crg"]
 [ext_resource type="FontFile" uid="uid://dr7g5bnuqelmi" path="res://assets/fonts/monogram.ttf" id="1_c6fta"]
@@ -20,7 +20,6 @@
 [ext_resource type="Texture2D" uid="uid://ba8uirt1mikud" path="res://assets/art/BUDS/Tappy/AirAsia Buds-Turnaround_TAPPY-FRONT.svg" id="8_pva7u"]
 [ext_resource type="PackedScene" uid="uid://b4hq8wo1csnsn" path="res://src/Nodes/PowerUps/luggage Free-For-All.tscn" id="8_rorva"]
 [ext_resource type="Texture2D" uid="uid://cfwh4d3ne6ycy" path="res://assets/art/BUDS/Ogu/AirAsia Buds-Turnaround_OGU-FRONT.svg" id="9_83inw"]
-[ext_resource type="Script" path="res://src/Nodes/World/MainCamera.gd" id="14_tldhf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toyci"]
 bg_color = Color(1, 0.341176, 0.290196, 1)
@@ -50,13 +49,18 @@ size = Vector2(165.307, 41.1581)
 
 [sub_resource type="Curve2D" id="Curve2D_7s41v"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 32, 44.4405, 0, 0, 0, 0, 28, 50.5006, 0, 0, 0, 0, 24, 59.5907, 0, 0, 0, 0, 23, 92.9211, 0, 0, 0, 0, 24, 137.362, 0, 0, 0, 0, 25, 189.882, 0, 0, 0, 0, 25, 249.473, 0, 0, 0, 0, 27, 284.823, 0, 0, 0, 0, 25, 305.024, 0, 0, 0, 0, 30, 315.124, 0, 0, 0, 0, 29, 316.134, 0, 0, 0, 0, 29, 319.164, 0, 0, 0, 0, 33, 321.184, 0, 0, 0, 0, 39, 321.184, 0, 0, 0, 0, 43, 323.204, 0, 0, 0, 0, 46, 321.184, 0, 0, 0, 0, 47, 322.194, 0, 0, 0, 0, 76, 322.194, 0, 0, 0, 0, 107, 324.214, 0, 0, 0, 0, 152, 323.204, 0, 0, 0, 0, 156, 321.184, 0, 0, 0, 0, 159, 318.154, 0, 0, 0, 0, 159, 316.134, 0, 0, 0, 0, 161, 312.094, 0, 0, 0, 0, 164, 306.034, 0, 0, 0, 0, 164, 284.823, 0, 0, 0, 0, 165, 229.273, 0, 0, 0, 0, 160, 150.492, 0, 0, 0, 0, 161, 130.292, 0, 0, 0, 0, 160, 114.131, 0, 0, 0, 0, 161, 68.6808, 0, 0, 0, 0, 158, 52.5206, 0, 0, 0, 0, 153, 46.4606, 9.60513, 3.03771, -9.60513, -3.03771, 148, 42.4205, 0, 0, 0, 0, 140, 41.4105, 0, 0, 0, 0, 130, 40.4005, 0, 0, 0, 0, 127, 40.4005, 0, 0, 0, 0, 114, 40.4005, 0, 0, 0, 0, 99, 39.3905, 0, 0, 0, 0, 89, 39.3905, 0, 0, 0, 0, 45, 38.3805, 0, 0, 0, 0, 40, 39.3905, 0, 0, 0, 0, 39, 40.4005, 0, 0, 0, 0, 35, 41.4105, 0, 0, 0, 0, 32, 44.4405)
+"points": PackedVector2Array(0, 0, 0, 0, 32, 44.4405, 0, 0, 0, 0, 28, 50.5006, 0, 0, 0, 0, 24, 59.5907, 0, 0, 0, 0, 23, 92.9211, 0, 0, 0, 0, 24, 137.362, 0, 0, 0, 0, 25, 189.882, 0, 0, 0, 0, 25, 249.473, 0, 0, 0, 0, 27, 284.823, 0, 0, 0, 0, 25, 305.024, 0, 0, 0, 0, 30, 315.124, 0, 0, 0, 0, 29, 316.134, 0, 0, 0, 0, 29, 319.164, 0, 0, 0, 0, 33, 321.184, 0, 0, 0, 0, 39, 321.184, 0, 0, 0, 0, 43, 323.204, 0, 0, 0, 0, 46, 321.184, 0, 0, 0, 0, 47, 322.194, 0, 0, 0, 0, 76, 322.194, 0, 0, 0, 0, 107, 324.214, 0, 0, 0, 0, 152, 323.204, 0, 0, 0, 0, 156, 321.184, 0, 0, 0, 0, 159, 318.154, 0, 0, 0, 0, 159, 316.134, 0, 0, 0, 0, 161, 312.094, 0, 0, 0, 0, 164, 306.034, 0, 0, 0, 0, 164, 284.823, 0, 0, 0, 0, 165, 229.273, 0, 0, 0, 0, 160, 150.492, 0, 0, 0, 0, 161, 130.292, 0, 0, 0, 0, 160, 114.131, 0, 0, 0, 0, 161, 68.6808, 0, 0, 0, 0, 158, 52.5206, 0, 0, 0, 0, 154.68, 45.9602, 9.60513, 3.03771, -9.60513, -3.03771, 145.648, 43.9175, 0, 0, 0, 0, 144.519, 41.8748, 0, 0, 0, 0, 142.261, 41.8748, 0, 0, 0, 0, 140.002, 36.7681, 0, 0, 0, 0, 128.712, 35.7468, 0, 0, 0, 0, 129.841, 39.8321, 0, 0, 0, 0, 126.454, 37.7895, 0, 0, 0, 0, 112.905, 37.7895, 0, 0, 0, 0, 97.0985, 36.7681, 0, 0, 0, 0, 88.066, 36.7681, 0, 0, 0, 0, 63.2269, 35.7468, 0, 0, 0, 0, 45, 38.3805, 0, 0, 0, 0, 40, 39.3905, 0, 0, 0, 0, 39, 40.4005, 0, 0, 0, 0, 35, 41.4105, 0, 0, 0, 0, 32, 44.4405)
 }
-point_count = 45
+point_count = 49
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_04crg")
 metadata/_edit_horizontal_guides_ = [59.0]
+
+[node name="Floor" type="ColorRect" parent="."]
+offset_right = 179.0
+offset_bottom = 318.0
+color = Color(0.278431, 0.176471, 0.262745, 1)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -226,14 +230,39 @@ tint_progress = Color(0.94902, 0.384314, 0, 1)
 [node name="EntryPoint" type="Marker2D" parent="HUD"]
 position = Vector2(68, 103)
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = 48.0
-offset_top = 89.0
-offset_right = 88.0
-offset_bottom = 298.0
+[node name="Pause" type="Control" parent="HUD"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Pause"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.5
+offset_top = -121.0
+offset_right = 40.5
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ResumeBtn" type="Button" parent="HUD/Pause/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="PauseQuitBtn" type="Button" parent="HUD/Pause/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
 
 [node name="SpawnerRoot" parent="." node_paths=PackedStringArray("path") instance=ExtResource("1_g3cta")]
-visible = false
 position = Vector2(25, 31)
 rotation = 1.5509
 path = NodePath("../ConveyerBelt")
@@ -278,7 +307,6 @@ debug_color = Color(0.992157, 0, 0.239216, 0.419608)
 position = Vector2(91.2953, -64.1964)
 
 [node name="PowerUpSpawner" type="Node2D" parent="." node_paths=PackedStringArray("path")]
-visible = false
 position = Vector2(25, 31)
 rotation = 1.5509
 script = ExtResource("4_sfqwm")
@@ -345,11 +373,6 @@ rotation = -1.5509
 [node name="SL_Ogu" parent="Characters" instance=ExtResource("4_wxhtd")]
 position = Vector2(148.379, -118.072)
 rotation = -1.5509
-
-[node name="MainCamera" type="Camera2D" parent="."]
-position = Vector2(90, 160)
-rotation = 1.5509
-script = ExtResource("14_tldhf")
 
 [connection signal="area_entered" from="SpawnerRoot/CollectPointRoot/BamCollectPoint" to="SpawnerRoot" method="_on_bam_collect_point_area_entered"]
 [connection signal="area_exited" from="SpawnerRoot/CollectPointRoot/BamCollectPoint" to="SpawnerRoot" method="_on_bam_collect_point_area_exited"]
