@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cquyih57budum"]
+[gd_scene load_steps=45 format=3 uid="uid://cquyih57budum"]
 
 [ext_resource type="Script" path="res://src/Scripts/UIController/MenuBackground.gd" id="1_8t3b5"]
 [ext_resource type="Texture2D" uid="uid://cyfyk4uoye475" path="res://assets/ui/ALL_HUD/18.png" id="2_7pn4b"]
@@ -18,9 +18,12 @@
 [ext_resource type="Texture2D" uid="uid://xl4fre5dlu34" path="res://assets/art/BUDS/Tappy/AirAsia Buds-Turnaround_TAPPY-QUARTER.svg" id="9_oodtk"]
 [ext_resource type="Texture2D" uid="uid://e2t7sfvmx46i" path="res://assets/art/BUDS/Ogu/AirAsia Buds-Turnaround_OGU-QUARTER.svg" id="10_e1ph0"]
 [ext_resource type="Texture2D" uid="uid://daloy0k3o7qmm" path="res://assets/art/BUDS/Ogu/AirAsia Buds-Turnaround_OGU-SIDE.svg" id="11_tctym"]
+[ext_resource type="Script" path="res://src/Scripts/UIController/GiftHudBehavior.gd" id="19_o7hdd"]
+[ext_resource type="Texture2D" uid="uid://v5dfmdkn6fxa" path="res://assets/ui/ALL_HUD/27.png" id="20_01yvg"]
 [ext_resource type="Texture2D" uid="uid://blapbo25bh1bs" path="res://assets/ui/ALL_HUD/21.png" id="20_pekuj"]
 [ext_resource type="Script" path="res://src/Scripts/UIController/ButtonBehavior.gd" id="20_vyt8b"]
 [ext_resource type="Texture2D" uid="uid://c15a2xoedbu1m" path="res://assets/ui/ALL_HUD/22.png" id="21_gc024"]
+[ext_resource type="FontFile" uid="uid://dr7g5bnuqelmi" path="res://assets/fonts/monogram.ttf" id="21_uhieq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lklt4"]
 animations = [{
@@ -132,6 +135,7 @@ corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
+anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6swng"]
 bg_color = Color(1, 0.972549, 0.776471, 1)
@@ -144,6 +148,11 @@ corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
+anti_aliasing = false
+
+[sub_resource type="Theme" id="Theme_rysvp"]
+default_font = ExtResource("21_uhieq")
+default_font_size = 32
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ireol"]
 bg_color = Color(1, 0.972549, 0.776471, 1)
@@ -152,13 +161,14 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 1
-corner_radius_top_right = 1
-corner_radius_bottom_right = 1
-corner_radius_bottom_left = 1
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1w2wu"]
-bg_color = Color(0.419608, 0.0470588, 0.0823529, 1)
+bg_color = Color(0.984314, 0.564706, 0.207843, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -172,14 +182,6 @@ corner_radius_bottom_left = 1
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uf2d2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1psmi"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0fxxi"]
-atlas = ExtResource("7_47tb7")
-region = Rect2(280, 296, 608, 616)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p2gch"]
-atlas = ExtResource("7_47tb7")
-region = Rect2(968, 296, 608, 616)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -451,6 +453,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("19_o7hdd")
 
 [node name="GiftPanel" type="Panel" parent="CanvasLayer/GiftHud"]
 layout_mode = 0
@@ -467,6 +470,7 @@ texture_normal = SubResource("AtlasTexture_5qydy")
 texture_pressed = SubResource("AtlasTexture_ffrv7")
 
 [node name="GiftHud" type="Panel" parent="CanvasLayer/GiftHud"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -491,10 +495,24 @@ anchor_bottom = 0.5
 offset_left = -39.5
 offset_top = -46.5
 offset_right = 38.5
-offset_bottom = -6.5
+offset_bottom = 7.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_6swng")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/GiftHud/GiftHud/Body"]
+position = Vector2(39, 28.4375)
+scale = Vector2(0.0489, 0.0489)
+texture = ExtResource("20_01yvg")
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer/GiftHud/GiftHud/Body"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 50.0
+offset_right = 67.0
+offset_bottom = 76.0
+theme = SubResource("Theme_rysvp")
+text = "TIMER"
 
 [node name="ClaimBtnBase" type="Button" parent="CanvasLayer/GiftHud/GiftHud"]
 layout_mode = 0
@@ -514,12 +532,8 @@ scale = Vector2(0.0408, 0.0408)
 texture_normal = ExtResource("20_pekuj")
 texture_pressed = ExtResource("21_gc024")
 
-[node name="TClaimBtn2" type="TouchScreenButton" parent="CanvasLayer/GiftHud/GiftHud"]
-position = Vector2(101, 1)
-scale = Vector2(0.0408, 0.0408)
-texture_normal = SubResource("AtlasTexture_0fxxi")
-texture_pressed = SubResource("AtlasTexture_p2gch")
-
 [connection signal="pressed" from="Main/BtnContainer/TPlayBtn" to="ButtonBehavior" method="_on_t_play_btn_pressed"]
 [connection signal="pressed" from="Main/BtnContainer/TSettingsBtn" to="ButtonBehavior" method="_on_t_settings_btn_pressed"]
 [connection signal="pressed" from="Main/BtnContainer/TCloseBtn" to="ButtonBehavior" method="_on_t_close_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/GiftHud/GiftPanel/TDailyGiftBtn" to="CanvasLayer/GiftHud" method="_on_t_daily_gift_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/GiftHud/GiftHud/TClaimBtn" to="CanvasLayer/GiftHud" method="_on_t_claim_btn_pressed"]
