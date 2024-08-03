@@ -170,7 +170,7 @@ size_flags_horizontal = 8
 theme_override_fonts/font = ExtResource("1_c6fta")
 text = "5.0s"
 
-[node name="PowerUp1Btn" type="Button" parent="HUD/PowerUpPanel/CharacterPowerUp/VSplitContainer"]
+[node name="Button" type="Button" parent="HUD/PowerUpPanel/CharacterPowerUp/VSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -208,7 +208,7 @@ size_flags_horizontal = 8
 theme_override_fonts/font = ExtResource("1_c6fta")
 text = "5.0s"
 
-[node name="PowerUp2Btn" type="Button" parent="HUD/PowerUpPanel/CharacterPowerUp2/VSplitContainer"]
+[node name="Button" type="Button" parent="HUD/PowerUpPanel/CharacterPowerUp2/VSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -247,7 +247,7 @@ size_flags_horizontal = 8
 theme_override_fonts/font = ExtResource("1_c6fta")
 text = "5.0s"
 
-[node name="PowerUp3Btn" type="Button" parent="HUD/PowerUpPanel/CharacterPowerUp3/VSplitContainer"]
+[node name="Button" type="Button" parent="HUD/PowerUpPanel/CharacterPowerUp3/VSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -286,7 +286,7 @@ size_flags_horizontal = 8
 theme_override_fonts/font = ExtResource("1_c6fta")
 text = "5.0s"
 
-[node name="PowerUp4Btn" type="Button" parent="HUD/PowerUpPanel/CharacterPowerUp4/VSplitContainer"]
+[node name="Button" type="Button" parent="HUD/PowerUpPanel/CharacterPowerUp4/VSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -356,8 +356,3 @@ position = Vector2(149, 186)
 position = Vector2(-27, 2)
 shape = SubResource("RectangleShape2D_w7akx")
 debug_color = Color(0.992157, 0, 0.239216, 0.419608)
-
-[connection signal="pressed" from="HUD/PowerUpPanel/CharacterPowerUp/VSplitContainer/PowerUp1Btn" to="HUD/PowerUpPanel" method="_on_power_up_1_btn_pressed"]
-[connection signal="pressed" from="HUD/PowerUpPanel/CharacterPowerUp2/VSplitContainer/PowerUp2Btn" to="HUD/PowerUpPanel" method="_on_power_up_2_btn_pressed"]
-[connection signal="pressed" from="HUD/PowerUpPanel/CharacterPowerUp3/VSplitContainer/PowerUp3Btn" to="HUD/PowerUpPanel" method="_on_power_up_3_btn_pressed"]
-[connection signal="pressed" from="HUD/PowerUpPanel/CharacterPowerUp4/VSplitContainer/PowerUp4Btn" to="HUD/PowerUpPanel" method="_on_power_up_4_btn_pressed"]

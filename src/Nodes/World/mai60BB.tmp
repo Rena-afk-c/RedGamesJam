@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c61fva6qp43g1"]
+[gd_scene load_steps=16 format=3 uid="uid://c61fva6qp43g1"]
 
 [ext_resource type="FontFile" uid="uid://dr7g5bnuqelmi" path="res://assets/fonts/monogram.ttf" id="1_c6fta"]
 [ext_resource type="PackedScene" uid="uid://bcyx52vo85dkq" path="res://src/Nodes/World/luggage_spawner.tscn" id="1_g3cta"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://bpngs84hwd5fv" path="res://src/Nodes/SelectableCharacters/sl_tappy.tscn" id="2_35b71"]
 [ext_resource type="Texture2D" uid="uid://ba8uirt1mikud" path="res://assets/art/BUDS/Tappy/AirAsia Buds-Turnaround_TAPPY-FRONT.svg" id="3_3r1m1"]
 [ext_resource type="PackedScene" uid="uid://b6ldiotx6774q" path="res://src/Nodes/SelectableCharacters/sl_biggie.tscn" id="3_4rnlw"]
-[ext_resource type="Script" path="res://src/Nodes/World/PowerUpUI.gd" id="3_b0u8o"]
 [ext_resource type="Texture2D" uid="uid://cqs60tvr0jxi1" path="res://assets/art/BUDS/Bam/AirAsia Buds-Turnaround_BAM-FRONT.svg" id="4_vuql2"]
 [ext_resource type="PackedScene" uid="uid://7s8gjoot1l5u" path="res://src/Nodes/SelectableCharacters/sl_ogu.tscn" id="4_wxhtd"]
 [ext_resource type="Texture2D" uid="uid://dcbtovkr1waq4" path="res://assets/art/BUDS/Biggie/AirAsia Buds-Turnaround_BIGGIE-FRONT.svg" id="5_85d54"]
@@ -90,7 +89,6 @@ offset_right = -2.0
 offset_bottom = -38.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("3_b0u8o")
 
 [node name="UpgradeBase" type="Panel" parent="HUD/PowerUpPanel"]
 layout_mode = 1
@@ -170,7 +168,7 @@ size_flags_horizontal = 8
 theme_override_fonts/font = ExtResource("1_c6fta")
 text = "5.0s"
 
-[node name="PowerUp1Btn" type="Button" parent="HUD/PowerUpPanel/CharacterPowerUp/VSplitContainer"]
+[node name="Button" type="Button" parent="HUD/PowerUpPanel/CharacterPowerUp/VSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -208,7 +206,7 @@ size_flags_horizontal = 8
 theme_override_fonts/font = ExtResource("1_c6fta")
 text = "5.0s"
 
-[node name="PowerUp2Btn" type="Button" parent="HUD/PowerUpPanel/CharacterPowerUp2/VSplitContainer"]
+[node name="Button" type="Button" parent="HUD/PowerUpPanel/CharacterPowerUp2/VSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -247,7 +245,7 @@ size_flags_horizontal = 8
 theme_override_fonts/font = ExtResource("1_c6fta")
 text = "5.0s"
 
-[node name="PowerUp3Btn" type="Button" parent="HUD/PowerUpPanel/CharacterPowerUp3/VSplitContainer"]
+[node name="Button" type="Button" parent="HUD/PowerUpPanel/CharacterPowerUp3/VSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -286,7 +284,7 @@ size_flags_horizontal = 8
 theme_override_fonts/font = ExtResource("1_c6fta")
 text = "5.0s"
 
-[node name="PowerUp4Btn" type="Button" parent="HUD/PowerUpPanel/CharacterPowerUp4/VSplitContainer"]
+[node name="Button" type="Button" parent="HUD/PowerUpPanel/CharacterPowerUp4/VSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -356,8 +354,3 @@ position = Vector2(149, 186)
 position = Vector2(-27, 2)
 shape = SubResource("RectangleShape2D_w7akx")
 debug_color = Color(0.992157, 0, 0.239216, 0.419608)
-
-[connection signal="pressed" from="HUD/PowerUpPanel/CharacterPowerUp/VSplitContainer/PowerUp1Btn" to="HUD/PowerUpPanel" method="_on_power_up_1_btn_pressed"]
-[connection signal="pressed" from="HUD/PowerUpPanel/CharacterPowerUp2/VSplitContainer/PowerUp2Btn" to="HUD/PowerUpPanel" method="_on_power_up_2_btn_pressed"]
-[connection signal="pressed" from="HUD/PowerUpPanel/CharacterPowerUp3/VSplitContainer/PowerUp3Btn" to="HUD/PowerUpPanel" method="_on_power_up_3_btn_pressed"]
-[connection signal="pressed" from="HUD/PowerUpPanel/CharacterPowerUp4/VSplitContainer/PowerUp4Btn" to="HUD/PowerUpPanel" method="_on_power_up_4_btn_pressed"]
