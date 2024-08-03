@@ -6,7 +6,7 @@ extends Node
 @onready var t_play_btn = $"../Main/BtnContainer/TPlayBtn"
 @onready var t_settings_btn = $"../Main/BtnContainer/TSettingsBtn"
 @onready var t_close_btn = $"../Main/BtnContainer/TCloseBtn"
-@onready var t_daily_gift_btn = $"../CanvasLayer/GiftHud/GiftPanel/TDailyGiftBtn"
+@onready var t_daily_gift_btn = $"../GiftHud/GiftPanel/TDailyGiftBtn"
 
 
 
@@ -74,9 +74,7 @@ func _on_t_play_btn_pressed():
 func _on_play_button_animation_finished():
 	get_tree().change_scene_to_file("res://src/Nodes/World/main.tscn")
 
-func _on_t_settings_btn_pressed():
-	# Implement settings functionality here
-	pass
+
 
 func _on_t_close_btn_pressed():
 	# Implement close functionality here
