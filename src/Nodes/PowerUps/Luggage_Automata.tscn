@@ -1,43 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwevdoftrw2i2"]
+[gd_scene load_steps=4 format=3 uid="uid://cwevdoftrw2i2"]
 
 [ext_resource type="Script" path="res://src/Scripts/Controllers/PowerUp_LA.gd" id="1_8q2w8"]
-[ext_resource type="Shader" path="res://assets/shaders/bubble_effect.gdshader" id="2_7aqdx"]
 [ext_resource type="Texture2D" uid="uid://cfyqxej00mmq5" path="res://assets/art/20240804_013452885_iOS.png" id="2_j28i2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3r17h"]
 radius = 15.0333
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g65rl"]
-shader = ExtResource("2_7aqdx")
-shader_parameter/bubble_color = Color(1, 1, 1, 0)
-shader_parameter/outline_color = Color(1, 1, 1, 1)
-shader_parameter/outline_thickness = 0.03
-shader_parameter/wobble_speed = 1.5
-shader_parameter/wobble_amplitude = 0.02
-shader_parameter/sparkle_speed = 5.0
-shader_parameter/num_sparkles = 3
-shader_parameter/pop_bubble = true
-shader_parameter/pop_progress = 0.0
-
 [node name="PU_Luggage_Automata" type="Area2D" groups=["powerups"]]
 position = Vector2(23, 20)
 script = ExtResource("1_8q2w8")
-
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(-20.642, -20.3772)
-scale = Vector2(0.0302584, 0.0302584)
-texture = ExtResource("2_j28i2")
-region_enabled = true
-region_rect = Rect2(248, 200, 1280, 752)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-22, -20)
 shape = SubResource("CircleShape2D_3r17h")
 
-[node name="BubbleOverlay" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_g65rl")
-offset_left = -37.0
-offset_top = -35.0
-offset_right = -7.0
-offset_bottom = -5.0
-mouse_filter = 2
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(-22, -21)
+scale = Vector2(0.0236095, 0.0236095)
+texture = ExtResource("2_j28i2")
+region_enabled = true
+region_rect = Rect2(248, 200, 1280, 752)

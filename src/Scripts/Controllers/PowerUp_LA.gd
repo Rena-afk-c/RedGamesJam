@@ -5,73 +5,44 @@ extends Area2D
 @export var scale_up_factor: float = 1.2
 @export var scale_duration: float = 0.5
 @export var rotation_speed: float = 1.0  # Rotation speed in radians per second
+@export var glow_intensity: float = 1.5  # Maximum glow intensity
+@export var glow_duration: float = 1.0  # Duration of one glow cycle
 
 @onready var icon = $Icon
-@onready var bubble_overlay = $BubbleOverlay
+@onready var collect_zone: Area2D = get_node("/root").find_child("CollectPowerUpZone", true, false)
 
-var is_popping = false
 var is_fading = false
-var pop_progress = 0.0
-var pop_speed = 2.0
-var shake_amount = 1.0
-var shake_duration = 0.2
-var shake_timer = 0.0
 var fade_timer = 0.0
 var scale_timer = 0.0
-var original_positions = {}
 var original_scale: Vector2
 var target_rotation: float = 0.0
-
-var collect_zone: Area2D
 var in_collection_zone: bool = false
+var glow_tween: Tween
 
 func _ready():
-	input_pickable = true  # Ensure the Area2D can receive input events
+	input_pickable = true
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
 	
-	if bubble_overlay.material is ShaderMaterial:
-		bubble_overlay.material.set_shader_parameter("pop_bubble", false)
-		bubble_overlay.material.set_shader_parameter("pop_progress", 0.0)
-	
-	original_positions = {
-		"icon": icon.position,
-		"bubble_overlay": bubble_overlay.position
-	}
 	original_scale = scale
 	
-	# Find the CollectPowerUpZone
-	collect_zone = get_node("/root").find_child("CollectPowerUpZone", true, false)
 	if not collect_zone:
 		push_error("CollectPowerUpZone not found in the scene!")
 	else:
-		# Connect to the CollectPowerUpZone's signals
 		collect_zone.area_entered.connect(_on_entered_collection_zone)
 		collect_zone.area_exited.connect(_on_exited_collection_zone)
+	
+	start_glow_effect()
 
 func _process(delta):
-	if is_popping:
-		process_popping(delta)
-	elif is_fading:
+	if is_fading:
 		process_fading(delta)
 	else:
 		process_idle_animation(delta)
 
 func process_idle_animation(delta):
-	# Smooth rotation
 	target_rotation += rotation_speed * delta
 	rotation = lerp_angle(rotation, target_rotation, 0.1)
-
-func process_popping(delta):
-	pop_progress += delta * pop_speed
-	bubble_overlay.material.set_shader_parameter("pop_progress", pop_progress)
-	
-	if shake_timer > 0:
-		shake_timer -= delta
-		apply_shake()
-	elif shake_timer <= 0:
-		reset_positions()
-		start_fading()
 
 func process_fading(delta):
 	fade_timer += delta
@@ -96,7 +67,7 @@ func _on_mouse_exited():
 func _input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		if in_collection_zone and can_activate_powerup():
-			start_pop_effect()
+			activate_powerup()
 
 func _on_entered_collection_zone(area):
 	if area == self:
@@ -124,25 +95,16 @@ func convert_character_type(game_character: GameManager.Characters) -> PowerUpsM
 			push_error("Invalid character type")
 			return PowerUpsManager.CharacterType.TAPPY  # Default to TAPPY in case of error
 
-func start_pop_effect():
-	if not is_popping and not is_fading:
-		is_popping = true
-		pop_progress = 0.0
-		shake_timer = shake_duration
-		bubble_overlay.material.set_shader_parameter("pop_bubble", true)
-		
+func activate_powerup():
+	if not is_fading:
+		is_fading = true
+		fade_timer = 0.0
+		scale_timer = 0.0
+		GameManager.power_up_used = true
 		PowerUpsManager.activate_powerup(powerup_type)
-func apply_shake():
-	var shake_offset = Vector2(randf_range(-shake_amount, shake_amount), randf_range(-shake_amount, shake_amount))
-	icon.position = original_positions["icon"] + shake_offset
-	bubble_overlay.position = original_positions["bubble_overlay"] + shake_offset
+		GameManager.power_up_used = false
 
-func reset_positions():
-	icon.position = original_positions["icon"]
-	bubble_overlay.position = original_positions["bubble_overlay"]
-
-func start_fading():
-	is_popping = false
-	is_fading = true
-	fade_timer = 0.0
-	scale_timer = 0.0
+func start_glow_effect():
+	glow_tween = create_tween().set_loops()
+	glow_tween.tween_property(self, "modulate", Color(glow_intensity, glow_intensity, glow_intensity, 1.0), glow_duration / 2.0)
+	glow_tween.tween_property(self, "modulate", Color(1.0, 1.0, 1.0, 1.0), glow_duration / 2.0)

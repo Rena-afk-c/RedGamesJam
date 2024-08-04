@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://nn8mucbvyyh8"]
+[gd_scene load_steps=72 format=3 uid="uid://nn8mucbvyyh8"]
 
 [ext_resource type="Script" path="res://src/Scripts/Controllers/FlightDisplay.gd" id="1_8nimi"]
 [ext_resource type="Script" path="res://src/Prefabs/utils/GameStateManager.gd" id="1_htfnk"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://src/Scripts/UIController/PowerUpIndicator.gd" id="3_wqatc"]
 [ext_resource type="Texture2D" uid="uid://dgjsj11rng87k" path="res://assets/ui/ALL_HUD/20.png" id="4_ey47v"]
 [ext_resource type="Texture2D" uid="uid://qlvjx6wractd" path="res://assets/ui/upgrade_icon.png" id="4_m53u1"]
+[ext_resource type="Texture2D" uid="uid://cr7acmubxjiuf" path="res://assets/ui/base.png" id="6_apapt"]
+[ext_resource type="Texture2D" uid="uid://gbox842orv2o" path="res://assets/art/20240804_013410928_iOS.png" id="7_24v8l"]
 [ext_resource type="Texture2D" uid="uid://d2sfplfe0mtyn" path="res://assets/ui/ALL_HUD/1.png" id="9_6sdx6"]
 [ext_resource type="PackedScene" uid="uid://bcyx52vo85dkq" path="res://src/Nodes/World/luggage_spawner.tscn" id="9_p52hf"]
 [ext_resource type="Script" path="res://src/Scripts/Controllers/PowerUpSpawner.gd" id="10_3iq14"]
@@ -56,19 +58,6 @@ region = Rect2(392, 472, 992, 1000)
 [sub_resource type="AtlasTexture" id="AtlasTexture_m0nij"]
 atlas = ExtResource("4_m53u1")
 region = Rect2(1576, 472, 984, 1000)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0a4xp"]
-bg_color = Color(0.933333, 0.254902, 0.270588, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhrjc"]
 bg_color = Color(0, 0, 0, 1)
@@ -232,7 +221,7 @@ scale = Vector2(0.0272177, 0.0272177)
 texture_normal = SubResource("AtlasTexture_sr7ci")
 texture_pressed = SubResource("AtlasTexture_m0nij")
 
-[node name="C_Flight_Display" type="Control" parent="HUD"]
+[node name="TicketDisplay" type="Control" parent="HUD"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -244,39 +233,28 @@ grow_vertical = 2
 script = ExtResource("1_8nimi")
 metadata/_edit_use_anchors_ = true
 
-[node name="Base" type="Panel" parent="HUD/C_Flight_Display"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.457447
-anchor_top = 7.35714
-anchor_right = 0.457447
-anchor_bottom = 7.35714
-offset_left = -32.5
-offset_top = -19.0
-offset_right = 21.5
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_0a4xp")
-metadata/_edit_use_anchors_ = true
+[node name="Base" type="Sprite2D" parent="HUD/TicketDisplay"]
+position = Vector2(-102, 17)
+scale = Vector2(0.0295, 0.0295)
+texture = ExtResource("6_apapt")
 
-[node name="CounterLabel" type="Label" parent="HUD/C_Flight_Display/Base"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -29.0
-offset_top = -14.5
-offset_right = 19.0
-offset_bottom = 17.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="TicketSprite" type="Sprite2D" parent="HUD/TicketDisplay/Base"]
+position = Vector2(-50, -1.52588e-05)
+scale = Vector2(0.847222, 0.847222)
+texture = ExtResource("7_24v8l")
+region_enabled = true
+region_rect = Rect2(120, 32, 1440, 864)
+
+[node name="CounterLabel" type="Label" parent="HUD/TicketDisplay/Base"]
+offset_left = 1220.34
+offset_top = -474.576
+offset_right = 1260.34
+offset_bottom = -451.576
+scale = Vector2(78.4287, 68.7938)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("2_0cqbf")
-theme_override_font_sizes/font_size = 32
-text = "  0"
-metadata/_edit_use_anchors_ = true
+text = "010"
 
 [node name="DurationBars" type="Control" parent="HUD"]
 layout_mode = 3
@@ -422,7 +400,6 @@ scale = Vector2(0.104861, 0.100035)
 texture = ExtResource("16_hl2as")
 
 [node name="PowerUpSpawner" type="Node2D" parent="." node_paths=PackedStringArray("path")]
-visible = false
 position = Vector2(25, 31)
 rotation = 1.5509
 script = ExtResource("10_3iq14")
@@ -452,7 +429,6 @@ shape = SubResource("RectangleShape2D_ie0yw")
 position = Vector2(89.7634, 12.7884)
 
 [node name="ConveyerBelt" type="Path2D" parent="."]
-visible = false
 position = Vector2(-11, -27)
 scale = Vector2(0.827193, 0.999189)
 curve = SubResource("Curve2D_re8bw")
@@ -485,6 +461,7 @@ position = Vector2(149.078, -119.724)
 rotation = -1.5509
 
 [node name="Pause" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Pause_Overlay" type="Control" parent="Pause"]
 layout_mode = 3
@@ -717,6 +694,7 @@ scale = Vector2(0.047125, 0.047125)
 texture = ExtResource("20_rcf10")
 
 [node name="GameOver" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -839,6 +817,7 @@ texture_normal = SubResource("AtlasTexture_l3twj")
 texture_pressed = SubResource("AtlasTexture_t3q71")
 
 [node name="UpgradeManager" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="UpgradeHud" type="Control" parent="UpgradeManager"]
 layout_mode = 3
@@ -957,25 +936,7 @@ texture_normal = SubResource("AtlasTexture_2nvgf")
 texture_pressed = SubResource("AtlasTexture_t7nab")
 
 [node name="TransitionManager" parent="." instance=ExtResource("30_xouhy")]
-
-[node name="ScoreLabel" type="Label" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 69.0
-offset_top = 129.0
-offset_right = 81.0
-offset_bottom = 155.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 0.972549, 0.776471, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
-theme_override_fonts/font = ExtResource("2_0cqbf")
-theme_override_font_sizes/font_size = 32
-text = "0"
+visible = false
 
 [connection signal="pressed" from="HUD/TPauseBtn" to="HUD/GameStateManager" method="_on_t_pause_btn_pressed"]
 [connection signal="pressed" from="HUD/TUpBtn" to="." method="_on_t_up_btn_pressed"]
