@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://nn8mucbvyyh8"]
+[gd_scene load_steps=74 format=3 uid="uid://nn8mucbvyyh8"]
 
 [ext_resource type="Script" path="res://src/Scripts/Controllers/FlightDisplay.gd" id="1_8nimi"]
 [ext_resource type="Script" path="res://src/Prefabs/utils/GameStateManager.gd" id="1_htfnk"]
@@ -17,10 +17,10 @@
 [ext_resource type="PackedScene" uid="uid://b4hq8wo1csnsn" path="res://src/Nodes/PowerUps/luggage Free-For-All.tscn" id="12_1waiw"]
 [ext_resource type="PackedScene" uid="uid://cwevdoftrw2i2" path="res://src/Nodes/PowerUps/Luggage_Automata.tscn" id="13_ndvrl"]
 [ext_resource type="PackedScene" uid="uid://bjt7cwcbutfj8" path="res://src/Nodes/PowerUps/Time Slow.tscn" id="14_10kit"]
+[ext_resource type="Texture2D" uid="uid://c518d3020dkyx" path="res://assets/art/BUDS/Untitled_Artwork.png" id="14_xy211"]
 [ext_resource type="Texture2D" uid="uid://bb1o6pdmv02nk" path="res://assets/art/20240804_013201099_iOS.png" id="15_gsyuw"]
 [ext_resource type="Texture2D" uid="uid://tna84s8oiceh" path="res://assets/art/20240804_013135801_iOS.png" id="15_jjsgd"]
 [ext_resource type="Texture2D" uid="uid://c4rl8n2m5glda" path="res://assets/art/20240804_013253315_iOS.png" id="16_7j0jo"]
-[ext_resource type="Texture2D" uid="uid://j1ocsmv45th2" path="res://assets/art/20240804_013230646_iOS.png" id="16_hl2as"]
 [ext_resource type="PackedScene" uid="uid://bpngs84hwd5fv" path="res://src/Nodes/SelectableCharacters/sl_tappy.tscn" id="16_xvnsr"]
 [ext_resource type="Script" path="res://src/Scripts/UIController/Pause_Overlay.gd" id="17_3242x"]
 [ext_resource type="PackedScene" uid="uid://bg7hmcutdesfl" path="res://src/Nodes/SelectableCharacters/sl_bam.tscn" id="17_vxx13"]
@@ -31,6 +31,8 @@
 [ext_resource type="Texture2D" uid="uid://cmg6deccuwee2" path="res://assets/ui/ALL_HUD/25.png" id="20_nm8oa"]
 [ext_resource type="Texture2D" uid="uid://d1jo2fc5xvg7b" path="res://assets/ui/paused.png" id="20_rcf10"]
 [ext_resource type="Script" path="res://globals/Scenes/Game_Over_Behavior.gd" id="20_xjo7s"]
+[ext_resource type="Texture2D" uid="uid://j20q72mxg6w5" path="res://assets/ui/ALL_HUD/10.png" id="21_eqaxe"]
+[ext_resource type="Texture2D" uid="uid://cmr67lnr3t2jn" path="res://assets/ui/ALL_HUD/9.png" id="22_uxjia"]
 [ext_resource type="Texture2D" uid="uid://8pi2kf1xf564" path="res://assets/ui/ALL_HUD/8.png" id="23_04w8d"]
 [ext_resource type="Texture2D" uid="uid://dblevra23wb7f" path="res://assets/ui/ALL_HUD/7.png" id="24_k7gc6"]
 [ext_resource type="Texture2D" uid="uid://decqnjuvaab1u" path="res://assets/ui/ALL_HUD/3.png" id="25_ykd1m"]
@@ -119,9 +121,9 @@ size = Vector2(185.526, 17.0446)
 
 [sub_resource type="Curve2D" id="Curve2D_re8bw"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -42.3118, 124.101, -3.84672, -1.06152, 3.84672, 1.06152, 58.0276, 127.103, -9.28575, -5.30161, 9.28575, 5.30161, 66.4899, 278.226, 6.72416, 13.5191, -6.72416, -13.5191, 153.531, 270.219, 2.82397, 2.33787, -2.82397, -2.33787, 146.278, 178.144, 5.98379, 3.89224, -5.98379, -3.89224, 140.233, 95.0771, 3.63082, 0.667962, -3.63082, -0.667962, 110.011, 86.0698, 11.5341, -0.561687, -11.5341, 0.561687, 84.6235, 88.0714, 0, 0, 0, 0, 67.6988, 91.0739, 4.74934, -4.21265, -4.74934, 4.21265, 64.0721, 104.084, -0.806849, 26.0505, 0.806849, -26.0505, -43.5207, 93.0755, 0, 0, 0, 0, -42.3118, 124.101)
+"points": PackedVector2Array(0, 0, 0, 0, -42.3118, 132.107, -3.84672, -1.06152, 3.84672, 1.06152, 61.6543, 128.104, -9.28575, -5.30161, 9.28575, 5.30161, 66.4899, 278.226, 6.72416, 13.5191, -6.72416, -13.5191, 153.531, 270.219, 2.82397, 2.33787, -2.82397, -2.33787, 146.278, 178.144, 2.59141, 6.41983, -2.59141, -6.41983, 140.233, 95.0771, 3.63082, 0.667962, -3.63082, -0.667962, 110.011, 86.0698, 11.5341, -0.561687, -11.5341, 0.561687, 84.6235, 88.0714, 0, 0, 0, 0, 70.1167, 90.0731, 0, 0, 0, 0, 66.4899, 99.0804, 4.74934, -4.21265, -4.74934, 4.21265, 65.281, 111.09, -0.806849, 26.0505, 0.806849, -26.0505, -43.5207, 93.0755, 0, 0, 0, 0, -42.3118, 124.101)
 }
-point_count = 12
+point_count = 13
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dxvtd"]
 load_path = "res://.godot/imported/20.png-4c61d082dd0fef9ca149448542f42246.ctex"
@@ -392,9 +394,9 @@ scale = Vector2(0.14375, 0.100035)
 texture = ExtResource("15_gsyuw")
 
 [node name="Slide" type="Sprite2D" parent="Env"]
-position = Vector2(15, 98)
+position = Vector2(16, 97)
 scale = Vector2(0.104861, 0.150017)
-texture = ExtResource("16_hl2as")
+texture = ExtResource("14_xy211")
 region_enabled = true
 region_rect = Rect2(-72, 728, 440, 480)
 
@@ -478,13 +480,13 @@ debug_color = Color(0.745098, 0.0117647, 0.2, 0.419608)
 position = Vector2(89.7634, 12.7884)
 
 [node name="ConveyerBelt" type="Path2D" parent="."]
-position = Vector2(-11, -27)
+position = Vector2(-10, -26)
 scale = Vector2(0.827193, 0.999189)
 curve = SubResource("Curve2D_re8bw")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="ConveyerBelt"]
-position = Vector2(-42.3118, 124.101)
-rotation = 0.0299095
+position = Vector2(-42.3118, 132.107)
+rotation = -0.0384863
 
 [node name="Characters" type="Node2D" parent="."]
 position = Vector2(-30, -28)
@@ -510,6 +512,7 @@ position = Vector2(149.078, -119.724)
 rotation = -1.5509
 
 [node name="Pause" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Pause_Overlay" type="Control" parent="Pause"]
 layout_mode = 3
@@ -742,6 +745,7 @@ scale = Vector2(0.047125, 0.047125)
 texture = ExtResource("20_rcf10")
 
 [node name="GameOver" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -777,72 +781,73 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Base" type="Panel" parent="GameOver/Root"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.413408
-anchor_top = 0.501558
-anchor_right = 0.413408
-anchor_bottom = 0.501558
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -2.0
 offset_top = -53.0
 offset_right = 102.0
 offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.1, 1)
 theme_override_styles/panel = SubResource("StyleBoxFlat_66iao")
 metadata/_edit_use_anchors_ = true
+
+[node name="ScoreSprite" type="Sprite2D" parent="GameOver/Root/Base"]
+position = Vector2(37, 15)
+scale = Vector2(0.0384, 0.0384)
+texture = ExtResource("21_eqaxe")
 
 [node name="ScoreLabel" type="Label" parent="GameOver/Root/Base"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.638112
-anchor_top = 0.189189
-anchor_right = -0.00349661
-anchor_bottom = 0.540541
+anchor_left = 0.00480769
+anchor_top = 0.0405405
+anchor_right = 0.00480769
+anchor_bottom = 0.0405405
 offset_left = 70.0
 offset_top = 2.0
 offset_right = 82.0
 offset_bottom = 28.0
-scale = Vector2(0.7, 0.7)
 theme_override_colors/font_color = Color(1, 0.972549, 0.776471, 1)
 theme_override_fonts/font = ExtResource("8_sxmi8")
-theme_override_font_sizes/font_size = 24
-text = "Sample"
+theme_override_font_sizes/font_size = 32
+text = "7"
 metadata/_edit_use_anchors_ = true
 
 [node name="Ticketsbase" type="Panel" parent="GameOver/Root"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.413408
-anchor_top = 0.660436
-anchor_right = 0.413408
-anchor_bottom = 0.660436
-offset_left = -2.00001
-offset_top = -62.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -11.0
 offset_right = 102.0
-offset_bottom = -25.0
+offset_bottom = 26.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.1, 1)
 theme_override_styles/panel = SubResource("StyleBoxFlat_66iao")
 metadata/_edit_use_anchors_ = true
 
+[node name="TicketSprie" type="Sprite2D" parent="GameOver/Root/Ticketsbase"]
+position = Vector2(37, 18)
+scale = Vector2(0.0384, 0.0384)
+texture = ExtResource("22_uxjia")
+
 [node name="TicketLabel" type="Label" parent="GameOver/Root/Ticketsbase"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.666958
-anchor_top = 0.189189
-anchor_right = -0.0323426
-anchor_bottom = 0.540541
+layout_mode = 0
 offset_left = 73.0
 offset_top = 2.0
 offset_right = 85.0
 offset_bottom = 28.0
-scale = Vector2(0.7, 0.7)
 theme_override_colors/font_color = Color(1, 0.972549, 0.776471, 1)
 theme_override_fonts/font = ExtResource("8_sxmi8")
-theme_override_font_sizes/font_size = 24
-text = "Sample"
+theme_override_font_sizes/font_size = 32
+text = "7"
 metadata/_edit_use_anchors_ = true
 
 [node name="GameOverSprite" type="Sprite2D" parent="GameOver/Root"]
@@ -863,6 +868,7 @@ texture_normal = SubResource("AtlasTexture_l3twj")
 texture_pressed = SubResource("AtlasTexture_t3q71")
 
 [node name="UpgradeManager" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="UpgradeHud" type="Control" parent="UpgradeManager"]
 layout_mode = 3
@@ -1011,6 +1017,7 @@ texture_normal = SubResource("AtlasTexture_2nvgf")
 texture_pressed = SubResource("AtlasTexture_t7nab")
 
 [node name="TransitionManager" parent="." instance=ExtResource("30_xouhy")]
+visible = false
 
 [connection signal="pressed" from="HUD/TPauseBtn" to="HUD/GameStateManager" method="_on_t_pause_btn_pressed"]
 [connection signal="pressed" from="HUD/TUpBtn" to="." method="_on_t_up_btn_pressed"]

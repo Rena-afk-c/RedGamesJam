@@ -27,7 +27,6 @@ position = Vector2(-6.5, -7)
 shape = SubResource("RectangleShape2D_xit3y")
 
 [node name="BiggieSprite" type="Sprite2D" parent="."]
-visible = false
 scale = Vector2(0.073989, 0.0743628)
 texture = ExtResource("3_3qjyi")
 region_enabled = true
