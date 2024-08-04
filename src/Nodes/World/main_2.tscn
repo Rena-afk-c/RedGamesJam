@@ -1,11 +1,12 @@
-[gd_scene load_steps=50 format=3 uid="uid://nn8mucbvyyh8"]
+[gd_scene load_steps=67 format=3 uid="uid://nn8mucbvyyh8"]
 
 [ext_resource type="Script" path="res://src/Scripts/Controllers/FlightDisplay.gd" id="1_8nimi"]
 [ext_resource type="Script" path="res://src/Prefabs/utils/GameStateManager.gd" id="1_htfnk"]
+[ext_resource type="Script" path="res://src/Nodes/World/main_2.gd" id="1_w5kp7"]
 [ext_resource type="FontFile" uid="uid://dr7g5bnuqelmi" path="res://assets/fonts/monogram.ttf" id="2_0cqbf"]
 [ext_resource type="Script" path="res://src/Scripts/UIController/PowerUpIndicator.gd" id="3_wqatc"]
 [ext_resource type="Texture2D" uid="uid://dgjsj11rng87k" path="res://assets/ui/ALL_HUD/20.png" id="4_ey47v"]
-[ext_resource type="Texture2D" uid="uid://bo7ivwe8opfhh" path="res://assets/ui/CircularProgressBar.png" id="5_0hjf5"]
+[ext_resource type="Texture2D" uid="uid://qlvjx6wractd" path="res://assets/ui/upgrade_icon.png" id="4_m53u1"]
 [ext_resource type="Texture2D" uid="uid://d2sfplfe0mtyn" path="res://assets/ui/ALL_HUD/1.png" id="9_6sdx6"]
 [ext_resource type="PackedScene" uid="uid://bcyx52vo85dkq" path="res://src/Nodes/World/luggage_spawner.tscn" id="9_p52hf"]
 [ext_resource type="Script" path="res://src/Scripts/Controllers/PowerUpSpawner.gd" id="10_3iq14"]
@@ -13,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://b4hq8wo1csnsn" path="res://src/Nodes/PowerUps/luggage Free-For-All.tscn" id="12_1waiw"]
 [ext_resource type="PackedScene" uid="uid://cwevdoftrw2i2" path="res://src/Nodes/PowerUps/Luggage_Automata.tscn" id="13_ndvrl"]
 [ext_resource type="PackedScene" uid="uid://bjt7cwcbutfj8" path="res://src/Nodes/PowerUps/Time Slow.tscn" id="14_10kit"]
-[ext_resource type="Script" path="res://src/Scripts/Controllers/WeatherSystem.gd" id="15_sf37u"]
+[ext_resource type="Texture2D" uid="uid://bieyotbryoy2f" path="res://assets/shaders/LightSource.tres" id="16_p7gge"]
 [ext_resource type="PackedScene" uid="uid://bpngs84hwd5fv" path="res://src/Nodes/SelectableCharacters/sl_tappy.tscn" id="16_xvnsr"]
 [ext_resource type="Script" path="res://src/Scripts/UIController/Pause_Overlay.gd" id="17_3242x"]
 [ext_resource type="PackedScene" uid="uid://bg7hmcutdesfl" path="res://src/Nodes/SelectableCharacters/sl_bam.tscn" id="17_vxx13"]
@@ -29,6 +30,12 @@
 [ext_resource type="Texture2D" uid="uid://8pi2kf1xf564" path="res://assets/ui/ALL_HUD/8.png" id="23_04w8d"]
 [ext_resource type="Texture2D" uid="uid://dblevra23wb7f" path="res://assets/ui/ALL_HUD/7.png" id="24_k7gc6"]
 [ext_resource type="Texture2D" uid="uid://decqnjuvaab1u" path="res://assets/ui/ALL_HUD/3.png" id="25_ykd1m"]
+[ext_resource type="PackedScene" uid="uid://dh1hh3582ol8" path="res://src/Nodes/GUI/transition.tscn" id="30_xouhy"]
+[ext_resource type="Texture2D" uid="uid://xxmaajxg1d7d" path="res://assets/ui/Add a heading.png" id="32_xtm5x"]
+[ext_resource type="Script" path="res://src/Scripts/UIController/UpgradeHud.gd" id="32_ywc6o"]
+[ext_resource type="Texture2D" uid="uid://by21avkiwbker" path="res://assets/ui/upgrade button.png" id="33_jpeuk"]
+[ext_resource type="Texture2D" uid="uid://b55s8oaocsdxe" path="res://assets/ui/ALL_HUD/14.png" id="34_nwnbs"]
+[ext_resource type="Texture2D" uid="uid://fownr3pdxmmn" path="res://assets/ui/ALL_HUD/15.png" id="35_sws1p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qpa40"]
 atlas = ExtResource("9_6sdx6")
@@ -38,42 +45,93 @@ region = Rect2(248, 296, 616, 616)
 atlas = ExtResource("9_6sdx6")
 region = Rect2(984, 296, 616, 616)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_sr7ci"]
+atlas = ExtResource("4_m53u1")
+region = Rect2(392, 472, 992, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0nij"]
+atlas = ExtResource("4_m53u1")
+region = Rect2(1576, 472, 984, 1000)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0a4xp"]
 bg_color = Color(0.933333, 0.254902, 0.270588, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 anti_aliasing = false
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhrjc"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1a4db"]
+bg_color = Color(0, 0.733333, 0.894118, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tmnew"]
+bg_color = Color(1, 0, 0.184314, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7f772"]
+bg_color = Color(1, 0.4, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_76t4e"]
+bg_color = Color(0.6, 0.631373, 0.647059, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_611dn"]
-size = Vector2(35, 34)
+size = Vector2(35, 57)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h28sw"]
-size = Vector2(35, 35)
+size = Vector2(35, 50.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gfoe7"]
-size = Vector2(35, 34)
+size = Vector2(35, 46)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r1dvx"]
-size = Vector2(35, 38)
+size = Vector2(35, 53)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fohrn"]
 size = Vector2(51.5, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ie0yw"]
-size = Vector2(165.307, 41.1581)
+size = Vector2(232.305, 40.2429)
 
 [sub_resource type="Curve2D" id="Curve2D_re8bw"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 32, 44.4405, 0, 0, 0, 0, 28, 50.5006, 0, 0, 0, 0, 24, 59.5907, 0, 0, 0, 0, 23, 92.9211, 0, 0, 0, 0, 24, 137.362, 0, 0, 0, 0, 25, 189.882, 0, 0, 0, 0, 25, 249.473, 0, 0, 0, 0, 27, 284.823, 0, 0, 0, 0, 25, 305.024, 0, 0, 0, 0, 30, 315.124, 0, 0, 0, 0, 29, 316.134, 0, 0, 0, 0, 29, 319.164, 0, 0, 0, 0, 33, 321.184, 0, 0, 0, 0, 39, 321.184, 0, 0, 0, 0, 43, 323.204, 0, 0, 0, 0, 46, 321.184, 0, 0, 0, 0, 47, 322.194, 0, 0, 0, 0, 76, 322.194, 0, 0, 0, 0, 107, 324.214, 0, 0, 0, 0, 152, 323.204, 0, 0, 0, 0, 156, 321.184, 0, 0, 0, 0, 159, 318.154, 0, 0, 0, 0, 159, 316.134, 0, 0, 0, 0, 161, 312.094, 0, 0, 0, 0, 164, 306.034, 0, 0, 0, 0, 164, 284.823, 0, 0, 0, 0, 165, 229.273, 0, 0, 0, 0, 160, 150.492, 0, 0, 0, 0, 161, 130.292, 0, 0, 0, 0, 160, 114.131, 0, 0, 0, 0, 161, 68.6808, 0, 0, 0, 0, 158, 52.5206, 0, 0, 0, 0, 154.68, 45.9602, 9.60513, 3.03771, -9.60513, -3.03771, 145.648, 43.9175, 0, 0, 0, 0, 144.519, 41.8748, 0, 0, 0, 0, 142.261, 41.8748, 0, 0, 0, 0, 140.002, 36.7681, 0, 0, 0, 0, 128.712, 35.7468, 0, 0, 0, 0, 129.841, 39.8321, 0, 0, 0, 0, 126.454, 37.7895, 0, 0, 0, 0, 112.905, 37.7895, 0, 0, 0, 0, 97.0985, 36.7681, 0, 0, 0, 0, 88.066, 36.7681, 0, 0, 0, 0, 63.2269, 35.7468, 0, 0, 0, 0, 45, 38.3805, 0, 0, 0, 0, 40, 39.3905, 0, 0, 0, 0, 39, 40.4005, 0, 0, 0, 0, 35, 41.4105, 0, 0, 0, 0, 32, 44.4405)
 }
 point_count = 49
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dxvtd"]
+load_path = "res://.godot/imported/20.png-4c61d082dd0fef9ca149448542f42246.ctex"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1844d"]
 bg_color = Color(0.933333, 0.254902, 0.270588, 1)
@@ -142,7 +200,16 @@ region = Rect2(280, 296, 608, 616)
 atlas = ExtResource("25_ykd1m")
 region = Rect2(968, 296, 608, 616)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2nvgf"]
+atlas = ExtResource("33_jpeuk")
+region = Rect2(264, 432, 1112, 1136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7nab"]
+atlas = ExtResource("33_jpeuk")
+region = Rect2(1616, 432, 1144, 1136)
+
 [node name="Main" type="Node2D"]
+script = ExtResource("1_w5kp7")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -150,10 +217,16 @@ region = Rect2(968, 296, 608, 616)
 script = ExtResource("1_htfnk")
 
 [node name="TPauseBtn" type="TouchScreenButton" parent="HUD"]
-position = Vector2(5, 5)
+position = Vector2(150, 4)
 scale = Vector2(0.0422078, 0.0422078)
 texture_normal = SubResource("AtlasTexture_qpa40")
 texture_pressed = SubResource("AtlasTexture_2njiw")
+
+[node name="TUpBtn" type="TouchScreenButton" parent="HUD"]
+position = Vector2(150, 30.9919)
+scale = Vector2(0.0272177, 0.0272177)
+texture_normal = SubResource("AtlasTexture_sr7ci")
+texture_pressed = SubResource("AtlasTexture_m0nij")
 
 [node name="C_Flight_Display" type="Control" parent="HUD"]
 layout_mode = 3
@@ -170,10 +243,10 @@ metadata/_edit_use_anchors_ = true
 [node name="Base" type="Panel" parent="HUD/C_Flight_Display"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.521277
-anchor_top = 0.5
-anchor_right = 0.819149
-anchor_bottom = 0.5
+anchor_left = 0.457447
+anchor_top = 7.35714
+anchor_right = 0.457447
+anchor_bottom = 7.35714
 offset_left = -32.5
 offset_top = -19.0
 offset_right = 21.5
@@ -198,22 +271,24 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_0cqbf")
 theme_override_font_sizes/font_size = 32
-text = " 0"
+text = "  0"
 metadata/_edit_use_anchors_ = true
 
-[node name="PowerUpDurationIndicator" type="Control" parent="HUD"]
+[node name="DurationBars" type="Control" parent="HUD"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 282.0
-offset_bottom = -2.0
+offset_left = -14.0
+offset_top = 23.0
+offset_right = -14.0
+offset_bottom = -261.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_wqatc")
 metadata/_edit_use_anchors_ = true
 
-[node name="BamProgressBar" type="Control" parent="HUD/PowerUpDurationIndicator"]
+[node name="DPB" type="Control" parent="HUD/DurationBars"]
 layout_mode = 1
 anchor_left = 0.527778
 anchor_top = 0.111111
@@ -224,124 +299,53 @@ offset_right = -30.0
 grow_horizontal = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="sprite" type="Sprite2D" parent="HUD/PowerUpDurationIndicator/BamProgressBar"]
-position = Vector2(10, 19)
-scale = Vector2(0.0490625, 0.0490625)
-texture = ExtResource("4_ey47v")
-region_enabled = true
-region_rect = Rect2(968, 432, 384, 384)
-
-[node name="Progressbar" type="TextureProgressBar" parent="HUD/PowerUpDurationIndicator/BamProgressBar"]
+[node name="BamDurationBar" type="ProgressBar" parent="HUD/DurationBars/DPB"]
 layout_mode = 0
-offset_left = -5.00001
-offset_top = 4.03616
-offset_right = 295.0
-offset_bottom = 304.036
-rotation = -0.00120531
-scale = Vector2(0.1, 0.1)
-fill_mode = 4
-texture_under = ExtResource("5_0hjf5")
-texture_progress = ExtResource("5_0hjf5")
-tint_under = Color(0, 0, 0, 0)
-tint_progress = Color(0.772549, 0.878431, 1, 1)
-metadata/_edit_use_anchors_ = true
+offset_left = 123.0
+offset_top = 47.0
+offset_right = 127.0
+offset_bottom = 74.0
+theme_override_styles/background = SubResource("StyleBoxFlat_yhrjc")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1a4db")
+value = 100.0
+fill_mode = 3
+show_percentage = false
 
-[node name="BiggieProgressBar" type="Control" parent="HUD/PowerUpDurationIndicator"]
-layout_mode = 1
-anchor_left = -0.0611111
-anchor_top = 0.111111
-anchor_right = -0.0611111
-anchor_bottom = 0.111111
-offset_left = 84.0
-offset_right = 84.0
-metadata/_edit_use_anchors_ = true
-
-[node name="sprite" type="Sprite2D" parent="HUD/PowerUpDurationIndicator/BiggieProgressBar"]
-position = Vector2(23, 19)
-scale = Vector2(0.04875, 0.04875)
-texture = ExtResource("4_ey47v")
-region_enabled = true
-region_rect = Rect2(1400, 416, 400, 408)
-
-[node name="Progressbar" type="TextureProgressBar" parent="HUD/PowerUpDurationIndicator/BiggieProgressBar"]
+[node name="BiggieDurationbar" type="ProgressBar" parent="HUD/DurationBars/DPB"]
 layout_mode = 0
-offset_left = 7.99998
-offset_top = 4.03616
-offset_right = 308.0
-offset_bottom = 304.036
-rotation = -0.00120531
-scale = Vector2(0.1, 0.1)
-fill_mode = 4
-texture_under = ExtResource("5_0hjf5")
-texture_progress = ExtResource("5_0hjf5")
-tint_under = Color(0, 0, 0, 0)
-tint_progress = Color(0.964706, 0, 0.180392, 1)
-metadata/_edit_use_anchors_ = true
+offset_left = 123.0
+offset_top = 100.0
+offset_right = 127.0
+offset_bottom = 127.0
+theme_override_styles/background = SubResource("StyleBoxFlat_yhrjc")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tmnew")
+value = 100.0
+fill_mode = 3
+show_percentage = false
 
-[node name="TappyProgressBar" type="Control" parent="HUD/PowerUpDurationIndicator"]
-layout_mode = 1
-anchor_left = 0.0888889
-anchor_top = 0.111111
-anchor_right = 0.0888889
-anchor_bottom = 0.111111
-offset_left = 52.0
-offset_right = 52.0
-metadata/_edit_use_anchors_ = true
-
-[node name="sprite" type="Sprite2D" parent="HUD/PowerUpDurationIndicator/TappyProgressBar"]
-position = Vector2(-14, 19)
-scale = Vector2(0.0505729, 0.0505729)
-texture = ExtResource("4_ey47v")
-region_enabled = true
-region_rect = Rect2(536, 424, 384, 384)
-
-[node name="ProgressBar" type="TextureProgressBar" parent="HUD/PowerUpDurationIndicator/TappyProgressBar"]
+[node name="OguDurationbar" type="ProgressBar" parent="HUD/DurationBars/DPB"]
 layout_mode = 0
-offset_left = -29.0
-offset_top = 4.03616
-offset_right = 271.0
-offset_bottom = 304.036
-rotation = -0.00120531
-scale = Vector2(0.1, 0.1)
-fill_mode = 4
-texture_under = ExtResource("5_0hjf5")
-texture_progress = ExtResource("5_0hjf5")
-tint_under = Color(0, 0, 0, 0)
-tint_progress = Color(0.552941, 0.596078, 0.639216, 1)
-metadata/_edit_use_anchors_ = true
+offset_left = 123.0
+offset_top = 152.0
+offset_right = 127.0
+offset_bottom = 179.0
+theme_override_styles/background = SubResource("StyleBoxFlat_yhrjc")
+theme_override_styles/fill = SubResource("StyleBoxFlat_7f772")
+value = 100.0
+fill_mode = 3
+show_percentage = false
 
-[node name="OguProgressBar" type="Control" parent="HUD/PowerUpDurationIndicator"]
-layout_mode = 1
-anchor_left = -0.133333
-anchor_top = 0.0833333
-anchor_right = -0.133333
-anchor_bottom = 0.0833333
-offset_left = 85.0
-offset_right = 125.0
-offset_bottom = 40.0
-metadata/_edit_use_anchors_ = true
-
-[node name="sprite" type="Sprite2D" parent="HUD/PowerUpDurationIndicator/OguProgressBar"]
-position = Vector2(56, 19)
-scale = Vector2(0.0460577, 0.0460577)
-texture = ExtResource("4_ey47v")
-region_enabled = true
-region_rect = Rect2(80, 416, 416, 416)
-
-[node name="Progressbar" type="TextureProgressBar" parent="HUD/PowerUpDurationIndicator/OguProgressBar"]
+[node name="TappyDurationbar" type="ProgressBar" parent="HUD/DurationBars/DPB"]
 layout_mode = 0
-offset_left = 41.0
-offset_top = 4.03616
-offset_right = 341.0
-offset_bottom = 304.036
-rotation = -0.00120531
-scale = Vector2(0.1, 0.1)
-fill_mode = 4
-texture_under = ExtResource("5_0hjf5")
-texture_progress = ExtResource("5_0hjf5")
-tint_under = Color(0, 0, 0, 0)
-tint_progress = Color(0.94902, 0.384314, 0, 1)
-metadata/_edit_use_anchors_ = true
+offset_left = 123.0
+offset_top = 206.0
+offset_right = 127.0
+offset_bottom = 233.0
+theme_override_styles/background = SubResource("StyleBoxFlat_yhrjc")
+theme_override_styles/fill = SubResource("StyleBoxFlat_76t4e")
+value = 100.0
+fill_mode = 3
+show_percentage = false
 
 [node name="SpawnerRoot" parent="." node_paths=PackedStringArray("path") instance=ExtResource("9_p52hf")]
 position = Vector2(25, 31)
@@ -357,7 +361,7 @@ rotation = -1.5509
 position = Vector2(149, 83)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnerRoot/CollectPointRoot/BamCollectPoint"]
-position = Vector2(-30.5, 0)
+position = Vector2(-32, 2.99996)
 shape = SubResource("RectangleShape2D_611dn")
 debug_color = Color(0.992157, 0, 0.239216, 0.419608)
 
@@ -365,7 +369,7 @@ debug_color = Color(0.992157, 0, 0.239216, 0.419608)
 position = Vector2(149, 116)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnerRoot/CollectPointRoot/BiggieCollectPoint"]
-position = Vector2(-30.5, 1.5)
+position = Vector2(-32, 28)
 shape = SubResource("RectangleShape2D_h28sw")
 debug_color = Color(0.992157, 0, 0.239216, 0.419608)
 
@@ -373,7 +377,7 @@ debug_color = Color(0.992157, 0, 0.239216, 0.419608)
 position = Vector2(149, 152)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnerRoot/CollectPointRoot/OguCollectPoint"]
-position = Vector2(-30.5, 0)
+position = Vector2(-33, 42)
 shape = SubResource("RectangleShape2D_gfoe7")
 debug_color = Color(0.992157, 0, 0.239216, 0.419608)
 
@@ -381,7 +385,7 @@ debug_color = Color(0.992157, 0, 0.239216, 0.419608)
 position = Vector2(149, 186)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnerRoot/CollectPointRoot/TappyCollectPoint"]
-position = Vector2(-30.5, 2)
+position = Vector2(-34, 61)
 shape = SubResource("RectangleShape2D_r1dvx")
 debug_color = Color(0.992157, 0, 0.239216, 0.419608)
 
@@ -410,7 +414,9 @@ debug_color = Color(0.976471, 0, 0.407843, 0.419608)
 [node name="CollectPowerUpZone" type="Area2D" parent="PowerUpSpawner"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PowerUpSpawner/CollectPowerUpZone"]
-position = Vector2(101.791, -88.9925)
+position = Vector2(135.547, -86.1845)
+rotation = 0.0275241
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_ie0yw")
 
 [node name="SpawnPoint" type="Node2D" parent="PowerUpSpawner"]
@@ -420,13 +426,22 @@ position = Vector2(89.7634, 12.7884)
 
 [node name="WeatherSystem" type="CanvasModulate" parent="Env"]
 position = Vector2(14, 114)
-script = ExtResource("15_sf37u")
-mid_color = Color(0.717647, 0.286275, 0.290196, 1)
-cycle_duration = 20.0
+
+[node name="PointLight2D" type="PointLight2D" parent="Env"]
+position = Vector2(106, 101)
+color = Color(1, 0.686275, 0.168627, 1)
+energy = 0.33
+texture = ExtResource("16_p7gge")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Env"]
+position = Vector2(94, 243)
+color = Color(1, 0.686275, 0.168627, 1)
+energy = 0.33
+texture = ExtResource("16_p7gge")
 
 [node name="ConveyerBelt" type="Path2D" parent="."]
 position = Vector2(-11, -27)
-scale = Vector2(0.885699, 0.979109)
+scale = Vector2(0.827193, 0.999189)
 curve = SubResource("Curve2D_re8bw")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="ConveyerBelt"]
@@ -434,26 +449,30 @@ position = Vector2(32, 44.4405)
 rotation = 2.15421
 
 [node name="Characters" type="Node2D" parent="."]
-position = Vector2(33, 7)
+position = Vector2(-30, -28)
 rotation = 1.5509
+scale = Vector2(1.5, 1.5)
 
 [node name="SL_Tappy" parent="Characters" instance=ExtResource("16_xvnsr")]
-position = Vector2(184.391, -118.355)
+position = Vector2(186.417, -119.648)
 rotation = -1.5509
 
 [node name="SL_Bam" parent="Characters" instance=ExtResource("17_vxx13")]
-position = Vector2(77.4124, -120.484)
+position = Vector2(76.3993, -119.837)
 rotation = -1.5509
+scale = Vector2(0.838809, 0.838809)
 
 [node name="SL_Biggie" parent="Characters" instance=ExtResource("18_tit7w")]
-position = Vector2(112.386, -118.788)
+position = Vector2(113.738, -119.761)
 rotation = -1.5509
+scale = Vector2(0.931165, 0.931165)
 
 [node name="SL_Ogu" parent="Characters" instance=ExtResource("19_g6c5f")]
-position = Vector2(148.379, -118.072)
+position = Vector2(149.078, -119.724)
 rotation = -1.5509
 
 [node name="Pause" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Pause_Overlay" type="Control" parent="Pause"]
 layout_mode = 3
@@ -475,7 +494,138 @@ offset_right = 29.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.67451, 0.0980392, 0.235294, 0.458824)
+color = Color(0, 0, 0, 0.780392)
+
+[node name="ICONS" type="Node2D" parent="Pause/Pause_Overlay/BG"]
+position = Vector2(26, 26)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Pause/Pause_Overlay/BG/ICONS"]
+position = Vector2(49, 72)
+rotation = 0.611171
+scale = Vector2(0.0995514, 0.0995514)
+texture = ExtResource("4_ey47v")
+region_enabled = true
+region_rect = Rect2(968, 432, 384, 384)
+
+[node name="Sprite2D4" type="Sprite2D" parent="Pause/Pause_Overlay/BG/ICONS"]
+position = Vector2(63, 249)
+rotation = 0.611171
+scale = Vector2(0.0995514, 0.0995514)
+texture = ExtResource("4_ey47v")
+region_enabled = true
+region_rect = Rect2(968, 432, 384, 384)
+
+[node name="Sprite2D5" type="Sprite2D" parent="Pause/Pause_Overlay/BG/ICONS"]
+position = Vector2(112, 268)
+rotation = 0.611171
+scale = Vector2(0.0995514, 0.0995514)
+texture = ExtResource("4_ey47v")
+region_enabled = true
+region_rect = Rect2(968, 432, 384, 384)
+
+[node name="Sprite2D6" type="Sprite2D" parent="Pause/Pause_Overlay/BG/ICONS"]
+position = Vector2(155, 268)
+rotation = 0.611171
+scale = Vector2(0.0995514, 0.0995514)
+texture = ExtResource("4_ey47v")
+region_enabled = true
+region_rect = Rect2(968, 432, 384, 384)
+
+[node name="Sprite2D7" type="Sprite2D" parent="Pause/Pause_Overlay/BG/ICONS"]
+position = Vector2(37, 271)
+rotation = 0.611171
+scale = Vector2(0.0995514, 0.0995514)
+texture = SubResource("CompressedTexture2D_dxvtd")
+region_enabled = true
+region_rect = Rect2(1400, 408, 392, 408)
+
+[node name="Sprite2D8" type="Sprite2D" parent="Pause/Pause_Overlay/BG/ICONS"]
+position = Vector2(107, 222)
+rotation = 0.611171
+scale = Vector2(0.0995514, 0.0995514)
+texture = SubResource("CompressedTexture2D_dxvtd")
+region_enabled = true
+region_rect = Rect2(1400, 408, 392, 408)
+
+[node name="Sprite2D9" type="Sprite2D" parent="Pause/Pause_Overlay/BG/ICONS"]
+position = Vector2(140, 231)
+rotation = 0.611171
+scale = Vector2(0.0995514, 0.0995514)
+texture = SubResource("CompressedTexture2D_dxvtd")
+region_enabled = true
+region_rect = Rect2(1400, 408, 392, 408)
+
+[node name="Sprite2D10" type="Sprite2D" parent="Pause/Pause_Overlay/BG/ICONS"]
+position = Vector2(108, 89)
+rotation = 0.611171
+scale = Vector2(0.0995514, 0.0995514)
+texture = SubResource("CompressedTexture2D_dxvtd")
+region_enabled = true
+region_rect = Rect2(1400, 408, 392, 408)
+
+[node name="Sprite2D11" type="Sprite2D" parent="Pause/Pause_Overlay/BG/ICONS"]
+position = Vector2(16, 179)
+rotation = 0.611171
+scale = Vector2(0.0995514, 0.0995514)
+texture = SubResource("CompressedTexture2D_dxvtd")
+region_enabled = true
+region_rect = Rect2(528, 408, 400, 408)
+
+[node name="Sprite2D12" type="Sprite2D" parent="Pause/Pause_Overlay/BG/ICONS"]
+position = Vector2(96, 48)
+rotation = 0.611171
+scale = Vector2(0.0995514, 0.0995514)
+texture = SubResource("CompressedTexture2D_dxvtd")
+region_enabled = true
+region_rect = Rect2(528, 408, 400, 408)
+
+[node name="Sprite2D13" type="Sprite2D" parent="Pause/Pause_Overlay/BG/ICONS"]
+position = Vector2(107, 179)
+rotation = 0.611171
+scale = Vector2(0.0995514, 0.0995514)
+texture = SubResource("CompressedTexture2D_dxvtd")
+region_enabled = true
+region_rect = Rect2(528, 408, 400, 408)
+
+[node name="Sprite2D14" type="Sprite2D" parent="Pause/Pause_Overlay/BG/ICONS"]
+position = Vector2(61, 240)
+rotation = 0.611171
+scale = Vector2(0.0995514, 0.0995514)
+texture = SubResource("CompressedTexture2D_dxvtd")
+region_enabled = true
+region_rect = Rect2(528, 408, 400, 408)
+
+[node name="Sprite2D15" type="Sprite2D" parent="Pause/Pause_Overlay/BG/ICONS"]
+position = Vector2(148, 136)
+rotation = 0.611171
+scale = Vector2(0.0995514, 0.0995514)
+texture = SubResource("CompressedTexture2D_dxvtd")
+region_enabled = true
+region_rect = Rect2(72, 408, 432, 408)
+
+[node name="Sprite2D16" type="Sprite2D" parent="Pause/Pause_Overlay/BG/ICONS"]
+position = Vector2(141, 37)
+rotation = 0.611171
+scale = Vector2(0.0995514, 0.0995514)
+texture = SubResource("CompressedTexture2D_dxvtd")
+region_enabled = true
+region_rect = Rect2(72, 408, 432, 408)
+
+[node name="Sprite2D17" type="Sprite2D" parent="Pause/Pause_Overlay/BG/ICONS"]
+position = Vector2(50, 136)
+rotation = 0.611171
+scale = Vector2(0.0995514, 0.0995514)
+texture = SubResource("CompressedTexture2D_dxvtd")
+region_enabled = true
+region_rect = Rect2(72, 408, 432, 408)
+
+[node name="Sprite2D18" type="Sprite2D" parent="Pause/Pause_Overlay/BG/ICONS"]
+position = Vector2(34, 45)
+rotation = 0.611171
+scale = Vector2(0.0995514, 0.0995514)
+texture = SubResource("CompressedTexture2D_dxvtd")
+region_enabled = true
+region_rect = Rect2(72, 408, 432, 408)
 
 [node name="ResumeBase" type="Panel" parent="Pause/Pause_Overlay"]
 layout_mode = 1
@@ -677,7 +827,130 @@ scale = Vector2(0.0566667, 0.0566667)
 texture_normal = SubResource("AtlasTexture_l3twj")
 texture_pressed = SubResource("AtlasTexture_t3q71")
 
+[node name="UpgradeManager" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="UpgradeHud" type="Control" parent="UpgradeManager"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+mouse_force_pass_scroll_events = false
+script = ExtResource("32_ywc6o")
+metadata/_edit_use_anchors_ = true
+
+[node name="Root" type="Control" parent="UpgradeManager/UpgradeHud"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 139.0
+offset_bottom = 281.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="UpgradeManager/UpgradeHud/Root"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 8.11732
+anchor_bottom = 7.88785
+offset_right = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.682353)
+metadata/_edit_use_anchors_ = true
+
+[node name="Base" type="Panel" parent="UpgradeManager/UpgradeHud/Root"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.139665
+anchor_top = 0.498442
+anchor_right = 0.335196
+anchor_bottom = 0.719626
+offset_left = -2.0
+offset_top = -53.0
+offset_right = 102.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_66iao")
+metadata/_edit_use_anchors_ = true
+
+[node name="Node" type="Node2D" parent="UpgradeManager/UpgradeHud/Root"]
+position = Vector2(2, -4)
+
+[node name="14" type="Sprite2D" parent="UpgradeManager/UpgradeHud/Root/Node"]
+position = Vector2(72, 127)
+scale = Vector2(0.0330071, 0.0330071)
+texture = ExtResource("34_nwnbs")
+region_enabled = true
+region_rect = Rect2(0, 0, 1875, 624)
+
+[node name="15" type="Sprite2D" parent="UpgradeManager/UpgradeHud/Root/Node"]
+position = Vector2(72, 158)
+scale = Vector2(0.0314289, 0.0314289)
+texture = ExtResource("34_nwnbs")
+region_enabled = true
+region_rect = Rect2(0, 704, 1875, 536)
+
+[node name="16" type="Sprite2D" parent="UpgradeManager/UpgradeHud/Root/Node"]
+position = Vector2(75, 170)
+scale = Vector2(0.0330071, 0.0330071)
+texture = ExtResource("35_sws1p")
+region_enabled = true
+region_rect = Rect2(0, 0, 1864, 640)
+
+[node name="17" type="Sprite2D" parent="UpgradeManager/UpgradeHud/Root/Node"]
+position = Vector2(75, 200)
+scale = Vector2(0.0330071, 0.0330071)
+texture = ExtResource("35_sws1p")
+region_enabled = true
+region_rect = Rect2(0, 720, 1864, 504)
+
+[node name="UpgradeSprite" type="Sprite2D" parent="UpgradeManager/UpgradeHud/Root"]
+position = Vector2(85, 53)
+scale = Vector2(0.0592001, 0.0592001)
+texture = ExtResource("32_xtm5x")
+
+[node name="CloseBtn" type="TouchScreenButton" parent="UpgradeManager/UpgradeHud/Root"]
+position = Vector2(131, 77)
+scale = Vector2(0.0444079, 0.0444079)
+texture_normal = SubResource("AtlasTexture_l3twj")
+texture_pressed = SubResource("AtlasTexture_t3q71")
+
+[node name="UpgradeLA" type="TouchScreenButton" parent="UpgradeManager/UpgradeHud/Root"]
+position = Vector2(131, 113)
+scale = Vector2(0.0206835, 0.0206835)
+texture_normal = SubResource("AtlasTexture_2nvgf")
+texture_pressed = SubResource("AtlasTexture_t7nab")
+
+[node name="UpgradeTS" type="TouchScreenButton" parent="UpgradeManager/UpgradeHud/Root"]
+position = Vector2(131, 137)
+scale = Vector2(0.0206835, 0.0206835)
+texture_normal = SubResource("AtlasTexture_2nvgf")
+texture_pressed = SubResource("AtlasTexture_t7nab")
+
+[node name="UpgradePF" type="TouchScreenButton" parent="UpgradeManager/UpgradeHud/Root"]
+position = Vector2(131, 161)
+scale = Vector2(0.0206835, 0.0206835)
+texture_normal = SubResource("AtlasTexture_2nvgf")
+texture_pressed = SubResource("AtlasTexture_t7nab")
+
+[node name="UpgradeFFA" type="TouchScreenButton" parent="UpgradeManager/UpgradeHud/Root"]
+position = Vector2(131, 185)
+scale = Vector2(0.0206835, 0.0206835)
+texture_normal = SubResource("AtlasTexture_2nvgf")
+texture_pressed = SubResource("AtlasTexture_t7nab")
+
+[node name="TransitionManager" parent="." instance=ExtResource("30_xouhy")]
+visible = false
+
 [connection signal="pressed" from="HUD/TPauseBtn" to="HUD/GameStateManager" method="_on_t_pause_btn_pressed"]
+[connection signal="pressed" from="HUD/TUpBtn" to="." method="_on_t_up_btn_pressed"]
 [connection signal="area_entered" from="SpawnerRoot/CollectPointRoot/BamCollectPoint" to="SpawnerRoot" method="_on_bam_collect_point_area_entered"]
 [connection signal="area_exited" from="SpawnerRoot/CollectPointRoot/BamCollectPoint" to="SpawnerRoot" method="_on_bam_collect_point_area_exited"]
 [connection signal="area_entered" from="SpawnerRoot/CollectPointRoot/BiggieCollectPoint" to="SpawnerRoot" method="_on_biggie_collect_point_area_entered"]
@@ -688,3 +961,7 @@ texture_pressed = SubResource("AtlasTexture_t3q71")
 [connection signal="area_exited" from="SpawnerRoot/CollectPointRoot/TappyCollectPoint" to="SpawnerRoot" method="_on_tappy_collect_point_area_exited"]
 [connection signal="pressed" from="Pause/Pause_Overlay/ResumeBase/Panel/TResumeBtn" to="HUD/GameStateManager" method="_on_t_resume_btn_pressed"]
 [connection signal="pressed" from="Pause/Pause_Overlay/MenuBase/Panel/TMenuBtn" to="Pause/Pause_Overlay" method="_on_t_menu_btn_pressed"]
+[connection signal="pressed" from="UpgradeManager/UpgradeHud/Root/UpgradeLA" to="UpgradeManager/UpgradeHud" method="_on_upgrade_la_pressed"]
+[connection signal="pressed" from="UpgradeManager/UpgradeHud/Root/UpgradeTS" to="UpgradeManager/UpgradeHud" method="_on_upgrade_ts_pressed"]
+[connection signal="pressed" from="UpgradeManager/UpgradeHud/Root/UpgradePF" to="UpgradeManager/UpgradeHud" method="_on_upgrade_pf_pressed"]
+[connection signal="pressed" from="UpgradeManager/UpgradeHud/Root/UpgradeFFA" to="UpgradeManager/UpgradeHud" method="_on_upgrade_ffa_pressed"]

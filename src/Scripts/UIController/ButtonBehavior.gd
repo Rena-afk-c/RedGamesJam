@@ -1,25 +1,24 @@
 extends Node
 
-
 @onready var game_logo = $"../Background/GameLogo"
 @onready var air_asialogo = $"../Background/AirAsialogo"
 @onready var t_play_btn = $"../Main/BtnContainer/TPlayBtn"
 @onready var t_settings_btn = $"../Main/BtnContainer/TSettingsBtn"
 @onready var t_close_btn = $"../Main/BtnContainer/TCloseBtn"
 @onready var t_daily_gift_btn = $"../GiftHud/GiftPanel/TDailyGiftBtn"
-
-
+@onready var TransitionManager = $"../TransitionManager"
 
 var buttons: Array
 var logos: Array
-const BUTTON_PRESS_SCALE_FACTOR = 0.9  # 10% smaller when pressed
-const BUTTON_IDLE_SCALE_FACTOR = 1.05  # 5% larger at peak of idle animation
-const LOGO_ROTATION_DEGREES = 2  # Reduced rotation for subtler effect
-const SCENE_TRANSITION_DELAY = 0.3  # Delay in seconds before changing the scene
+const BUTTON_PRESS_SCALE_FACTOR = 0.9
+const BUTTON_IDLE_SCALE_FACTOR = 1.05
+const LOGO_ROTATION_DEGREES = 2
+const SCENE_TRANSITION_DELAY = 0.3
 
 func _ready():
 	buttons = [t_play_btn, t_settings_btn, t_close_btn, t_daily_gift_btn]
 	logos = [game_logo, air_asialogo]
+	TransitionManager.fade_in()
 	
 	for button in buttons:
 		button.pressed.connect(_on_button_pressed.bind(button))
@@ -27,6 +26,9 @@ func _ready():
 	
 	for logo in logos:
 		start_logo_idle_animation(logo)
+	
+	# Connect the play button pressed signal
+	t_play_btn.pressed.connect(_on_t_play_btn_pressed)
 
 func _on_button_pressed(button):
 	var original_scale = button.scale
@@ -66,19 +68,16 @@ func start_logo_idle_animation(logo):
 	logo.set_meta("color_tween", color_tween)
 
 func _on_t_play_btn_pressed():
-	stop_all_tweens()
-	# Create a timer to delay the scene change
-	var timer = get_tree().create_timer(SCENE_TRANSITION_DELAY)
-	timer.connect("timeout", _on_play_button_animation_finished)
+	TransitionManager.transition("res://src/Nodes/World/main_2.tscn", TransitionManager.TransitionType.ICON_AND_TEXT)
+
+
+
 
 func _on_play_button_animation_finished():
-	get_tree().change_scene_to_file("res://src/Nodes/World/main_2.tscn")
-
-
+	TransitionManager.chan
 
 func _on_t_close_btn_pressed():
-	# Implement close functionality here
-	pass
+	get_tree().quit()
 
 func stop_all_tweens():
 	for button in buttons:

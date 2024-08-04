@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://cquyih57budum"]
+[gd_scene load_steps=57 format=3 uid="uid://cquyih57budum"]
 
 [ext_resource type="Script" path="res://src/Scripts/UIController/MenuBackground.gd" id="1_8t3b5"]
 [ext_resource type="Script" path="res://src/Scripts/UIController/MainMenu.gd" id="1_qcbpn"]
@@ -30,6 +30,7 @@
 [ext_resource type="Script" path="res://src/Scripts/UIController/SettingsBehavior.gd" id="25_t7ld0"]
 [ext_resource type="Texture2D" uid="uid://bvc0f7wrjktjo" path="res://assets/ui/ALL_HUD/17.png" id="26_2405l"]
 [ext_resource type="Texture2D" uid="uid://phlh1w4kaua8" path="res://assets/ui/ALL_HUD/5.png" id="26_ypusq"]
+[ext_resource type="PackedScene" uid="uid://dh1hh3582ol8" path="res://src/Nodes/GUI/transition.tscn" id="31_t6coi"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lklt4"]
 animations = [{
@@ -397,7 +398,6 @@ script = ExtResource("20_vyt8b")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(90, 160)
-process_callback = 0
 position_smoothing_enabled = true
 
 [node name="GiftHud" type="Control" parent="."]
@@ -547,6 +547,9 @@ scale = Vector2(0.0232, 0.0232)
 texture_normal = SubResource("AtlasTexture_f4fio")
 
 [node name="FG" type="CanvasLayer" parent="."]
+
+[node name="TransitionManager" parent="." instance=ExtResource("31_t6coi")]
+visible = false
 
 [connection signal="pressed" from="Main/BtnContainer/TPlayBtn" to="ButtonBehavior" method="_on_t_play_btn_pressed"]
 [connection signal="pressed" from="Main/BtnContainer/TSettingsBtn" to="." method="_on_t_settings_btn_pressed"]
