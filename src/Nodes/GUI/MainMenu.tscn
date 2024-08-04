@@ -26,8 +26,8 @@
 [ext_resource type="Script" path="res://src/Scripts/UIController/ButtonBehavior.gd" id="20_vyt8b"]
 [ext_resource type="Texture2D" uid="uid://c15a2xoedbu1m" path="res://assets/ui/ALL_HUD/22.png" id="21_gc024"]
 [ext_resource type="FontFile" uid="uid://dr7g5bnuqelmi" path="res://assets/fonts/monogram.ttf" id="21_uhieq"]
-[ext_resource type="FontFile" uid="uid://cfaa3278t64rr" path="res://assets/fonts/more-sugar.regular.ttf" id="24_47g3x"]
-[ext_resource type="Texture2D" uid="uid://gbox842orv2o" path="res://assets/art/20240804_013410928_iOS.png" id="24_geeut"]
+[ext_resource type="FontFile" path="res://assets/fonts/more-sugar.regular.ttf" id="24_47g3x"]
+[ext_resource type="Texture2D" path="res://assets/art/20240804_013410928_iOS.png" id="24_geeut"]
 [ext_resource type="Texture2D" uid="uid://bjnvqm8e46fi3" path="res://assets/ui/ALL_HUD/4.png" id="25_e1qvm"]
 [ext_resource type="Script" path="res://src/Scripts/UIController/SettingsBehavior.gd" id="25_t7ld0"]
 [ext_resource type="Texture2D" uid="uid://bvc0f7wrjktjo" path="res://assets/ui/ALL_HUD/17.png" id="26_2405l"]
@@ -559,7 +559,6 @@ texture_normal = SubResource("AtlasTexture_f4fio")
 [node name="FG" type="CanvasLayer" parent="."]
 
 [node name="TransitionManager" parent="." instance=ExtResource("31_t6coi")]
-visible = false
 
 [connection signal="pressed" from="Main/BtnContainer/TPlayBtn" to="ButtonBehavior" method="_on_t_play_btn_pressed"]
 [connection signal="pressed" from="Main/BtnContainer/TSettingsBtn" to="." method="_on_t_settings_btn_pressed"]

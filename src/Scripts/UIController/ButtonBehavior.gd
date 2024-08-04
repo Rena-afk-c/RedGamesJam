@@ -28,7 +28,7 @@ func _ready():
 		start_logo_idle_animation(logo)
 	
 	# Connect the play button pressed signal
-	t_play_btn.pressed.connect(_on_t_play_btn_pressed)
+	#t_play_btn.pressed.connect(_on_t_play_btn_pressed)
 
 func _on_button_pressed(button):
 	var original_scale = button.scale

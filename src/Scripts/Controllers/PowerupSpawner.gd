@@ -14,7 +14,7 @@ enum PowerupType {
 @export var path: Path2D
 @onready var spawn_point = $SpawnPoint
 @onready var pu_detection_zone: Area2D = $PU_DetectionZone
-@onready var score_label = $"../ScoreLabel"
+#@onready var score_label = $"../ScoreLabel"
 
 var spawn_timer: float = 0.0
 @export var spawn_interval: float = 5.0

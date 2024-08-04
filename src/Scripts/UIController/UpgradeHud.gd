@@ -21,10 +21,10 @@ func _ready():
 		button.scale = UPGRADE_BUTTON_SCALE
 	close_btn.scale = CLOSE_BUTTON_SCALE
 	
-	upgrade_la.pressed.connect(_on_upgrade_la_pressed)
-	upgrade_ts.pressed.connect(_on_upgrade_ts_pressed)
-	upgrade_pf.pressed.connect(_on_upgrade_pf_pressed)
-	upgrade_ffa.pressed.connect(_on_upgrade_ffa_pressed)
+	#upgrade_la.pressed.connect(_on_upgrade_la_pressed)
+	#upgrade_ts.pressed.connect(_on_upgrade_ts_pressed)
+	#upgrade_pf.pressed.connect(_on_upgrade_pf_pressed)
+	#upgrade_ffa.pressed.connect(_on_upgrade_ffa_pressed)
 	close_btn.pressed.connect(_on_close_btn_pressed)
 
 func utilize():

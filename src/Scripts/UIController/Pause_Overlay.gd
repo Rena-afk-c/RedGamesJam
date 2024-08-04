@@ -22,6 +22,7 @@ func _ready():
 	start_floating_icons_animation()
 
 func setup_button_connections():
+	return
 	t_menu_btn.pressed.connect(_on_t_menu_btn_pressed)
 
 func start_pause_icon_animation():

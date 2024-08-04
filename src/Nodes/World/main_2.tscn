@@ -6,21 +6,21 @@
 [ext_resource type="Script" path="res://src/Scripts/UIController/PowerUpIndicator.gd" id="3_wqatc"]
 [ext_resource type="Texture2D" uid="uid://dgjsj11rng87k" path="res://assets/ui/ALL_HUD/20.png" id="4_ey47v"]
 [ext_resource type="Texture2D" uid="uid://qlvjx6wractd" path="res://assets/ui/upgrade_icon.png" id="4_m53u1"]
-[ext_resource type="Texture2D" uid="uid://cr7acmubxjiuf" path="res://assets/ui/base.png" id="6_apapt"]
-[ext_resource type="Texture2D" uid="uid://gbox842orv2o" path="res://assets/art/20240804_013410928_iOS.png" id="7_24v8l"]
-[ext_resource type="FontFile" uid="uid://cfaa3278t64rr" path="res://assets/fonts/more-sugar.regular.ttf" id="8_sxmi8"]
+[ext_resource type="Texture2D" path="res://assets/ui/base.png" id="6_apapt"]
+[ext_resource type="Texture2D" path="res://assets/art/20240804_013410928_iOS.png" id="7_24v8l"]
+[ext_resource type="FontFile" path="res://assets/fonts/more-sugar.regular.ttf" id="8_sxmi8"]
 [ext_resource type="Texture2D" uid="uid://d2sfplfe0mtyn" path="res://assets/ui/ALL_HUD/1.png" id="9_6sdx6"]
 [ext_resource type="PackedScene" uid="uid://bcyx52vo85dkq" path="res://src/Nodes/World/luggage_spawner.tscn" id="9_p52hf"]
-[ext_resource type="Texture2D" uid="uid://b63eihrrtefi0" path="res://assets/art/20240804_013602286_iOS.png" id="9_tv5gv"]
+[ext_resource type="Texture2D" path="res://assets/art/20240804_013602286_iOS.png" id="9_tv5gv"]
 [ext_resource type="Script" path="res://src/Scripts/Controllers/PowerUpSpawner.gd" id="10_3iq14"]
 [ext_resource type="PackedScene" uid="uid://di4klb6ej4o01" path="res://src/Nodes/PowerUps/Point Frenzy.tscn" id="11_abhby"]
 [ext_resource type="PackedScene" uid="uid://b4hq8wo1csnsn" path="res://src/Nodes/PowerUps/luggage Free-For-All.tscn" id="12_1waiw"]
 [ext_resource type="PackedScene" uid="uid://cwevdoftrw2i2" path="res://src/Nodes/PowerUps/Luggage_Automata.tscn" id="13_ndvrl"]
 [ext_resource type="PackedScene" uid="uid://bjt7cwcbutfj8" path="res://src/Nodes/PowerUps/Time Slow.tscn" id="14_10kit"]
-[ext_resource type="Texture2D" uid="uid://c518d3020dkyx" path="res://assets/art/BUDS/Untitled_Artwork.png" id="14_xy211"]
-[ext_resource type="Texture2D" uid="uid://bb1o6pdmv02nk" path="res://assets/art/20240804_013201099_iOS.png" id="15_gsyuw"]
-[ext_resource type="Texture2D" uid="uid://tna84s8oiceh" path="res://assets/art/20240804_013135801_iOS.png" id="15_jjsgd"]
-[ext_resource type="Texture2D" uid="uid://c4rl8n2m5glda" path="res://assets/art/20240804_013253315_iOS.png" id="16_7j0jo"]
+[ext_resource type="Texture2D" path="res://assets/art/BUDS/Untitled_Artwork.png" id="14_xy211"]
+[ext_resource type="Texture2D" path="res://assets/art/20240804_013201099_iOS.png" id="15_gsyuw"]
+[ext_resource type="Texture2D" path="res://assets/art/20240804_013135801_iOS.png" id="15_jjsgd"]
+[ext_resource type="Texture2D" path="res://assets/art/20240804_013253315_iOS.png" id="16_7j0jo"]
 [ext_resource type="PackedScene" uid="uid://bpngs84hwd5fv" path="res://src/Nodes/SelectableCharacters/sl_tappy.tscn" id="16_xvnsr"]
 [ext_resource type="Script" path="res://src/Scripts/UIController/Pause_Overlay.gd" id="17_3242x"]
 [ext_resource type="PackedScene" uid="uid://bg7hmcutdesfl" path="res://src/Nodes/SelectableCharacters/sl_bam.tscn" id="17_vxx13"]
@@ -40,8 +40,8 @@
 [ext_resource type="Texture2D" uid="uid://by21avkiwbker" path="res://assets/ui/upgrade button.png" id="33_jpeuk"]
 [ext_resource type="Texture2D" uid="uid://b55s8oaocsdxe" path="res://assets/ui/ALL_HUD/14.png" id="34_nwnbs"]
 [ext_resource type="Texture2D" uid="uid://fownr3pdxmmn" path="res://assets/ui/ALL_HUD/15.png" id="35_sws1p"]
-[ext_resource type="Texture2D" uid="uid://clejnrcioaeov" path="res://assets/art/20240804_013122657_iOS.png" id="36_q7wp3"]
-[ext_resource type="Texture2D" uid="uid://cfyqxej00mmq5" path="res://assets/art/20240804_013452885_iOS.png" id="42_iixus"]
+[ext_resource type="Texture2D" path="res://assets/art/20240804_013122657_iOS.png" id="36_q7wp3"]
+[ext_resource type="Texture2D" path="res://assets/art/20240804_013452885_iOS.png" id="42_iixus"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qpa40"]
 atlas = ExtResource("9_6sdx6")
@@ -510,7 +510,6 @@ position = Vector2(149.078, -119.724)
 rotation = -1.5509
 
 [node name="Pause" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="Pause_Overlay" type="Control" parent="Pause"]
 layout_mode = 3
@@ -743,7 +742,6 @@ scale = Vector2(0.047125, 0.047125)
 texture = ExtResource("20_rcf10")
 
 [node name="GameOver" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -863,7 +861,6 @@ texture_normal = SubResource("AtlasTexture_l3twj")
 texture_pressed = SubResource("AtlasTexture_t3q71")
 
 [node name="UpgradeManager" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="UpgradeHud" type="Control" parent="UpgradeManager"]
 layout_mode = 3

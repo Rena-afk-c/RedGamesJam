@@ -3,4 +3,5 @@ extends Node2D
 
 
 func _ready():
-	transition_manager.fade_out()
+	pass
+	#transition_manager.fade_out()
