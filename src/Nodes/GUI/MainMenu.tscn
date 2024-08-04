@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://cquyih57budum"]
+[gd_scene load_steps=59 format=3 uid="uid://cquyih57budum"]
 
 [ext_resource type="Script" path="res://src/Scripts/UIController/MenuBackground.gd" id="1_8t3b5"]
 [ext_resource type="Script" path="res://src/Scripts/UIController/MainMenu.gd" id="1_qcbpn"]
@@ -26,6 +26,8 @@
 [ext_resource type="Script" path="res://src/Scripts/UIController/ButtonBehavior.gd" id="20_vyt8b"]
 [ext_resource type="Texture2D" uid="uid://c15a2xoedbu1m" path="res://assets/ui/ALL_HUD/22.png" id="21_gc024"]
 [ext_resource type="FontFile" uid="uid://dr7g5bnuqelmi" path="res://assets/fonts/monogram.ttf" id="21_uhieq"]
+[ext_resource type="FontFile" uid="uid://cfaa3278t64rr" path="res://assets/fonts/more-sugar.regular.ttf" id="24_47g3x"]
+[ext_resource type="Texture2D" uid="uid://gbox842orv2o" path="res://assets/art/20240804_013410928_iOS.png" id="24_geeut"]
 [ext_resource type="Texture2D" uid="uid://bjnvqm8e46fi3" path="res://assets/ui/ALL_HUD/4.png" id="25_e1qvm"]
 [ext_resource type="Script" path="res://src/Scripts/UIController/SettingsBehavior.gd" id="25_t7ld0"]
 [ext_resource type="Texture2D" uid="uid://bvc0f7wrjktjo" path="res://assets/ui/ALL_HUD/17.png" id="26_2405l"]
@@ -401,7 +403,6 @@ position = Vector2(90, 160)
 position_smoothing_enabled = true
 
 [node name="GiftHud" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -468,14 +469,22 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -44.0
+offset_left = -38.0
 offset_top = 30.0
-offset_right = 46.0
-offset_bottom = 43.0
+offset_right = 52.0
+offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_rysvp")
-text = "  "
+theme_override_fonts/font = ExtResource("24_47g3x")
+text = "  50"
+
+[node name="TicketSprite" type="Sprite2D" parent="GiftHud/GiftHud/Body"]
+position = Vector2(45, 64)
+scale = Vector2(0.0230599, 0.0230599)
+texture = ExtResource("24_geeut")
+region_enabled = true
+region_rect = Rect2(120, 32, 1440, 864)
 
 [node name="ClaimBtnBase" type="Button" parent="GiftHud/GiftHud"]
 layout_mode = 0

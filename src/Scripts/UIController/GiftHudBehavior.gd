@@ -2,7 +2,6 @@ extends Control
 
 @onready var t_daily_gift_btn = $GiftPanel/TDailyGiftBtn
 @onready var t_claim_btn = $GiftHud/TClaimBtn
-@onready var timer_label = $GiftHud/Body/TimerLabel
 @onready var gift_hud = $GiftHud
 @onready var sprite_2d = $GiftHud/Body/Sprite2D
 
@@ -37,9 +36,6 @@ func _ready():
 	if not t_claim_btn.pressed.is_connected(_on_t_claim_btn_pressed):
 		t_claim_btn.pressed.connect(_on_t_claim_btn_pressed)
 
-func _process(delta):
-	if not can_claim:
-		_update_timer_label()
 
 func _on_t_daily_gift_btn_pressed():
 	AudioManager.button_click()
@@ -58,7 +54,6 @@ func _show_gift_hud():
 	tween.chain().tween_callback(func():
 		is_hud_visible = true
 		is_animating = false
-		_update_timer_label()
 	)
 
 func _hide_gift_hud():
@@ -72,26 +67,11 @@ func _hide_gift_hud():
 		is_animating = false
 	)
 
-# The rest of the functions remain the same
-
-func _update_timer_label():
-	if can_claim:
-		timer_label.text = "Available Now!"
-	else:
-		var time_left = int(claim_timer.time_left)
-		if time_left >= 3600:
-			var hours = time_left / 3600
-			timer_label.text = "   %d hour%s" % [hours, "s" if hours > 1 else ""]
-		elif time_left >= 60:
-			var minutes = time_left / 60
-			timer_label.text = "   %d minute%s" % [minutes, "s" if minutes > 1 else ""]
-		else:
-			timer_label.text = "   %d second%s" % [time_left, "s" if time_left > 1 else ""]
 
 func _on_t_claim_btn_pressed():
 	AudioManager.button_click()
 	if can_claim:
-		collect_daily_reward()
+		GameManager.tickets += 50
 		_start_claim_cooldown()
 	else:
 		AudioManager.incorrect_option_sfx()
@@ -101,8 +81,6 @@ func collect_daily_reward():
 	ParticleManager.create_confetti_particle()
 	print("Daily reward collected!")
 	
-	# Add your reward logic here
-
 func _start_claim_cooldown():
 	can_claim = false
 	claim_timer.start(CLAIM_COOLDOWN)
@@ -111,7 +89,6 @@ func _start_claim_cooldown():
 func _on_claim_timer_timeout():
 	can_claim = true
 	t_claim_btn.modulate.a = 1.0  # Restore full opacity
-	_update_timer_label()  # Update the label immediately when the timer expires
 
 func _start_gift_animation():
 	var float_height: float = 5.0
