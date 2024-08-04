@@ -84,6 +84,7 @@ func animate_floating_icon(icon: Node2D):
 
 func _on_t_menu_btn_pressed():
 	AudioManager.button_click()
+	AudioManager.fade_out_audio(1.5)
 	animate_button_press(t_menu_btn)
 	await get_tree().create_timer(SCENE_TRANSITION_DELAY).timeout
 	TransitionManager.transition("res://src/Nodes/GUI/MainMenu.tscn", TransitionManager.TransitionType.ICON_AND_TEXT)
