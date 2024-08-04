@@ -6,6 +6,7 @@ const FIRE_BURNING_SCENE_PATH = "res://src/ParticleEffects/fire_burning.tscn"
 const RAINING_COIN_SCENE_PATH = "res://src/ParticleEffects/raining_coin.tscn"
 
 func create_fire_burning_particle():
+	return
 	var particle_scene = preload(FIRE_BURNING_SCENE_PATH)
 	var particle_instance = particle_scene.instantiate()
 	
@@ -45,6 +46,7 @@ func create_exploding_particle():
 		particle_instance.queue_free()
 
 func create_raining_coin_particle():
+	return
 	var particle_scene = preload(RAINING_COIN_SCENE_PATH)
 	var particle_instance = particle_scene.instantiate()
 	

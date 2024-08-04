@@ -781,10 +781,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Base" type="Panel" parent="GameOver/Root"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = -1
+anchor_left = 0.335196
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 0.335196
 anchor_bottom = 0.5
 offset_left = -2.0
 offset_top = -53.0
@@ -792,6 +792,7 @@ offset_right = 102.0
 offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.24, 1)
 theme_override_styles/panel = SubResource("StyleBoxFlat_66iao")
 metadata/_edit_use_anchors_ = true
 
@@ -803,26 +804,26 @@ texture = ExtResource("21_eqaxe")
 [node name="ScoreLabel" type="Label" parent="GameOver/Root/Base"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.00480769
-anchor_top = 0.0405405
-anchor_right = 0.00480769
-anchor_bottom = 0.0405405
+anchor_left = -0.634305
+anchor_top = 0.175676
+anchor_right = -0.595844
+anchor_bottom = 0.527027
 offset_left = 70.0
 offset_top = 2.0
 offset_right = 82.0
 offset_bottom = 28.0
 theme_override_colors/font_color = Color(1, 0.972549, 0.776471, 1)
 theme_override_fonts/font = ExtResource("8_sxmi8")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 18
 text = "7"
 metadata/_edit_use_anchors_ = true
 
 [node name="Ticketsbase" type="Panel" parent="GameOver/Root"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = -1
+anchor_left = 0.335196
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 0.335196
 anchor_bottom = 0.5
 offset_left = -2.0
 offset_top = -11.0
@@ -830,6 +831,7 @@ offset_right = 102.0
 offset_bottom = 26.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.24, 1)
 theme_override_styles/panel = SubResource("StyleBoxFlat_66iao")
 metadata/_edit_use_anchors_ = true
 
@@ -839,14 +841,19 @@ scale = Vector2(0.0384, 0.0384)
 texture = ExtResource("22_uxjia")
 
 [node name="TicketLabel" type="Label" parent="GameOver/Root/Ticketsbase"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.668269
+anchor_top = 0.22973
+anchor_right = -0.629808
+anchor_bottom = 0.581081
 offset_left = 73.0
 offset_top = 2.0
 offset_right = 85.0
 offset_bottom = 28.0
 theme_override_colors/font_color = Color(1, 0.972549, 0.776471, 1)
 theme_override_fonts/font = ExtResource("8_sxmi8")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 18
 text = "7"
 metadata/_edit_use_anchors_ = true
 
@@ -856,13 +863,13 @@ scale = Vector2(0.0592001, 0.0592001)
 texture = ExtResource("23_04w8d")
 
 [node name="RestartBtn" type="TouchScreenButton" parent="GameOver/Root"]
-position = Vector2(32, 110)
+position = Vector2(59, 214)
 scale = Vector2(0.0566667, 0.0566667)
 texture_normal = SubResource("AtlasTexture_lhtvh")
 texture_pressed = SubResource("AtlasTexture_dsbc4")
 
 [node name="CloseBtn" type="TouchScreenButton" parent="GameOver/Root"]
-position = Vector2(32, 148)
+position = Vector2(96, 213)
 scale = Vector2(0.0566667, 0.0566667)
 texture_normal = SubResource("AtlasTexture_l3twj")
 texture_pressed = SubResource("AtlasTexture_t3q71")
