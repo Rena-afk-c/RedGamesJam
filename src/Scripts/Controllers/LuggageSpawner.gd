@@ -23,6 +23,8 @@ var active_collection_point: Area2D
 @export var glow_fade_time: float = 0.3  
 
 func _ready():
+	AudioManager.play_main_menu_bg_music()
+	AudioManager.fade_in_audio(1.0)
 	game_over.hide()
 	GameManager.character_selected.connect(_on_character_changed)
 	update_active_collection_point()
@@ -53,6 +55,7 @@ func can_spawn_luggage() -> bool:
 	return last_luggage.progress > min_distance
 
 func spawn_luggage() -> void:
+	AudioManager.drop_luggage_sfx()
 	var new_luggage = luggage_scene.instantiate()
 	var new_path_follow = PathFollow2D.new()
 	
@@ -133,6 +136,7 @@ func _on_luggage_free_for_all_deactivated():
 
 
 func collect_luggage(luggage: RigidBody2D, path_follow: PathFollow2D) -> void:
+	AudioManager.pick_up_luggage_sfx()
 	if luggage.get_meta("is_being_collected", false):
 		return
 	
@@ -213,6 +217,7 @@ func fade_out_glow_light(glow_light: PointLight2D) -> void:
 		tween.tween_property(glow_light, "energy", 0.0, glow_fade_time)
 
 func _on_game_over():
+	AudioManager.game_over()
 	# Stop spawning new luggage
 	set_process(false)
 	

@@ -12,11 +12,11 @@ func _ready():
 	animate_logo()
 
 func _on_music_btn_pressed():
-	pass
+	AudioManager.toggle_music()
 
 func _on_sfx_btn_pressed():
-	pass
-
+	AudioManager.toggle_sfx()
+	
 func animate_logo():
 	var tween = create_tween().set_loops().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	var start_y = settings_logo.position.y

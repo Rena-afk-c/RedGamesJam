@@ -13,6 +13,7 @@ func _on_currency_updated(new_amount: int):
 	update_counter(new_amount)
 
 func update_counter(amount: int):
+	AudioManager.point_gain_sfx()
 	var tween = create_tween()
 	
 	tween.tween_property(counter_label, "scale", Vector2(1.3, 1.3), 0.1)

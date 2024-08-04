@@ -4,43 +4,61 @@ extends Node
 @onready var music_audio_player = $MusicAudioPlayer
 @onready var bg_audio_player = $BgAudioPlayer
 
+
 const BG_MUSIC = preload("res://assets/audio/bg_music.mp3")
 const BUTTON_CLICK = preload("res://assets/audio/button_click.mp3")
 const CONVEYOR_BELT = preload("res://assets/audio/conveyor_belt.mp3")
 const DROP_LUGGAGE = preload("res://assets/audio/drop_luggage.mp3")
 const GAME_OVER = preload("res://assets/audio/game_over.mp3")
+const MAIN_MENU_BG = preload("res://assets/audio/main-menu-bg.mp3")
 const PICK_UP_LUGGAGE= preload("res://assets/audio/pick_up_luggage.mp3")
 const POINT_GAIN = preload("res://assets/audio/point_gain.mp3")
-const POINT_LOST = preload("res://assets/audio/point_lost.mp3")
+const INCORRECT_OPTION = preload("res://assets/audio/point_lost.mp3")
 const PICK_UP_POWER_UP = preload("res://assets/audio/power_up.mp3")
 const UPGRADE_NOTI = preload("res://assets/audio/upgrade_noti.mp3")
 
+const MUTED_VOLUME = -40
 
-var pitch_scale_speed = 1.0
+var is_music_on = true
+var is_sfx_on = true
 
-func play_bg_music():
-	music_audio_player.stream = BG_MUSIC
+func fade_out_audio(duration: float):
+	if is_music_on:
+		var tween = create_tween()
+		tween.tween_property(music_audio_player, "volume_db", -40, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+func fade_in_audio(duration: float):
+	if is_music_on:
+		var tween = create_tween()
+		tween.tween_property(music_audio_player, "volume_db", 0, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+# settings
+func toggle_music():
+	is_music_on = not is_music_on
+	if is_music_on:
+		music_audio_player.volume_db = 0
+		bg_audio_player.volume_db = 0
+	else:
+		music_audio_player.volume_db = MUTED_VOLUME
+		bg_audio_player.volume_db = MUTED_VOLUME
+
+func toggle_sfx():
+	is_sfx_on = not is_sfx_on
+	if is_sfx_on:
+		sfx_audio_player.volume_db = 0
+	else:
+		sfx_audio_player.volume_db = MUTED_VOLUME
+
+func play_main_menu_bg_music():
+	music_audio_player.stream = MAIN_MENU_BG
 	music_audio_player.play()
 	bg_audio_player.stream = CONVEYOR_BELT
 	bg_audio_player.play()
 
-func stop_bg_music():
+func stop_main_menu_bg_music():
 	music_audio_player.stop()
 	bg_audio_player.stop()
 
-# settings
-func adjust_music_volume(value):
-	music_audio_player.volume_db = value - 40
-	bg_audio_player.volume_db = value - 40
-	
-func adjust_sfx_volume(value):
-	sfx_audio_player.volume_db = value - 40
-	
-# when luggage spawns faster 
-func increase_bg_music_pace():
-	pitch_scale_speed += 0.05
-	music_audio_player.pitch_scale = pitch_scale_speed
-	
 # character sfx
 func pick_up_luggage_sfx():
 	sfx_audio_player.stream = PICK_UP_LUGGAGE
@@ -60,8 +78,8 @@ func point_gain_sfx():
 	sfx_audio_player.stream = POINT_GAIN
 	sfx_audio_player.play()
 	
-func point_lost_sfx():
-	sfx_audio_player.stream = POINT_LOST
+func incorrect_option_sfx():
+	sfx_audio_player.stream = INCORRECT_OPTION
 	sfx_audio_player.play()
 	
 func pick_up_powerup_sfx():
@@ -75,4 +93,4 @@ func upgrade_noti():
 func game_over():
 	sfx_audio_player.stream = GAME_OVER
 	sfx_audio_player.play()
-	stop_bg_music()
+	stop_main_menu_bg_music()

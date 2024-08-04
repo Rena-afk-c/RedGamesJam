@@ -42,6 +42,7 @@ func _process(delta):
 		_update_timer_label()
 
 func _on_t_daily_gift_btn_pressed():
+	AudioManager.button_click()
 	if not is_animating:
 		if is_hud_visible:
 			_hide_gift_hud()
@@ -88,6 +89,7 @@ func _update_timer_label():
 			timer_label.text = "   %d second%s" % [time_left, "s" if time_left > 1 else ""]
 
 func _on_t_claim_btn_pressed():
+	AudioManager.button_click()
 	if can_claim:
 		collect_daily_reward()
 		_start_claim_cooldown()
@@ -96,6 +98,7 @@ func _on_t_claim_btn_pressed():
 
 func collect_daily_reward():
 	print("Daily reward collected!")
+	
 	# Add your reward logic here
 
 func _start_claim_cooldown():

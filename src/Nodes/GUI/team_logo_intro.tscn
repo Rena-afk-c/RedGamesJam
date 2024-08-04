@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cx86fbpeunys4"]
+[gd_scene load_steps=4 format=3 uid="uid://bmxamrjr44n0m"]
 
 [ext_resource type="FontFile" uid="uid://dr7g5bnuqelmi" path="res://assets/fonts/monogram.ttf" id="1_501t2"]
 [ext_resource type="Script" path="res://src/Scripts/UIController/TeamLogoIntro.gd" id="1_corfe"]

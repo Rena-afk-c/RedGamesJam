@@ -416,7 +416,6 @@ debug_color = Color(0.976471, 0, 0.407843, 0.419608)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PowerUpSpawner/CollectPowerUpZone"]
 position = Vector2(135.547, -86.1845)
 rotation = 0.0275241
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_ie0yw")
 
 [node name="SpawnPoint" type="Node2D" parent="PowerUpSpawner"]
@@ -472,7 +471,6 @@ position = Vector2(149.078, -119.724)
 rotation = -1.5509
 
 [node name="Pause" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="Pause_Overlay" type="Control" parent="Pause"]
 layout_mode = 3
@@ -705,7 +703,6 @@ scale = Vector2(0.047125, 0.047125)
 texture = ExtResource("20_rcf10")
 
 [node name="GameOver" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -828,7 +825,6 @@ texture_normal = SubResource("AtlasTexture_l3twj")
 texture_pressed = SubResource("AtlasTexture_t3q71")
 
 [node name="UpgradeManager" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="UpgradeHud" type="Control" parent="UpgradeManager"]
 layout_mode = 3
@@ -947,7 +943,6 @@ texture_normal = SubResource("AtlasTexture_2nvgf")
 texture_pressed = SubResource("AtlasTexture_t7nab")
 
 [node name="TransitionManager" parent="." instance=ExtResource("30_xouhy")]
-visible = false
 
 [connection signal="pressed" from="HUD/TPauseBtn" to="HUD/GameStateManager" method="_on_t_pause_btn_pressed"]
 [connection signal="pressed" from="HUD/TUpBtn" to="." method="_on_t_up_btn_pressed"]

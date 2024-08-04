@@ -8,8 +8,6 @@ func _ready():
 	GameOver.show()
 	Pause.hide()
 
-# TODO: show pause UI when click button in main scene
-
 func _on_restart_btn_pressed():
 	AudioManager.button_click()
 	GameOver.hide()
