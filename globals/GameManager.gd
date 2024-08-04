@@ -4,7 +4,7 @@ enum Characters {TAPPY, BIGGIE, BAM, OGU}
 var selected_character: Characters = Characters.TAPPY  
 var currency_flight: int = 0
 var current_point_multiplier: float = 1.0
-
+var combo_score: int = 0
 signal character_selected(character: Characters)
 signal currency_updated(new_amount: int)
 signal game_over

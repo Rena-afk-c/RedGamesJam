@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bm738csh4iacf"]
+[gd_scene load_steps=7 format=3 uid="uid://bm738csh4iacf"]
 
 [ext_resource type="Script" path="res://src/Scripts/Controllers/LuggageBehavior.gd" id="1_orohw"]
 [ext_resource type="Texture2D" uid="uid://bieyotbryoy2f" path="res://assets/shaders/LightSource.tres" id="2_k4qs2"]
+[ext_resource type="Texture2D" uid="uid://sw874icae0dj" path="res://assets/art/luggage/Untitled_Artwork 1.png" id="3_3qjyi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l25uf"]
 size = Vector2(23, 32)
@@ -9,16 +10,11 @@ size = Vector2(23, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xit3y"]
 size = Vector2(23, 32)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vuwk1"]
+load_path = "res://.godot/imported/Untitled_Artwork 1.png-fb6b2fe1c145d6c3309df8b8333dc483.ctex"
+
 [node name="Luggage" type="RigidBody2D" groups=["luggage"]]
 script = ExtResource("1_orohw")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -18.0
-offset_top = -23.0
-offset_right = 15.0
-offset_bottom = 24.0
-scale = Vector2(0.681616, 0.681616)
-mouse_filter = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-6.5, -7)
@@ -32,4 +28,37 @@ shape = SubResource("RectangleShape2D_xit3y")
 
 [node name="GlowLight" type="PointLight2D" parent="."]
 position = Vector2(-8, -6)
+enabled = false
 texture = ExtResource("2_k4qs2")
+
+[node name="BiggieSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-7, -7)
+scale = Vector2(0.073989, 0.0743628)
+texture = ExtResource("3_3qjyi")
+region_enabled = true
+region_rect = Rect2(1048, 1192, 272, 472)
+
+[node name="Tappy" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-7, -7)
+scale = Vector2(0.073989, 0.0743628)
+texture = SubResource("CompressedTexture2D_vuwk1")
+region_enabled = true
+region_rect = Rect2(1384, 1192, 344, 384)
+
+[node name="Bam" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(21, -7)
+scale = Vector2(0.073989, 0.0743628)
+texture = SubResource("CompressedTexture2D_vuwk1")
+region_enabled = true
+region_rect = Rect2(1016, 1664, 376, 488)
+
+[node name="OguSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(21, -7)
+scale = Vector2(0.073989, 0.0743628)
+texture = SubResource("CompressedTexture2D_vuwk1")
+region_enabled = true
+region_rect = Rect2(1392, 1664, 312, 392)
