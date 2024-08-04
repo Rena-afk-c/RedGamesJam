@@ -2,86 +2,53 @@ extends Area2D
 
 @export var powerup_type: PowerUpsManager.CharacterType
 @export var fade_duration: float = 1.0
-@export var scale_up_factor: float = 1.2
-@export var scale_duration: float = 0.5
 @export var rotation_speed: float = 1.0  # Rotation speed in radians per second
+@export var flicker_intensity: float = 0.3  # Intensity of the flicker effect
+@export var flicker_duration: float = 0.5  # Duration of one flicker cycle
+@export var breath_scale: float = 0.2  # Scale factor for breathing effect
+@export var breath_duration: float = 2.0  # Duration of one breath cycle
 
 @onready var icon = $Icon
-@onready var bubble_overlay = $BubbleOverlay
+@onready var collect_zone: Area2D = get_node("/root").find_child("CollectPowerUpZone", true, false)
 
-var is_popping = false
 var is_fading = false
-var pop_progress = 0.0
-var pop_speed = 2.0
-var shake_amount = 1.0
-var shake_duration = 0.2
-var shake_timer = 0.0
 var fade_timer = 0.0
-var scale_timer = 0.0
-var original_positions = {}
 var original_scale: Vector2
 var target_rotation: float = 0.0
-
-var collect_zone: Area2D
 var in_collection_zone: bool = false
+var flicker_tween: Tween
+var breath_tween: Tween
 
 func _ready():
-	input_pickable = true  # Ensure the Area2D can receive input events
+	input_pickable = true
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
 	
-	if bubble_overlay.material is ShaderMaterial:
-		bubble_overlay.material.set_shader_parameter("pop_bubble", false)
-		bubble_overlay.material.set_shader_parameter("pop_progress", 0.0)
+	original_scale = icon.scale
 	
-	original_positions = {
-		"icon": icon.position,
-		"bubble_overlay": bubble_overlay.position
-	}
-	original_scale = scale
-	
-	# Find the CollectPowerUpZone
-	collect_zone = get_node("/root").find_child("CollectPowerUpZone", true, false)
 	if not collect_zone:
 		push_error("CollectPowerUpZone not found in the scene!")
 	else:
-		# Connect to the CollectPowerUpZone's signals
 		collect_zone.area_entered.connect(_on_entered_collection_zone)
 		collect_zone.area_exited.connect(_on_exited_collection_zone)
+	
+	start_flicker_effect()
+	start_breath_effect()
 
 func _process(delta):
-	if is_popping:
-		process_popping(delta)
-	elif is_fading:
+	if is_fading:
 		process_fading(delta)
 	else:
 		process_idle_animation(delta)
 
 func process_idle_animation(delta):
-	# Smooth rotation
 	target_rotation += rotation_speed * delta
 	rotation = lerp_angle(rotation, target_rotation, 0.1)
-
-func process_popping(delta):
-	pop_progress += delta * pop_speed
-	bubble_overlay.material.set_shader_parameter("pop_progress", pop_progress)
-	
-	if shake_timer > 0:
-		shake_timer -= delta
-		apply_shake()
-	elif shake_timer <= 0:
-		reset_positions()
-		start_fading()
 
 func process_fading(delta):
 	fade_timer += delta
 	var fade_progress = fade_timer / fade_duration
 	modulate.a = 1.0 - fade_progress
-	
-	scale_timer += delta
-	var scale_progress = min(scale_timer / scale_duration, 1.0)
-	var current_scale = original_scale.lerp(original_scale * scale_up_factor, scale_progress)
-	scale = current_scale
 	
 	if fade_timer >= fade_duration:
 		queue_free()
@@ -96,9 +63,7 @@ func _on_mouse_exited():
 func _input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		if in_collection_zone and can_activate_powerup():
-			start_pop_effect()
-			GameManager.power_up_used = true
-			GameManager.power_up_used = false
+			activate_powerup()
 
 func _on_entered_collection_zone(area):
 	if area == self:
@@ -126,26 +91,21 @@ func convert_character_type(game_character: GameManager.Characters) -> PowerUpsM
 			push_error("Invalid character type")
 			return PowerUpsManager.CharacterType.TAPPY  # Default to TAPPY in case of error
 
-func start_pop_effect():
-	if not is_popping and not is_fading:
-		is_popping = true
-		pop_progress = 0.0
-		shake_timer = shake_duration
-		bubble_overlay.material.set_shader_parameter("pop_bubble", true)
-		
+func activate_powerup():
+	if not is_fading:
+		is_fading = true
+		fade_timer = 0.0
+		GameManager.power_up_used = true
 		PowerUpsManager.activate_powerup(powerup_type)
+		GameManager.power_up_used = false
 
-func apply_shake():
-	var shake_offset = Vector2(randf_range(-shake_amount, shake_amount), randf_range(-shake_amount, shake_amount))
-	icon.position = original_positions["icon"] + shake_offset
-	bubble_overlay.position = original_positions["bubble_overlay"] + shake_offset
+func start_flicker_effect():
+	flicker_tween = create_tween().set_loops()
+	flicker_tween.tween_property(icon, "modulate", Color(1 + flicker_intensity, 1 + flicker_intensity, 1 + flicker_intensity, 1.0), flicker_duration / 2.0)
+	flicker_tween.tween_property(icon, "modulate", Color(1.0, 1.0, 1.0, 1.0), flicker_duration / 2.0)
 
-func reset_positions():
-	icon.position = original_positions["icon"]
-	bubble_overlay.position = original_positions["bubble_overlay"]
-
-func start_fading():
-	is_popping = false
-	is_fading = true
-	fade_timer = 0.0
-	scale_timer = 0.0
+func start_breath_effect():
+	breath_tween = create_tween().set_loops()
+	var scaled_breath = breath_scale * original_scale.x  # Scale the breath effect relative to the icon's small size
+	breath_tween.tween_property(icon, "scale", original_scale * (1 + scaled_breath), breath_duration / 2.0)
+	breath_tween.tween_property(icon, "scale", original_scale, breath_duration / 2.0)

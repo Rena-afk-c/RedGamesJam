@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://nn8mucbvyyh8"]
+[gd_scene load_steps=74 format=3 uid="uid://nn8mucbvyyh8"]
 
 [ext_resource type="Script" path="res://src/Scripts/Controllers/FlightDisplay.gd" id="1_8nimi"]
 [ext_resource type="Script" path="res://src/Prefabs/utils/GameStateManager.gd" id="1_htfnk"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://gbox842orv2o" path="res://assets/art/20240804_013410928_iOS.png" id="7_24v8l"]
 [ext_resource type="Texture2D" uid="uid://d2sfplfe0mtyn" path="res://assets/ui/ALL_HUD/1.png" id="9_6sdx6"]
 [ext_resource type="PackedScene" uid="uid://bcyx52vo85dkq" path="res://src/Nodes/World/luggage_spawner.tscn" id="9_p52hf"]
+[ext_resource type="Texture2D" uid="uid://b63eihrrtefi0" path="res://assets/art/20240804_013602286_iOS.png" id="9_tv5gv"]
 [ext_resource type="Script" path="res://src/Scripts/Controllers/PowerUpSpawner.gd" id="10_3iq14"]
 [ext_resource type="PackedScene" uid="uid://di4klb6ej4o01" path="res://src/Nodes/PowerUps/Point Frenzy.tscn" id="11_abhby"]
 [ext_resource type="PackedScene" uid="uid://b4hq8wo1csnsn" path="res://src/Nodes/PowerUps/luggage Free-For-All.tscn" id="12_1waiw"]
@@ -42,6 +43,7 @@
 [ext_resource type="Texture2D" uid="uid://b55s8oaocsdxe" path="res://assets/ui/ALL_HUD/14.png" id="34_nwnbs"]
 [ext_resource type="Texture2D" uid="uid://fownr3pdxmmn" path="res://assets/ui/ALL_HUD/15.png" id="35_sws1p"]
 [ext_resource type="Texture2D" uid="uid://clejnrcioaeov" path="res://assets/art/20240804_013122657_iOS.png" id="36_q7wp3"]
+[ext_resource type="Texture2D" uid="uid://cfyqxej00mmq5" path="res://assets/art/20240804_013452885_iOS.png" id="42_iixus"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qpa40"]
 atlas = ExtResource("9_6sdx6")
@@ -239,22 +241,23 @@ scale = Vector2(0.0295, 0.0295)
 texture = ExtResource("6_apapt")
 
 [node name="TicketSprite" type="Sprite2D" parent="HUD/TicketDisplay/Base"]
-position = Vector2(-50, -1.52588e-05)
+position = Vector2(-49.9999, 0)
 scale = Vector2(0.847222, 0.847222)
 texture = ExtResource("7_24v8l")
 region_enabled = true
 region_rect = Rect2(120, 32, 1440, 864)
 
-[node name="CounterLabel" type="Label" parent="HUD/TicketDisplay/Base"]
-offset_left = 1220.34
-offset_top = -474.576
-offset_right = 1260.34
-offset_bottom = -451.576
-scale = Vector2(78.4287, 68.7938)
+[node name="Label" type="Label" parent="HUD/TicketDisplay/Base"]
+offset_left = 1119.0
+offset_top = -475.0
+offset_right = 1155.0
+offset_bottom = -449.0
+scale = Vector2(33.0817, 32.2944)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
+theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("2_0cqbf")
-text = "010"
+theme_override_font_sizes/font_size = 32
+text = "100"
 
 [node name="DurationBars" type="Control" parent="HUD"]
 layout_mode = 3
@@ -817,7 +820,6 @@ texture_normal = SubResource("AtlasTexture_l3twj")
 texture_pressed = SubResource("AtlasTexture_t3q71")
 
 [node name="UpgradeManager" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="UpgradeHud" type="Control" parent="UpgradeManager"]
 layout_mode = 3
@@ -873,28 +875,28 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(2, -4)
 
 [node name="14" type="Sprite2D" parent="UpgradeManager/UpgradeHud/Root/Node"]
-position = Vector2(72, 127)
+position = Vector2(80, 127)
 scale = Vector2(0.0330071, 0.0330071)
 texture = ExtResource("34_nwnbs")
 region_enabled = true
 region_rect = Rect2(0, 0, 1875, 624)
 
 [node name="15" type="Sprite2D" parent="UpgradeManager/UpgradeHud/Root/Node"]
-position = Vector2(72, 158)
-scale = Vector2(0.0314289, 0.0314289)
+position = Vector2(81.2323, 160)
+scale = Vector2(0.0301144, 0.0314289)
 texture = ExtResource("34_nwnbs")
 region_enabled = true
 region_rect = Rect2(0, 704, 1875, 536)
 
 [node name="16" type="Sprite2D" parent="UpgradeManager/UpgradeHud/Root/Node"]
-position = Vector2(75, 170)
+position = Vector2(85, 176)
 scale = Vector2(0.0330071, 0.0330071)
 texture = ExtResource("35_sws1p")
 region_enabled = true
 region_rect = Rect2(0, 0, 1864, 640)
 
 [node name="17" type="Sprite2D" parent="UpgradeManager/UpgradeHud/Root/Node"]
-position = Vector2(75, 200)
+position = Vector2(80.4076, 204.318)
 scale = Vector2(0.0330071, 0.0330071)
 texture = ExtResource("35_sws1p")
 region_enabled = true
@@ -928,6 +930,36 @@ position = Vector2(131, 161)
 scale = Vector2(0.0206835, 0.0206835)
 texture_normal = SubResource("AtlasTexture_2nvgf")
 texture_pressed = SubResource("AtlasTexture_t7nab")
+
+[node name="Icons" type="Node2D" parent="UpgradeManager/UpgradeHud/Root"]
+
+[node name="Icon3" type="Sprite2D" parent="UpgradeManager/UpgradeHud/Root/Icons"]
+position = Vector2(44, 177)
+scale = Vector2(0.0198066, 0.0172874)
+texture = ExtResource("42_iixus")
+region_enabled = true
+region_rect = Rect2(96, 1832, 1464, 1176)
+
+[node name="Icon2" type="Sprite2D" parent="UpgradeManager/UpgradeHud/Root/Icons"]
+position = Vector2(44, 150)
+scale = Vector2(0.0198761, 0.019876)
+texture = ExtResource("7_24v8l")
+region_enabled = true
+region_rect = Rect2(96, 1520, 1464, 1264)
+
+[node name="Icon" type="Sprite2D" parent="UpgradeManager/UpgradeHud/Root/Icons"]
+position = Vector2(44, 126)
+scale = Vector2(0.0249475, 0.0249474)
+texture = ExtResource("42_iixus")
+region_enabled = true
+region_rect = Rect2(248, 200, 1280, 752)
+
+[node name="FFA" type="Sprite2D" parent="UpgradeManager/UpgradeHud/Root/Icons"]
+position = Vector2(41.4635, 199.318)
+scale = Vector2(0.0197588, 0.0197588)
+texture = ExtResource("9_tv5gv")
+region_enabled = true
+region_rect = Rect2(96, 992, 1464, 648)
 
 [node name="UpgradeFFA" type="TouchScreenButton" parent="UpgradeManager/UpgradeHud/Root"]
 position = Vector2(131, 185)
