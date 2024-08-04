@@ -7,15 +7,13 @@
 radius = 15.0333
 
 [node name="PU_Luggage_Automata" type="Area2D" groups=["powerups"]]
-position = Vector2(23, 20)
 script = ExtResource("1_8q2w8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-22, -20)
 shape = SubResource("CircleShape2D_3r17h")
 
 [node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(-22, -21)
+position = Vector2(1.90735e-06, 0)
 scale = Vector2(0.0236095, 0.0236095)
 texture = ExtResource("2_j28i2")
 region_enabled = true

@@ -7,17 +7,15 @@
 radius = 15.0333
 
 [node name="PU_Point_Frenzy" type="Area2D" groups=["powerups"]]
-position = Vector2(23, 20)
 script = ExtResource("1_npbci")
 powerup_type = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3, 1)
 shape = SubResource("CircleShape2D_3r17h")
 debug_color = Color(0.756863, 0.270588, 0.898039, 0.419608)
 
 [node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(3, 2)
+position = Vector2(-2.38419e-07, -1.19209e-07)
 scale = Vector2(0.0198945, 0.0198945)
 texture = ExtResource("3_f8juv")
 region_enabled = true

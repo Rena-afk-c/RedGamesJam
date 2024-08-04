@@ -7,19 +7,17 @@
 radius = 15.0333
 
 [node name="PU_Time_Slow" type="Area2D" groups=["powerups"]]
-position = Vector2(23, 20)
 script = ExtResource("1_itd1o")
 powerup_type = 1
 flicker_intensity = 0.5
 breath_scale = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3, 1)
 shape = SubResource("CircleShape2D_3r17h")
 debug_color = Color(0.756863, 0.270588, 0.898039, 0.419608)
 
 [node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(3, 1)
+position = Vector2(2.38419e-07, 0)
 scale = Vector2(0.0198761, 0.019876)
 texture = ExtResource("3_n2qhi")
 region_enabled = true
