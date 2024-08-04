@@ -94,9 +94,11 @@ func _on_t_claim_btn_pressed():
 		collect_daily_reward()
 		_start_claim_cooldown()
 	else:
+		AudioManager.incorrect_option_sfx()
 		print("You can't claim a gift yet. Please wait for the cooldown to finish.")
 
 func collect_daily_reward():
+	ParticleManager.create_confetti_particle()
 	print("Daily reward collected!")
 	
 	# Add your reward logic here

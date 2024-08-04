@@ -19,8 +19,10 @@ config/icon="res://icon.svg"
 
 GameManager="*res://globals/GameManager.gd"
 AudioManager="*res://globals/Scenes/audio_manager.tscn"
-PowerUpsManager="*res://globals/PowerupManager.gd"
+PowerUpManager="*res://globals/PowerupManager.gd"
 PowerUpEffects="*res://src/Scripts/Utils/PowerUpEffects.gd"
+PowerUpsManager="*res://globals/PowerupManager.gd"
+ParticleManager="*res://src/Scripts/UIController/ParticleManager.gd"
 
 [display]
 

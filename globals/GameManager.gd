@@ -10,8 +10,7 @@ signal currency_updated(new_amount: int)
 signal game_over
 
 var luggage_count: int = 0
-var max_luggage: int = 20  
-
+var max_luggage: int = 20
 
 var power_up_used:bool = false
 
@@ -49,6 +48,7 @@ func get_selected_character() -> Characters:
 
 func collect_luggage():
 	AudioManager.point_gain_sfx()
+	ParticleManager.create_exploding_particle()
 	var base_value = 5
 	var collected_value = int(base_value * current_point_multiplier)
 	currency_flight += collected_value

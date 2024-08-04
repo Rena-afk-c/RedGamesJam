@@ -16,45 +16,63 @@ colors = PackedColorArray(0.879106, 0.241277, 0.272998, 1, 0.695505, 0.198567, 0
 colors = PackedColorArray(0.988235, 0.772549, 0.294118, 1, 0.676272, 0.507593, 0.0613995, 1)
 
 [node name="Confetti_Particles" type="Node2D"]
+z_index = 1000
+position = Vector2(90, 155)
 
 [node name="red" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_4k4vn")
+emitting = false
 amount = 25
-explosiveness = 0.2
+lifetime = 2.0
+one_shot = true
+speed_scale = 2.0
 lifetime_randomness = 0.5
 direction = Vector2(0, -1)
 gravity = Vector2(0, 100)
-initial_velocity_min = 60.0
-initial_velocity_max = 80.0
+initial_velocity_min = 100.0
+initial_velocity_max = 120.0
 angular_velocity_min = 280.0
 angular_velocity_max = 280.0
+scale_amount_min = 7.0
+scale_amount_max = 8.0
 scale_amount_curve = SubResource("Curve_nxjhm")
 color_ramp = SubResource("Gradient_g1dfi")
 
 [node name="green" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_4k4vn")
+emitting = false
 amount = 25
-explosiveness = 0.2
+lifetime = 2.0
+one_shot = true
+speed_scale = 2.0
 lifetime_randomness = 0.5
 direction = Vector2(0, -1)
 gravity = Vector2(0, 100)
-initial_velocity_min = 60.0
-initial_velocity_max = 80.0
+initial_velocity_min = 100.0
+initial_velocity_max = 120.0
 angular_velocity_min = 280.0
 angular_velocity_max = 280.0
+scale_amount_min = 7.0
+scale_amount_max = 8.0
 scale_amount_curve = SubResource("Curve_nxjhm")
 color_ramp = SubResource("Gradient_jryg8")
 
 [node name="yellow" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_4k4vn")
+emitting = false
 amount = 25
+lifetime = 2.0
+one_shot = true
+speed_scale = 2.0
 explosiveness = 0.2
 lifetime_randomness = 0.5
 direction = Vector2(0, -1)
 gravity = Vector2(0, 100)
-initial_velocity_min = 60.0
-initial_velocity_max = 80.0
+initial_velocity_min = 100.0
+initial_velocity_max = 120.0
 angular_velocity_min = 280.0
 angular_velocity_max = 280.0
+scale_amount_min = 7.0
+scale_amount_max = 8.0
 scale_amount_curve = SubResource("Curve_nxjhm")
 color_ramp = SubResource("Gradient_xal4t")

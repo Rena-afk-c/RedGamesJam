@@ -75,7 +75,6 @@ func drop_luggage_sfx():
 # UI sfx
 func button_click():
 	sfx_audio_player.stream = BUTTON_CLICK
-	sfx_audio_player.seek(0.26)
 	sfx_audio_player.play()
 	
 func point_gain_sfx():
