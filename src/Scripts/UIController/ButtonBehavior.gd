@@ -68,6 +68,8 @@ func start_logo_idle_animation(logo):
 	logo.set_meta("color_tween", color_tween)
 
 func _on_t_play_btn_pressed():
+	AudioManager.button_click()
+	AudioManager.fade_out_audio(1.0)
 	TransitionManager.transition("res://src/Nodes/World/main_2.tscn", TransitionManager.TransitionType.ICON_AND_TEXT)
 
 

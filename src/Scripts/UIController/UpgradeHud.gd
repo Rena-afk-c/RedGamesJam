@@ -55,21 +55,26 @@ func _button_pop_effect(button: TouchScreenButton):
 	pop_tween.tween_property(button, "scale", original_scale, 0.1)
 
 func _on_upgrade_la_pressed():
+	AudioManager.button_click()
 	_button_pop_effect(upgrade_la)
 	# Add your upgrade logic here
 
 func _on_upgrade_ts_pressed():
+	AudioManager.button_click()
 	_button_pop_effect(upgrade_ts)
 	# Add your upgrade logic here
 
 func _on_upgrade_pf_pressed():
+	AudioManager.button_click()
 	_button_pop_effect(upgrade_pf)
 	# Add your upgrade logic here
 
 func _on_upgrade_ffa_pressed():
+	AudioManager.button_click()
 	_button_pop_effect(upgrade_ffa)
 	# Add your upgrade logic here
 
 func _on_close_btn_pressed():
+	AudioManager.button_click()
 	_button_pop_effect(close_btn)
 	close()

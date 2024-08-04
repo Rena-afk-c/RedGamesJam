@@ -8,14 +8,17 @@ const SETTINGS_POSITION = Vector2(270, 160)
 var is_in_settings: bool = false
 
 func _ready():
+	AudioManager.play_main_menu_bg_music()
 	# Set the initial camera position
 	camera_2d.position = DEFAULT_POSITION
 
 func _on_t_settings_btn_pressed():
+	AudioManager.button_click()
 	if not is_in_settings:
 		_move_camera_to_settings()
 
 func _on_back_btn_pressed():
+	AudioManager.button_click()
 	if is_in_settings:
 		_move_camera_to_main()
 

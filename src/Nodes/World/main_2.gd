@@ -9,4 +9,5 @@ func _ready():
 
 
 func _on_t_up_btn_pressed():
+	AudioManager.button_click()
 	upgrade_manager.utilize()

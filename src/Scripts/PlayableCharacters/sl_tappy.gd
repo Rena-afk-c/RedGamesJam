@@ -30,6 +30,7 @@ func select_character():
 	animate_outline(true)
 
 func _on_character_selected(selected_character):
+	AudioManager.button_click()
 	if selected_character != character_type and is_selected:
 		is_selected = false
 		animate_selection()
