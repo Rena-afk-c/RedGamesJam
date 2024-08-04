@@ -7,6 +7,8 @@ extends Node2D
 
 func _ready():
 	transition_manager.fade_out_from_black()
+	AudioManager.fade_in_audio(1.0)
+	AudioManager.play_main_menu_bg_music()
 	AudioManager.play_bg_music()
 
 func _on_t_up_btn_pressed():

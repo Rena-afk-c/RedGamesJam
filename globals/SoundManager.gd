@@ -26,6 +26,7 @@ func fade_out_audio(duration: float):
 	if is_music_on:
 		var tween = create_tween()
 		tween.tween_property(music_audio_player, "volume_db", -40, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(bg_audio_player, "volume_db", -40, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 func fade_in_audio(duration: float):
 	if is_music_on:
@@ -94,6 +95,8 @@ func upgrade_noti():
 	sfx_audio_player.play()
 	
 func game_over():
+	fade_out_audio(3)
 	sfx_audio_player.stream = GAME_OVER
 	sfx_audio_player.play()
 	stop_main_menu_bg_music()
+	stop_bg_music()

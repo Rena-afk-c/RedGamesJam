@@ -8,6 +8,7 @@ const SETTINGS_POSITION = Vector2(270, 160)
 var is_in_settings: bool = false
 
 func _ready():
+	AudioManager.fade_in_audio(0.75)
 	AudioManager.play_main_menu_bg_music()
 	# Set the initial camera position
 	camera_2d.position = DEFAULT_POSITION

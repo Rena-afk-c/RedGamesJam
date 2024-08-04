@@ -22,8 +22,6 @@ var _paused: bool = false
 var active_collection_point: Area2D
 
 func _ready():
-	AudioManager.play_main_menu_bg_music()
-	AudioManager.fade_in_audio(1.0)
 	game_over.hide()
 	GameManager.character_selected.connect(_on_character_changed)
 	update_active_collection_point()
@@ -222,7 +220,6 @@ func _on_luggage_free_for_all_deactivated():
 	print("Luggage Free-For-All deactivated in LuggageSpawner")
 
 func _on_game_over():
-	AudioManager.game_over()
 	pause_spawner()
 	
 	for path_follow in luggage_list:
