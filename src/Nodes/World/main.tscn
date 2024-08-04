@@ -138,7 +138,7 @@ theme_override_fonts/font = ExtResource("1_c6fta")
 theme_override_font_sizes/font_size = 32
 text = " 0"
 
-[node name="PowerUpDurationIndicator" type="Control" parent="HUD" node_paths=PackedStringArray("tappy_progress_bar", "bam_progress_bar", "biggie_progress_bar", "ogu_progress_bar")]
+[node name="PowerUpDurationIndicator" type="Control" parent="HUD"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -148,10 +148,6 @@ offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_c7xlg")
-tappy_progress_bar = NodePath("TappyProgressBar/ProgressBar")
-bam_progress_bar = NodePath("BamProgressBar/Progressbar")
-biggie_progress_bar = NodePath("BiggieProgressBar/Progressbar")
-ogu_progress_bar = NodePath("OguProgressBar/Progressbar")
 metadata/_edit_use_anchors_ = true
 
 [node name="BamProgressBar" type="Control" parent="HUD/PowerUpDurationIndicator"]

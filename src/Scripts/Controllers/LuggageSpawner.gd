@@ -9,7 +9,7 @@ var spawn_timer: float = 0.0
 var move_speed: float = 50.0
 var min_distance: float = 100.0
 var luggage_list: Array[PathFollow2D] = []
-@export var pause_spawner:bool = false
+var _paused: bool = false
 
 @onready var game_over = $"../GameOver"
 @onready var collection_points = {
@@ -20,7 +20,6 @@ var luggage_list: Array[PathFollow2D] = []
 }
 
 var active_collection_point: Area2D
-@export var glow_fade_time: float = 0.3  
 
 func _ready():
 	AudioManager.play_main_menu_bg_music()
@@ -33,21 +32,45 @@ func _ready():
 	GameManager.connect("game_over", Callable(self, "_on_game_over"))
 
 func _process(delta: float) -> void:
+	if _paused:
+		return
+	
 	spawn_timer += delta
 	if spawn_timer >= spawn_interval and can_spawn_luggage():
 		spawn_luggage()
 		spawn_timer = 0
 	
 	move_luggage(delta)
-	update_luggage_highlight()
-	if luggage_list.size() >= 20:
+	if luggage_list.size() >= 3:
 		game_over.show()
-		game_over.Game_Over_Utilize(1,1)
+		game_over.Game_Over_Utilize(GameManager.high_score,GameManager.tickets)
 
-func Pause_Spawner():
-	pass
-	
-	
+func pause_spawner():
+	_paused = true
+	set_process(false)
+	set_physics_process(false)
+	for path_follow in luggage_list:
+		if path_follow.get_child_count() > 0:
+			var luggage = path_follow.get_child(0)
+			if luggage is Node2D:
+				luggage.set_process(false)
+				luggage.set_physics_process(false)
+			if luggage is RigidBody2D:
+				luggage.freeze = true
+
+func resume_spawner():
+	_paused = false
+	set_process(true)
+	set_physics_process(true)
+	for path_follow in luggage_list:
+		if path_follow.get_child_count() > 0:
+			var luggage = path_follow.get_child(0)
+			if luggage is Node2D:
+				luggage.set_process(true)
+				luggage.set_physics_process(true)
+			if luggage is RigidBody2D:
+				luggage.freeze = false
+
 func can_spawn_luggage() -> bool:
 	if luggage_list.is_empty():
 		return true
@@ -55,6 +78,9 @@ func can_spawn_luggage() -> bool:
 	return last_luggage.progress > min_distance
 
 func spawn_luggage() -> void:
+	if _paused:
+		return
+	
 	AudioManager.drop_luggage_sfx()
 	var new_luggage = luggage_scene.instantiate()
 	var new_path_follow = PathFollow2D.new()
@@ -66,15 +92,14 @@ func spawn_luggage() -> void:
 	new_path_follow.rotation = 0
 	new_luggage.position = Vector2.ZERO
 	
-	# Ensure the GlowLight is initially faded out
-	var glow_light = new_luggage.get_node("GlowLight")
-	if glow_light:
-		glow_light.energy = 0
-	
 	luggage_list.append(new_path_follow)
 	GameManager.increment_luggage_count()
 
 func move_luggage(delta: float) -> void:
+	if _paused:
+		return
+	
+	var luggage_to_remove = []
 	for path_follow in luggage_list:
 		if path_follow.get_child_count() > 0:
 			var luggage = path_follow.get_child(0)
@@ -84,11 +109,17 @@ func move_luggage(delta: float) -> void:
 				luggage.rotation = 0
 		
 		if path_follow.progress_ratio >= 1:
-			luggage_list.erase(path_follow)
-			GameManager.decrement_luggage_count()
-			path_follow.queue_free()
+			luggage_to_remove.append(path_follow)
+	
+	for path_follow in luggage_to_remove:
+		luggage_list.erase(path_follow)
+		GameManager.decrement_luggage_count()
+		path_follow.queue_free()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if _paused:
+		return
+	
 	if (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT) or \
 	   (event is InputEventScreenTouch and event.pressed):
 		var click_position = get_global_mouse_position()
@@ -128,14 +159,8 @@ func can_collect_luggage(luggage: RigidBody2D) -> bool:
 	var selected_character = GameManager.get_selected_character()
 	return PowerUpEffects.active_powerups[PowerUpsManager.PowerUpType.LUGGAGE_FREE_FOR_ALL] or luggage.luggage_type == selected_character
 
-func _on_luggage_free_for_all_activated():
-	print("Luggage Free-For-All activated in LuggageSpawner")
-
-func _on_luggage_free_for_all_deactivated():
-	print("Luggage Free-For-All deactivated in LuggageSpawner")
-
-
 func collect_luggage(luggage: RigidBody2D, path_follow: PathFollow2D) -> void:
+	GameManager.collect_ticket()
 	AudioManager.pick_up_luggage_sfx()
 	if luggage.get_meta("is_being_collected", false):
 		return
@@ -158,7 +183,6 @@ func collect_luggage(luggage: RigidBody2D, path_follow: PathFollow2D) -> void:
 	# Move towards collection point
 	var collection_point_pos = active_collection_point.global_position
 	tween.tween_property(luggage, "global_position", collection_point_pos, 0.5).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
-	
 	
 	# Fade out the GlowLight
 	var glow_light = luggage.get_node_or_null("GlowLight")
@@ -191,37 +215,16 @@ func _on_character_changed(character: GameManager.Characters) -> void:
 	update_active_collection_point()
 	print("LuggageSpawner: Character changed to ", GameManager.Characters.keys()[character])
 
-func update_luggage_highlight() -> void:
-	for path_follow in luggage_list:
-		if path_follow.get_child_count() > 0:
-			var luggage = path_follow.get_child(0)
-			if luggage is RigidBody2D and is_instance_valid(luggage) and luggage.is_inside_tree():
-				var luggage_area = luggage.get_node_or_null("CollectionPointArea")
-				var glow_light = luggage.get_node("GlowLight")
-				if luggage_area and active_collection_point and luggage_area.overlaps_area(active_collection_point):
-					if can_collect_luggage(luggage):
-						fade_in_glow_light(glow_light)
-					else:
-						fade_out_glow_light(glow_light)
-				else:
-					fade_out_glow_light(glow_light)
+func _on_luggage_free_for_all_activated():
+	print("Luggage Free-For-All activated in LuggageSpawner")
 
-func fade_in_glow_light(glow_light: PointLight2D) -> void:
-	if glow_light and glow_light.energy < 1.0:
-		var tween = create_tween()
-		tween.tween_property(glow_light, "energy", 1.0, glow_fade_time)
-
-func fade_out_glow_light(glow_light: PointLight2D) -> void:
-	if glow_light and glow_light.energy > 0.0:
-		var tween = create_tween()
-		tween.tween_property(glow_light, "energy", 0.0, glow_fade_time)
+func _on_luggage_free_for_all_deactivated():
+	print("Luggage Free-For-All deactivated in LuggageSpawner")
 
 func _on_game_over():
 	AudioManager.game_over()
-	# Stop spawning new luggage
-	set_process(false)
+	pause_spawner()
 	
-	# Optional: You can add visual feedback here, like fading out existing luggage
 	for path_follow in luggage_list:
 		if path_follow.get_child_count() > 0:
 			var luggage = path_follow.get_child(0)
@@ -229,6 +232,5 @@ func _on_game_over():
 				var tween = create_tween()
 				tween.tween_property(luggage, "modulate:a", 0, 1.0)
 	
-	# Wait a moment before restarting
 	await get_tree().create_timer(2.0).timeout
 	GameManager.restart_game()

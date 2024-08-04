@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://bm738csh4iacf"]
+[gd_scene load_steps=6 format=3 uid="uid://bm738csh4iacf"]
 
 [ext_resource type="Script" path="res://src/Scripts/Controllers/LuggageBehavior.gd" id="1_orohw"]
-[ext_resource type="Texture2D" uid="uid://bieyotbryoy2f" path="res://assets/shaders/LightSource.tres" id="2_k4qs2"]
 [ext_resource type="Texture2D" uid="uid://sw874icae0dj" path="res://assets/art/luggage/Untitled_Artwork 1.png" id="3_3qjyi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l25uf"]
@@ -27,10 +26,6 @@ position = Vector2(6, 7)
 position = Vector2(-6.5, -7)
 shape = SubResource("RectangleShape2D_xit3y")
 
-[node name="GlowLight" type="PointLight2D" parent="."]
-enabled = false
-texture = ExtResource("2_k4qs2")
-
 [node name="BiggieSprite" type="Sprite2D" parent="."]
 visible = false
 scale = Vector2(0.073989, 0.0743628)
@@ -38,14 +33,15 @@ texture = ExtResource("3_3qjyi")
 region_enabled = true
 region_rect = Rect2(1048, 1192, 272, 472)
 
-[node name="Tappy" type="Sprite2D" parent="."]
+[node name="Bam" type="Sprite2D" parent="."]
 visible = false
 scale = Vector2(0.073989, 0.0743628)
 texture = SubResource("CompressedTexture2D_vuwk1")
 region_enabled = true
 region_rect = Rect2(1384, 1192, 344, 384)
 
-[node name="Bam" type="Sprite2D" parent="."]
+[node name="Tappy" type="Sprite2D" parent="."]
+visible = false
 scale = Vector2(0.073989, 0.0743628)
 texture = SubResource("CompressedTexture2D_vuwk1")
 region_enabled = true

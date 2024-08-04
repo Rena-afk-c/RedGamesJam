@@ -3,6 +3,7 @@ extends Node2D
 
 @onready var transition_manager = $TransitionManager
 @onready var upgrade_manager = $UpgradeManager/UpgradeHud
+@onready var spawner_root = $SpawnerRoot
 
 func _ready():
 	transition_manager.fade_out_from_black()
