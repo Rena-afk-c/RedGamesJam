@@ -219,15 +219,4 @@ func _on_luggage_free_for_all_activated():
 func _on_luggage_free_for_all_deactivated():
 	print("Luggage Free-For-All deactivated in LuggageSpawner")
 
-func _on_game_over():
-	pause_spawner()
-	
-	for path_follow in luggage_list:
-		if path_follow.get_child_count() > 0:
-			var luggage = path_follow.get_child(0)
-			if luggage is RigidBody2D:
-				var tween = create_tween()
-				tween.tween_property(luggage, "modulate:a", 0, 1.0)
-	
-	await get_tree().create_timer(2.0).timeout
-	GameManager.restart_game()
+
