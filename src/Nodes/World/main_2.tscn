@@ -486,7 +486,7 @@ curve = SubResource("Curve2D_re8bw")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="ConveyerBelt"]
 position = Vector2(-42.3118, 132.107)
-rotation = -0.0384863
+rotation = -0.0384838
 
 [node name="Characters" type="Node2D" parent="."]
 position = Vector2(-30, -28)
@@ -494,11 +494,11 @@ rotation = 1.5509
 scale = Vector2(1.5, 1.5)
 
 [node name="SL_Tappy" parent="Characters" instance=ExtResource("16_xvnsr")]
-position = Vector2(186.417, -119.648)
-rotation = -1.5509
+position = Vector2(185.097, -120.341)
+rotation = -1.56703
 
 [node name="SL_Bam" parent="Characters" instance=ExtResource("17_vxx13")]
-position = Vector2(76.3993, -119.837)
+position = Vector2(83.7179, -119.025)
 rotation = -1.5509
 scale = Vector2(0.838809, 0.838809)
 

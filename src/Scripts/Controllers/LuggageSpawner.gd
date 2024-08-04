@@ -39,7 +39,7 @@ func _process(delta: float) -> void:
 		spawn_timer = 0
 	
 	move_luggage(delta)
-	if luggage_list.size() >= 20:
+	if luggage_list.size() >= 2:
 		game_over.show()
 		game_over.Game_Over_Utilize(GameManager.high_score,GameManager.tickets)
 
