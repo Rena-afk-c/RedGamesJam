@@ -40,7 +40,7 @@ func _process(delta: float) -> void:
 	
 	move_luggage(delta)
 	update_luggage_highlight()
-	if luggage_list.size() >= 30:
+	if luggage_list.size() >= 20:
 		game_over.show()
 		game_over.Game_Over_Utilize(1,1)
 
