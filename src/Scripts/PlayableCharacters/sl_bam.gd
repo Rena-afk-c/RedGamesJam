@@ -20,6 +20,7 @@ func _on_input_event(_viewport, event, _shape_idx):
 		select_character()
 
 func select_character():
+	AudioManager.button_click()
 	GameManager.select_character(character_type)
 	is_selected = true
 	animate_selection()

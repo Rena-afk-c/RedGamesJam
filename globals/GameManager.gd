@@ -49,6 +49,7 @@ func get_selected_character() -> Characters:
 
 func collect_luggage():
 	AudioManager.point_gain_sfx()
+	ParticleManager.create_exploding_particle()
 	var base_value = 5
 	var collected_value = int(base_value * current_point_multiplier)
 	currency_flight += collected_value
