@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://src/Scripts/Controllers/FlightDisplay.gd" id="1_8nimi"]
 [ext_resource type="Script" path="res://src/Prefabs/utils/GameStateManager.gd" id="1_htfnk"]
 [ext_resource type="Script" path="res://src/Nodes/World/main_2.gd" id="1_w5kp7"]
-[ext_resource type="FontFile" uid="uid://dr7g5bnuqelmi" path="res://assets/fonts/monogram.ttf" id="2_0cqbf"]
 [ext_resource type="Script" path="res://src/Scripts/UIController/PowerUpIndicator.gd" id="3_wqatc"]
 [ext_resource type="Texture2D" uid="uid://dgjsj11rng87k" path="res://assets/ui/ALL_HUD/20.png" id="4_ey47v"]
 [ext_resource type="Texture2D" uid="uid://qlvjx6wractd" path="res://assets/ui/upgrade_icon.png" id="4_m53u1"]
@@ -39,6 +38,7 @@
 [ext_resource type="PackedScene" uid="uid://dh1hh3582ol8" path="res://src/Nodes/GUI/transition.tscn" id="30_xouhy"]
 [ext_resource type="Texture2D" uid="uid://xxmaajxg1d7d" path="res://assets/ui/Add a heading.png" id="32_xtm5x"]
 [ext_resource type="Script" path="res://src/Scripts/UIController/UpgradeHud.gd" id="32_ywc6o"]
+[ext_resource type="FontFile" uid="uid://cfaa3278t64rr" path="res://assets/fonts/more-sugar.regular.ttf" id="33_83656"]
 [ext_resource type="Texture2D" uid="uid://by21avkiwbker" path="res://assets/ui/upgrade button.png" id="33_jpeuk"]
 [ext_resource type="Texture2D" uid="uid://b55s8oaocsdxe" path="res://assets/ui/ALL_HUD/14.png" id="34_nwnbs"]
 [ext_resource type="Texture2D" uid="uid://fownr3pdxmmn" path="res://assets/ui/ALL_HUD/15.png" id="35_sws1p"]
@@ -255,8 +255,8 @@ offset_bottom = -449.0
 scale = Vector2(33.0817, 32.2944)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("2_0cqbf")
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("33_83656")
+theme_override_font_sizes/font_size = 24
 text = "100"
 
 [node name="DurationBars" type="Control" parent="HUD"]
@@ -335,8 +335,8 @@ show_percentage = false
 [node name="SpawnerRoot" parent="." node_paths=PackedStringArray("path") instance=ExtResource("9_p52hf")]
 position = Vector2(25, 31)
 rotation = 1.5509
-path = NodePath("../ConveyerBelt")
 spawn_interval = 4.0
+path = NodePath("../ConveyerBelt")
 
 [node name="CollectPointRoot" type="Node2D" parent="SpawnerRoot"]
 position = Vector2(-31.4912, 24.3783)
@@ -438,7 +438,7 @@ curve = SubResource("Curve2D_re8bw")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="ConveyerBelt"]
 position = Vector2(-18.1336, 123.1)
-rotation = -0.0271364
+rotation = -0.0271415
 
 [node name="Characters" type="Node2D" parent="."]
 position = Vector2(-30, -28)
@@ -753,17 +753,17 @@ texture = ExtResource("21_eqaxe")
 [node name="ScoreLabel" type="Label" parent="GameOver/Root/Base"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.00480769
-anchor_top = 0.0405405
-anchor_right = 0.00480769
-anchor_bottom = 0.0405405
+anchor_left = 0.0528846
+anchor_top = 0.0945946
+anchor_right = 0.0528846
+anchor_bottom = 0.202703
 offset_left = 70.0
 offset_top = 2.0
 offset_right = 82.0
 offset_bottom = 28.0
 theme_override_colors/font_color = Color(1, 0.972549, 0.776471, 1)
-theme_override_fonts/font = ExtResource("2_0cqbf")
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("33_83656")
+theme_override_font_sizes/font_size = 24
 text = "7"
 metadata/_edit_use_anchors_ = true
 
@@ -795,8 +795,8 @@ offset_top = 2.0
 offset_right = 85.0
 offset_bottom = 28.0
 theme_override_colors/font_color = Color(1, 0.972549, 0.776471, 1)
-theme_override_fonts/font = ExtResource("2_0cqbf")
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("33_83656")
+theme_override_font_sizes/font_size = 24
 text = "7"
 metadata/_edit_use_anchors_ = true
 
