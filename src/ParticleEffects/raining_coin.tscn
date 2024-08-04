@@ -1,16 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://057qwlq6h05"]
+[gd_scene load_steps=2 format=3 uid="uid://057qwlq6h05"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_oan45"]
 
-[sub_resource type="Gradient" id="Gradient_avcdo"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
 [node name="CPUParticles2D" type="CPUParticles2D"]
 modulate = Color(0.841478, 0.594546, 0, 1)
+z_index = 1000
 material = SubResource("CanvasItemMaterial_oan45")
 position = Vector2(89, 2)
 amount = 50
-lifetime = 2.0
+lifetime = 1.75
 speed_scale = 0.75
 randomness = 0.1
 fixed_fps = 60
@@ -21,6 +19,6 @@ spread = 0.0
 gravity = Vector2(0, 0)
 initial_velocity_min = 200.0
 initial_velocity_max = 200.0
-scale_amount_min = 4.0
-scale_amount_max = 4.0
-color_ramp = SubResource("Gradient_avcdo")
+scale_amount_min = 5.0
+scale_amount_max = 5.0
+color = Color(1, 1, 0.290196, 1)

@@ -1,6 +1,32 @@
 [gd_scene load_steps=2 format=3 uid="uid://up732ly7s02n"]
 
-[ext_resource type="Script" path="res://src/Scripts/Controllers/GameOver.gd" id="1_xm885"]
+[sub_resource type="GDScript" id="GDScript_2kmem"]
+script/source = "extends CanvasLayer
+
+@onready var GameOver: Control = $GameOver
+@onready var Pause: Control = $Pause
+
+func _ready():
+	AudioManager.game_over()
+	GameOver.show()
+	Pause.hide()
+
+func _on_restart_btn_pressed():
+	AudioManager.button_click()
+	GameOver.hide()
+	get_tree().change_scene_to_file(\"res://src/Nodes/World/main.tscn\")
+
+func _on_quit_btn_pressed():
+	get_tree().quit()
+
+func _on_resume_btn_pressed():
+	AudioManager.button_click()
+	pass # resume the game
+
+func _on_pause_quit_btn_pressed():
+	get_tree().quit()
+#
+"
 
 [node name="MainMenu2" type="Control"]
 layout_mode = 3
@@ -11,7 +37,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-script = ExtResource("1_xm885")
+script = SubResource("GDScript_2kmem")
 
 [node name="GameOver" type="Control" parent="CanvasLayer"]
 layout_mode = 3

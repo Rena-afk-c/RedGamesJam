@@ -21,6 +21,7 @@ func _on_input_event(_viewport, event, _shape_idx):
 
 func select_character():
 	AudioManager.button_click()
+	ParticleManager.create_fire_burning_particle()
 	GameManager.select_character(character_type)
 	is_selected = true
 	animate_selection()

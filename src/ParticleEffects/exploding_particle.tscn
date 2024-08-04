@@ -11,6 +11,7 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="CPUParticles2D" type="CPUParticles2D"]
 modulate = Color(0.897139, 0.237736, 0.345478, 1)
+z_index = 1000
 material = SubResource("CanvasItemMaterial_e3bt3")
 position = Vector2(33, 16)
 amount = 50
