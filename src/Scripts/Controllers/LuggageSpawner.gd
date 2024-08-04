@@ -41,9 +41,9 @@ func _process(delta: float) -> void:
 		spawn_timer = 0
 	
 	move_luggage(delta)
-	if luggage_list.size() >= 3:
+	if luggage_list.size() >= 20:
 		game_over.show()
-		game_over.Game_Over_Utilize(GameManager.high_score,GameManager.tickets)
+		game_over.Game_Over_Utilize(1,1)
 
 func pause_spawner():
 	_paused = true
@@ -160,7 +160,6 @@ func can_collect_luggage(luggage: RigidBody2D) -> bool:
 	return PowerUpEffects.active_powerups[PowerUpsManager.PowerUpType.LUGGAGE_FREE_FOR_ALL] or luggage.luggage_type == selected_character
 
 func collect_luggage(luggage: RigidBody2D, path_follow: PathFollow2D) -> void:
-	GameManager.collect_ticket()
 	AudioManager.pick_up_luggage_sfx()
 	if luggage.get_meta("is_being_collected", false):
 		return

@@ -11,12 +11,6 @@ extends Control
 @onready var game_over_sprite = $Root/GameOverSprite
 @onready var restart_btn = $Root/RestartBtn
 @onready var close_btn = $Root/CloseBtn
-@onready var spawner_root = $"../SpawnerRoot"
-@onready var power_up_spawner = $"../PowerUpSpawner"
-@onready var duration_bars = $"../HUD/DurationBars"
-@onready var score_ticket_display = $"../HUD/Score+Ticket_Display"
-@onready var t_pause_btn = $"../HUD/TPauseBtn"
-@onready var t_up_btn = $"../HUD/TUpBtn"
 
 var tween: Tween
 
@@ -49,21 +43,12 @@ func _ready():
 	restart_btn.pressed.connect(on_restart_pressed)
 	close_btn.pressed.connect(on_close_pressed)
 
-func hide_btn():
-	t_pause_btn.hide()
-	t_up_btn.hide()
-
 func Game_Over_Utilize(final_score: int, final_tickets: int):
 	set_score(final_score)
 	set_tickets(final_tickets)
 	animate_game_over()
 	ticketsbase.show()
 	base.show()
-	spawner_root.pause_spawner()
-	power_up_spawner.pause_spawner()
-	duration_bars.hide()
-	score_ticket_display.hide()
-	hide_btn()
 	
 	# Enable touch input for the entire Control when game over screen is shown
 	mouse_filter = Control.MOUSE_FILTER_STOP

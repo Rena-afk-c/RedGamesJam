@@ -121,9 +121,9 @@ size = Vector2(185.526, 17.0446)
 
 [sub_resource type="Curve2D" id="Curve2D_re8bw"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -42.3118, 124.101, -3.84672, -1.06152, 3.84672, 1.06152, 58.0276, 127.103, -9.28575, -5.30161, 9.28575, 5.30161, 66.4899, 278.226, 6.72416, 13.5191, -6.72416, -13.5191, 153.531, 270.219, 2.82397, 2.33787, -2.82397, -2.33787, 146.278, 178.144, 5.98379, 3.89224, -5.98379, -3.89224, 140.233, 95.0771, 3.63082, 0.667962, -3.63082, -0.667962, 110.011, 86.0698, 11.5341, -0.561687, -11.5341, 0.561687, 84.6235, 88.0714, 0, 0, 0, 0, 67.6988, 91.0739, 4.74934, -4.21265, -4.74934, 4.21265, 64.0721, 104.084, -0.806849, 26.0505, 0.806849, -26.0505, -43.5207, 93.0755, 0, 0, 0, 0, -42.3118, 124.101)
+"points": PackedVector2Array(0, 0, 0, 0, -38.685, 119.097, -3.84672, -1.06152, 3.84672, 1.06152, 58.0276, 116.094, -9.28575, -5.30161, 9.28575, 5.30161, 66.4899, 278.226, 6.72416, 13.5191, -6.72416, -13.5191, 153.531, 270.219, 2.82397, 2.33787, -2.82397, -2.33787, 146.278, 178.144, 5.98379, 3.89224, -5.98379, -3.89224, 140.233, 95.0771, 3.63082, 0.667962, -3.63082, -0.667962, 110.011, 86.0698, 11.5341, -0.561687, -11.5341, 0.561687, 84.6235, 88.0714, 0, 0, 0, 0, 67.6988, 91.0739, 4.74934, -4.21265, -4.74934, 4.21265, 64.0721, 104.084, -0.806849, 26.0505, 0.806849, -26.0505, 64.0721, 269.218)
 }
-point_count = 12
+point_count = 11
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dxvtd"]
 load_path = "res://.godot/imported/20.png-4c61d082dd0fef9ca149448542f42246.ctex"
@@ -223,7 +223,7 @@ scale = Vector2(0.0272177, 0.0272177)
 texture_normal = SubResource("AtlasTexture_sr7ci")
 texture_pressed = SubResource("AtlasTexture_m0nij")
 
-[node name="Score+Ticket_Display" type="Control" parent="HUD"]
+[node name="TicketDisplay" type="Control" parent="HUD"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -232,73 +232,42 @@ offset_left = 133.0
 offset_bottom = -278.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 script = ExtResource("1_8nimi")
 metadata/_edit_use_anchors_ = true
 
-[node name="ScoreLabel" type="Label" parent="HUD/Score+Ticket_Display"]
-layout_mode = 0
-offset_left = -126.0
-offset_top = 285.0
-offset_right = 89.0
-offset_bottom = 324.0
-scale = Vector2(0.799387, 0.827146)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("8_sxmi8")
-theme_override_font_sizes/font_size = 32
-text = "0"
-
-[node name="NewHSLabel" type="Label" parent="HUD/Score+Ticket_Display"]
-layout_mode = 0
-offset_left = -96.0
-offset_top = 132.0
-offset_right = 119.0
-offset_bottom = 171.0
-scale = Vector2(0.460786, 0.476787)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("8_sxmi8")
-theme_override_font_sizes/font_size = 32
-text = "new highscore!"
-
-[node name="ComboLabel" type="Label" parent="HUD/Score+Ticket_Display"]
-layout_mode = 0
-offset_left = -42.0
-offset_top = 146.0
-offset_right = 227.0
-offset_bottom = 227.0
-scale = Vector2(0.409582, 0.423805)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_fonts/font = ExtResource("8_sxmi8")
-theme_override_font_sizes/font_size = 32
-text = "x2"
-
-[node name="Base" type="Sprite2D" parent="HUD/Score+Ticket_Display"]
-position = Vector2(-101, 17)
-scale = Vector2(0.0295, 0.0295)
-texture = ExtResource("6_apapt")
-
-[node name="TicketSprite" type="Sprite2D" parent="HUD/Score+Ticket_Display/Base"]
-position = Vector2(-406.78, 0)
-scale = Vector2(0.659016, 0.659016)
+[node name="Indicator" type="Sprite2D" parent="HUD/TicketDisplay"]
+visible = false
+position = Vector2(-48, 142)
+scale = Vector2(0.024993, 0.024993)
 texture = ExtResource("7_24v8l")
 region_enabled = true
 region_rect = Rect2(120, 32, 1440, 864)
 
-[node name="TicketLabel" type="Label" parent="HUD/Score+Ticket_Display/Base"]
-offset_left = 67.7966
-offset_top = -203.39
-offset_right = 117.797
-offset_bottom = -164.39
-scale = Vector2(13.2212, 12.5634)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/TicketDisplay/Indicator"]
+
+[node name="Base" type="Sprite2D" parent="HUD/TicketDisplay"]
+position = Vector2(-102, 17)
+scale = Vector2(0.0295, 0.0295)
+texture = ExtResource("6_apapt")
+
+[node name="TicketSprite" type="Sprite2D" parent="HUD/TicketDisplay/Base"]
+position = Vector2(-49.9999, 0)
+scale = Vector2(0.847222, 0.847222)
+texture = ExtResource("7_24v8l")
+region_enabled = true
+region_rect = Rect2(120, 32, 1440, 864)
+
+[node name="Label" type="Label" parent="HUD/TicketDisplay/Base"]
+offset_left = 1119.0
+offset_top = -542.373
+offset_right = 1169.0
+offset_bottom = -503.373
+scale = Vector2(33.0817, 32.2944)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("8_sxmi8")
 theme_override_font_sizes/font_size = 32
-text = "0"
-metadata/_edit_use_anchors_ = true
+text = "100"
 
 [node name="DurationBars" type="Control" parent="HUD"]
 layout_mode = 3
@@ -394,16 +363,15 @@ scale = Vector2(0.14375, 0.100035)
 texture = ExtResource("15_gsyuw")
 
 [node name="Slide" type="Sprite2D" parent="Env"]
-position = Vector2(15, 98)
-scale = Vector2(0.104861, 0.150017)
+position = Vector2(93.625, 157)
+scale = Vector2(0.104861, 0.100035)
 texture = ExtResource("16_hl2as")
-region_enabled = true
-region_rect = Rect2(-72, 728, 440, 480)
 
 [node name="SpawnerRoot" parent="." node_paths=PackedStringArray("path") instance=ExtResource("9_p52hf")]
 position = Vector2(25, 31)
 rotation = 1.5509
 path = NodePath("../ConveyerBelt")
+spawn_interval = 4.0
 
 [node name="CollectPointRoot" type="Node2D" parent="SpawnerRoot"]
 position = Vector2(-31.4912, 24.3783)
@@ -485,8 +453,8 @@ scale = Vector2(0.827193, 0.999189)
 curve = SubResource("Curve2D_re8bw")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="ConveyerBelt"]
-position = Vector2(-42.3118, 124.101)
-rotation = 0.0299139
+position = Vector2(-38.685, 119.097)
+rotation = -0.0310408
 
 [node name="Characters" type="Node2D" parent="."]
 position = Vector2(-30, -28)
