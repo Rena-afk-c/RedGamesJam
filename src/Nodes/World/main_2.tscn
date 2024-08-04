@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://nn8mucbvyyh8"]
+[gd_scene load_steps=72 format=3 uid="uid://nn8mucbvyyh8"]
 
 [ext_resource type="Script" path="res://src/Scripts/Controllers/FlightDisplay.gd" id="1_8nimi"]
 [ext_resource type="Script" path="res://src/Prefabs/utils/GameStateManager.gd" id="1_htfnk"]
@@ -31,8 +31,6 @@
 [ext_resource type="Texture2D" uid="uid://cmg6deccuwee2" path="res://assets/ui/ALL_HUD/25.png" id="20_nm8oa"]
 [ext_resource type="Texture2D" uid="uid://d1jo2fc5xvg7b" path="res://assets/ui/paused.png" id="20_rcf10"]
 [ext_resource type="Script" path="res://globals/Scenes/Game_Over_Behavior.gd" id="20_xjo7s"]
-[ext_resource type="Texture2D" uid="uid://j20q72mxg6w5" path="res://assets/ui/ALL_HUD/10.png" id="21_eqaxe"]
-[ext_resource type="Texture2D" uid="uid://cmr67lnr3t2jn" path="res://assets/ui/ALL_HUD/9.png" id="22_uxjia"]
 [ext_resource type="Texture2D" uid="uid://8pi2kf1xf564" path="res://assets/ui/ALL_HUD/8.png" id="23_04w8d"]
 [ext_resource type="Texture2D" uid="uid://dblevra23wb7f" path="res://assets/ui/ALL_HUD/7.png" id="24_k7gc6"]
 [ext_resource type="Texture2D" uid="uid://decqnjuvaab1u" path="res://assets/ui/ALL_HUD/3.png" id="25_ykd1m"]
@@ -486,7 +484,7 @@ curve = SubResource("Curve2D_re8bw")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="ConveyerBelt"]
 position = Vector2(-42.3118, 132.107)
-rotation = -0.0384863
+rotation = -0.0384838
 
 [node name="Characters" type="Node2D" parent="."]
 position = Vector2(-30, -28)
@@ -796,11 +794,6 @@ scale = Vector2(1.24, 1)
 theme_override_styles/panel = SubResource("StyleBoxFlat_66iao")
 metadata/_edit_use_anchors_ = true
 
-[node name="ScoreSprite" type="Sprite2D" parent="GameOver/Root/Base"]
-position = Vector2(37, 15)
-scale = Vector2(0.0384, 0.0384)
-texture = ExtResource("21_eqaxe")
-
 [node name="ScoreLabel" type="Label" parent="GameOver/Root/Base"]
 layout_mode = 1
 anchors_preset = -1
@@ -834,11 +827,6 @@ grow_vertical = 2
 scale = Vector2(1.24, 1)
 theme_override_styles/panel = SubResource("StyleBoxFlat_66iao")
 metadata/_edit_use_anchors_ = true
-
-[node name="TicketSprie" type="Sprite2D" parent="GameOver/Root/Ticketsbase"]
-position = Vector2(37, 18)
-scale = Vector2(0.0384, 0.0384)
-texture = ExtResource("22_uxjia")
 
 [node name="TicketLabel" type="Label" parent="GameOver/Root/Ticketsbase"]
 layout_mode = 1
