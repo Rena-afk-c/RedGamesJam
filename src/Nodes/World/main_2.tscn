@@ -17,10 +17,10 @@
 [ext_resource type="PackedScene" uid="uid://b4hq8wo1csnsn" path="res://src/Nodes/PowerUps/luggage Free-For-All.tscn" id="12_1waiw"]
 [ext_resource type="PackedScene" uid="uid://cwevdoftrw2i2" path="res://src/Nodes/PowerUps/Luggage_Automata.tscn" id="13_ndvrl"]
 [ext_resource type="PackedScene" uid="uid://bjt7cwcbutfj8" path="res://src/Nodes/PowerUps/Time Slow.tscn" id="14_10kit"]
+[ext_resource type="Texture2D" uid="uid://c518d3020dkyx" path="res://assets/art/BUDS/Untitled_Artwork.png" id="14_xy211"]
 [ext_resource type="Texture2D" uid="uid://bb1o6pdmv02nk" path="res://assets/art/20240804_013201099_iOS.png" id="15_gsyuw"]
 [ext_resource type="Texture2D" uid="uid://tna84s8oiceh" path="res://assets/art/20240804_013135801_iOS.png" id="15_jjsgd"]
 [ext_resource type="Texture2D" uid="uid://c4rl8n2m5glda" path="res://assets/art/20240804_013253315_iOS.png" id="16_7j0jo"]
-[ext_resource type="Texture2D" uid="uid://j1ocsmv45th2" path="res://assets/art/20240804_013230646_iOS.png" id="16_hl2as"]
 [ext_resource type="PackedScene" uid="uid://bpngs84hwd5fv" path="res://src/Nodes/SelectableCharacters/sl_tappy.tscn" id="16_xvnsr"]
 [ext_resource type="Script" path="res://src/Scripts/UIController/Pause_Overlay.gd" id="17_3242x"]
 [ext_resource type="PackedScene" uid="uid://bg7hmcutdesfl" path="res://src/Nodes/SelectableCharacters/sl_bam.tscn" id="17_vxx13"]
@@ -121,9 +121,9 @@ size = Vector2(185.526, 17.0446)
 
 [sub_resource type="Curve2D" id="Curve2D_re8bw"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -42.3118, 124.101, -3.84672, -1.06152, 3.84672, 1.06152, 58.0276, 127.103, -9.28575, -5.30161, 9.28575, 5.30161, 66.4899, 278.226, 6.72416, 13.5191, -6.72416, -13.5191, 153.531, 270.219, 2.82397, 2.33787, -2.82397, -2.33787, 146.278, 178.144, 5.98379, 3.89224, -5.98379, -3.89224, 140.233, 95.0771, 3.63082, 0.667962, -3.63082, -0.667962, 110.011, 86.0698, 11.5341, -0.561687, -11.5341, 0.561687, 84.6235, 88.0714, 0, 0, 0, 0, 67.6988, 91.0739, 4.74934, -4.21265, -4.74934, 4.21265, 64.0721, 104.084, -0.806849, 26.0505, 0.806849, -26.0505, -43.5207, 93.0755, 0, 0, 0, 0, -42.3118, 124.101)
+"points": PackedVector2Array(0, 0, 0, 0, -42.3118, 132.107, -3.84672, -1.06152, 3.84672, 1.06152, 61.6543, 128.104, -9.28575, -5.30161, 9.28575, 5.30161, 66.4899, 278.226, 6.72416, 13.5191, -6.72416, -13.5191, 153.531, 270.219, 2.82397, 2.33787, -2.82397, -2.33787, 146.278, 178.144, 2.59141, 6.41983, -2.59141, -6.41983, 140.233, 95.0771, 3.63082, 0.667962, -3.63082, -0.667962, 110.011, 86.0698, 11.5341, -0.561687, -11.5341, 0.561687, 84.6235, 88.0714, 0, 0, 0, 0, 70.1167, 90.0731, 0, 0, 0, 0, 66.4899, 99.0804, 4.74934, -4.21265, -4.74934, 4.21265, 65.281, 111.09, -0.806849, 26.0505, 0.806849, -26.0505, -43.5207, 93.0755, 0, 0, 0, 0, -42.3118, 124.101)
 }
-point_count = 12
+point_count = 13
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dxvtd"]
 load_path = "res://.godot/imported/20.png-4c61d082dd0fef9ca149448542f42246.ctex"
@@ -394,9 +394,9 @@ scale = Vector2(0.14375, 0.100035)
 texture = ExtResource("15_gsyuw")
 
 [node name="Slide" type="Sprite2D" parent="Env"]
-position = Vector2(15, 98)
+position = Vector2(16, 97)
 scale = Vector2(0.104861, 0.150017)
-texture = ExtResource("16_hl2as")
+texture = ExtResource("14_xy211")
 region_enabled = true
 region_rect = Rect2(-72, 728, 440, 480)
 
@@ -480,13 +480,13 @@ debug_color = Color(0.745098, 0.0117647, 0.2, 0.419608)
 position = Vector2(89.7634, 12.7884)
 
 [node name="ConveyerBelt" type="Path2D" parent="."]
-position = Vector2(-11, -27)
+position = Vector2(-10, -26)
 scale = Vector2(0.827193, 0.999189)
 curve = SubResource("Curve2D_re8bw")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="ConveyerBelt"]
-position = Vector2(-42.3118, 124.101)
-rotation = 0.0299139
+position = Vector2(-42.3118, 132.107)
+rotation = -0.0384863
 
 [node name="Characters" type="Node2D" parent="."]
 position = Vector2(-30, -28)
