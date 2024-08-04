@@ -10,10 +10,8 @@ radius = 15.0333
 position = Vector2(23, 20)
 script = ExtResource("1_itd1o")
 powerup_type = 1
-fade_duration = null
-scale_up_factor = null
-scale_duration = null
-rotation_speed = null
+flicker_intensity = 0.5
+breath_scale = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3, 1)

@@ -18,7 +18,7 @@ debug_color = Color(0.756863, 0.270588, 0.898039, 0.419608)
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(3, 2)
-scale = Vector2(0.0227823, 0.0227823)
+scale = Vector2(0.0198945, 0.0198945)
 texture = ExtResource("3_f8juv")
 region_enabled = true
 region_rect = Rect2(96, 1832, 1464, 1176)

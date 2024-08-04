@@ -2,29 +2,29 @@ extends Area2D
 
 @export var powerup_type: PowerUpsManager.CharacterType
 @export var fade_duration: float = 1.0
-@export var scale_up_factor: float = 1.2
-@export var scale_duration: float = 0.5
 @export var rotation_speed: float = 1.0  # Rotation speed in radians per second
-@export var glow_intensity: float = 1.5  # Maximum glow intensity
-@export var glow_duration: float = 1.0  # Duration of one glow cycle
+@export var flicker_intensity: float = 0.3  # Intensity of the flicker effect
+@export var flicker_duration: float = 0.5  # Duration of one flicker cycle
+@export var breath_scale: float = 0.2  # Scale factor for breathing effect
+@export var breath_duration: float = 2.0  # Duration of one breath cycle
 
 @onready var icon = $Icon
 @onready var collect_zone: Area2D = get_node("/root").find_child("CollectPowerUpZone", true, false)
 
 var is_fading = false
 var fade_timer = 0.0
-var scale_timer = 0.0
 var original_scale: Vector2
 var target_rotation: float = 0.0
 var in_collection_zone: bool = false
-var glow_tween: Tween
+var flicker_tween: Tween
+var breath_tween: Tween
 
 func _ready():
 	input_pickable = true
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
 	
-	original_scale = scale
+	original_scale = icon.scale
 	
 	if not collect_zone:
 		push_error("CollectPowerUpZone not found in the scene!")
@@ -32,7 +32,8 @@ func _ready():
 		collect_zone.area_entered.connect(_on_entered_collection_zone)
 		collect_zone.area_exited.connect(_on_exited_collection_zone)
 	
-	start_glow_effect()
+	start_flicker_effect()
+	start_breath_effect()
 
 func _process(delta):
 	if is_fading:
@@ -48,11 +49,6 @@ func process_fading(delta):
 	fade_timer += delta
 	var fade_progress = fade_timer / fade_duration
 	modulate.a = 1.0 - fade_progress
-	
-	scale_timer += delta
-	var scale_progress = min(scale_timer / scale_duration, 1.0)
-	var current_scale = original_scale.lerp(original_scale * scale_up_factor, scale_progress)
-	scale = current_scale
 	
 	if fade_timer >= fade_duration:
 		queue_free()
@@ -99,12 +95,17 @@ func activate_powerup():
 	if not is_fading:
 		is_fading = true
 		fade_timer = 0.0
-		scale_timer = 0.0
 		GameManager.power_up_used = true
 		PowerUpsManager.activate_powerup(powerup_type)
 		GameManager.power_up_used = false
 
-func start_glow_effect():
-	glow_tween = create_tween().set_loops()
-	glow_tween.tween_property(self, "modulate", Color(glow_intensity, glow_intensity, glow_intensity, 1.0), glow_duration / 2.0)
-	glow_tween.tween_property(self, "modulate", Color(1.0, 1.0, 1.0, 1.0), glow_duration / 2.0)
+func start_flicker_effect():
+	flicker_tween = create_tween().set_loops()
+	flicker_tween.tween_property(icon, "modulate", Color(1 + flicker_intensity, 1 + flicker_intensity, 1 + flicker_intensity, 1.0), flicker_duration / 2.0)
+	flicker_tween.tween_property(icon, "modulate", Color(1.0, 1.0, 1.0, 1.0), flicker_duration / 2.0)
+
+func start_breath_effect():
+	breath_tween = create_tween().set_loops()
+	var scaled_breath = breath_scale * original_scale.x  # Scale the breath effect relative to the icon's small size
+	breath_tween.tween_property(icon, "scale", original_scale * (1 + scaled_breath), breath_duration / 2.0)
+	breath_tween.tween_property(icon, "scale", original_scale, breath_duration / 2.0)
