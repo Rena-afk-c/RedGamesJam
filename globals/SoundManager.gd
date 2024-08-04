@@ -52,12 +52,16 @@ func toggle_sfx():
 func play_main_menu_bg_music():
 	music_audio_player.stream = MAIN_MENU_BG
 	music_audio_player.play()
+
+func play_bg_music():
 	bg_audio_player.stream = CONVEYOR_BELT
 	bg_audio_player.play()
 
+func stop_bg_music():
+	bg_audio_player.stop()
+	
 func stop_main_menu_bg_music():
 	music_audio_player.stop()
-	bg_audio_player.stop()
 
 # character sfx
 func pick_up_luggage_sfx():

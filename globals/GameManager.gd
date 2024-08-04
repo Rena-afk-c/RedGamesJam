@@ -48,6 +48,7 @@ func get_selected_character() -> Characters:
 	return selected_character
 
 func collect_luggage():
+	AudioManager.point_gain_sfx()
 	var base_value = 5
 	var collected_value = int(base_value * current_point_multiplier)
 	currency_flight += collected_value
@@ -55,6 +56,7 @@ func collect_luggage():
 	print("Luggage collected. Value: ", collected_value, " New currency: ", currency_flight)
 
 func _on_point_frenzy_activated(multiplier):
+	# raining particle
 	current_point_multiplier = multiplier
 	print("Point multiplier set to: ", current_point_multiplier)
 
