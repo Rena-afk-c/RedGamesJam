@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var powerup_type: PowerUpManager.CharacterType
+@export var powerup_type: PowerUpsManager.CharacterType
 @export var fade_duration: float = 1.0
 @export var scale_up_factor: float = 1.2
 @export var scale_duration: float = 0.5
@@ -110,19 +110,19 @@ func _on_exited_collection_zone(area):
 func can_activate_powerup() -> bool:
 	return convert_character_type(GameManager.get_selected_character()) == powerup_type
 
-func convert_character_type(game_character: GameManager.Characters) -> PowerUpManager.CharacterType:
+func convert_character_type(game_character: GameManager.Characters) -> PowerUpsManager.CharacterType:
 	match game_character:
 		GameManager.Characters.TAPPY:
-			return PowerUpManager.CharacterType.TAPPY
+			return PowerUpsManager.CharacterType.TAPPY
 		GameManager.Characters.BAM:
-			return PowerUpManager.CharacterType.BAM
+			return PowerUpsManager.CharacterType.BAM
 		GameManager.Characters.BIGGIE:
-			return PowerUpManager.CharacterType.BIGGIE
+			return PowerUpsManager.CharacterType.BIGGIE
 		GameManager.Characters.OGU:
-			return PowerUpManager.CharacterType.OGU
+			return PowerUpsManager.CharacterType.OGU
 		_:
 			push_error("Invalid character type")
-			return PowerUpManager.CharacterType.TAPPY  # Default to TAPPY in case of error
+			return PowerUpsManager.CharacterType.TAPPY  # Default to TAPPY in case of error
 
 func start_pop_effect():
 	if not is_popping and not is_fading:
@@ -131,8 +131,7 @@ func start_pop_effect():
 		shake_timer = shake_duration
 		bubble_overlay.material.set_shader_parameter("pop_bubble", true)
 		
-		PowerUpManager.activate_powerup(powerup_type)
-
+		PowerUpsManager.activate_powerup(powerup_type)
 func apply_shake():
 	var shake_offset = Vector2(randf_range(-shake_amount, shake_amount), randf_range(-shake_amount, shake_amount))
 	icon.position = original_positions["icon"] + shake_offset

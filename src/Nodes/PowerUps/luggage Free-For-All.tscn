@@ -1,9 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://b4hq8wo1csnsn"]
 
 [ext_resource type="Script" path="res://src/Nodes/PowerUps/luggage Free-For-All.gd" id="1_5tfq8"]
+[ext_resource type="Texture2D" uid="uid://b63eihrrtefi0" path="res://assets/art/20240804_013602286_iOS.png" id="3_exqd0"]
 [ext_resource type="Shader" path="res://assets/shaders/bubble_effect.gdshader" id="3_nilfs"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_yxw7p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g65rl"]
 shader = ExtResource("3_nilfs")
@@ -25,12 +24,6 @@ position = Vector2(23, 20)
 script = ExtResource("1_5tfq8")
 powerup_type = 3
 
-[node name="Icon" type="MeshInstance2D" parent="."]
-modulate = Color(0.772549, 0.27451, 0.168627, 1)
-position = Vector2(3, 1)
-scale = Vector2(25.0752, 25.0752)
-mesh = SubResource("SphereMesh_yxw7p")
-
 [node name="BubbleOverlay" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_g65rl")
 offset_left = -12.0
@@ -43,3 +36,10 @@ mouse_filter = 2
 position = Vector2(3, 1)
 shape = SubResource("CircleShape2D_3r17h")
 debug_color = Color(0.756863, 0.270588, 0.898039, 0.419608)
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(3, 0)
+scale = Vector2(0.0302584, 0.0302584)
+texture = ExtResource("3_exqd0")
+region_enabled = true
+region_rect = Rect2(96, 992, 1464, 648)

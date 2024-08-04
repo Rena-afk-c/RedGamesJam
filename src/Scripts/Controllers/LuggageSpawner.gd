@@ -123,7 +123,7 @@ func is_point_inside_collision(collision_shape: CollisionShape2D, point: Vector2
 
 func can_collect_luggage(luggage: RigidBody2D) -> bool:
 	var selected_character = GameManager.get_selected_character()
-	return PowerUpEffects.active_powerups[PowerUpManager.PowerUpType.LUGGAGE_FREE_FOR_ALL] or luggage.luggage_type == selected_character
+	return PowerUpEffects.active_powerups[PowerUpsManager.PowerUpType.LUGGAGE_FREE_FOR_ALL] or luggage.luggage_type == selected_character
 
 func _on_luggage_free_for_all_activated():
 	print("Luggage Free-For-All activated in LuggageSpawner")

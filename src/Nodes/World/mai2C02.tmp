@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://nn8mucbvyyh8"]
+[gd_scene load_steps=67 format=3 uid="uid://nn8mucbvyyh8"]
 
 [ext_resource type="Script" path="res://src/Scripts/Controllers/FlightDisplay.gd" id="1_8nimi"]
 [ext_resource type="Script" path="res://src/Prefabs/utils/GameStateManager.gd" id="1_htfnk"]
@@ -14,10 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://b4hq8wo1csnsn" path="res://src/Nodes/PowerUps/luggage Free-For-All.tscn" id="12_1waiw"]
 [ext_resource type="PackedScene" uid="uid://cwevdoftrw2i2" path="res://src/Nodes/PowerUps/Luggage_Automata.tscn" id="13_ndvrl"]
 [ext_resource type="PackedScene" uid="uid://bjt7cwcbutfj8" path="res://src/Nodes/PowerUps/Time Slow.tscn" id="14_10kit"]
-[ext_resource type="Texture2D" uid="uid://bb1o6pdmv02nk" path="res://assets/art/20240804_013201099_iOS.png" id="15_gsyuw"]
-[ext_resource type="Texture2D" uid="uid://tna84s8oiceh" path="res://assets/art/20240804_013135801_iOS.png" id="15_jjsgd"]
-[ext_resource type="Texture2D" uid="uid://c4rl8n2m5glda" path="res://assets/art/20240804_013253315_iOS.png" id="16_7j0jo"]
-[ext_resource type="Texture2D" uid="uid://j1ocsmv45th2" path="res://assets/art/20240804_013230646_iOS.png" id="16_hl2as"]
+[ext_resource type="Texture2D" uid="uid://bieyotbryoy2f" path="res://assets/shaders/LightSource.tres" id="16_p7gge"]
 [ext_resource type="PackedScene" uid="uid://bpngs84hwd5fv" path="res://src/Nodes/SelectableCharacters/sl_tappy.tscn" id="16_xvnsr"]
 [ext_resource type="Script" path="res://src/Scripts/UIController/Pause_Overlay.gd" id="17_3242x"]
 [ext_resource type="PackedScene" uid="uid://bg7hmcutdesfl" path="res://src/Nodes/SelectableCharacters/sl_bam.tscn" id="17_vxx13"]
@@ -39,7 +36,6 @@
 [ext_resource type="Texture2D" uid="uid://by21avkiwbker" path="res://assets/ui/upgrade button.png" id="33_jpeuk"]
 [ext_resource type="Texture2D" uid="uid://b55s8oaocsdxe" path="res://assets/ui/ALL_HUD/14.png" id="34_nwnbs"]
 [ext_resource type="Texture2D" uid="uid://fownr3pdxmmn" path="res://assets/ui/ALL_HUD/15.png" id="35_sws1p"]
-[ext_resource type="Texture2D" uid="uid://clejnrcioaeov" path="res://assets/art/20240804_013122657_iOS.png" id="36_q7wp3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qpa40"]
 atlas = ExtResource("9_6sdx6")
@@ -123,16 +119,16 @@ size = Vector2(35, 46)
 size = Vector2(35, 53)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fohrn"]
-size = Vector2(25.75, 24)
+size = Vector2(51.5, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ie0yw"]
 size = Vector2(232.305, 40.2429)
 
 [sub_resource type="Curve2D" id="Curve2D_re8bw"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -18.1336, 123.1, 0, 0, 0, 0, 55.6098, 121.098, -0.320198, -14.5794, 0.320198, 14.5794, 64.0721, 270.219, -0.960595, 0.265081, 0.960595, -0.265081, 107.593, 279.226, -5.44337, 10.6032, 5.44337, -10.6032, 128.144, 272.221, 6.08377, 4.77145, -6.08377, -4.77145, 126.935, 246.2, 0, 0, 0, 0, 129.353, 170.138, 9.05657, 1.31208, -9.05657, -1.31208, 120.891, 93.0755, 1.35849, -3.37393, -1.35849, 3.37393, 108.802, 94.0763, 0, 0, 0, 0, 105.175, 88.0714, 1.13207, -5.99809, -1.13207, 5.99809, 88.2503, 85.069, 1.35849, -1.8744, -1.35849, 1.8744, 74.9523, 87.0706, 6.56602, -1.8744, -6.56602, 1.8744, 59.2365, 93.0755, -3.23104, 0.222905, 3.23104, -0.222905, 56.8187, 129.105, 0, 0, 0, 0, 56.8187, 129.105)
+"points": PackedVector2Array(0, 0, 0, 0, 32, 44.4405, 0, 0, 0, 0, 28, 50.5006, 0, 0, 0, 0, 24, 59.5907, 0, 0, 0, 0, 23, 92.9211, 0, 0, 0, 0, 24, 137.362, 0, 0, 0, 0, 25, 189.882, 0, 0, 0, 0, 25, 249.473, 0, 0, 0, 0, 27, 284.823, 0, 0, 0, 0, 25, 305.024, 0, 0, 0, 0, 30, 315.124, 0, 0, 0, 0, 29, 316.134, 0, 0, 0, 0, 29, 319.164, 0, 0, 0, 0, 33, 321.184, 0, 0, 0, 0, 39, 321.184, 0, 0, 0, 0, 43, 323.204, 0, 0, 0, 0, 46, 321.184, 0, 0, 0, 0, 47, 322.194, 0, 0, 0, 0, 76, 322.194, 0, 0, 0, 0, 107, 324.214, 0, 0, 0, 0, 152, 323.204, 0, 0, 0, 0, 156, 321.184, 0, 0, 0, 0, 159, 318.154, 0, 0, 0, 0, 159, 316.134, 0, 0, 0, 0, 161, 312.094, 0, 0, 0, 0, 164, 306.034, 0, 0, 0, 0, 164, 284.823, 0, 0, 0, 0, 165, 229.273, 0, 0, 0, 0, 160, 150.492, 0, 0, 0, 0, 161, 130.292, 0, 0, 0, 0, 160, 114.131, 0, 0, 0, 0, 161, 68.6808, 0, 0, 0, 0, 158, 52.5206, 0, 0, 0, 0, 154.68, 45.9602, 9.60513, 3.03771, -9.60513, -3.03771, 145.648, 43.9175, 0, 0, 0, 0, 144.519, 41.8748, 0, 0, 0, 0, 142.261, 41.8748, 0, 0, 0, 0, 140.002, 36.7681, 0, 0, 0, 0, 128.712, 35.7468, 0, 0, 0, 0, 129.841, 39.8321, 0, 0, 0, 0, 126.454, 37.7895, 0, 0, 0, 0, 112.905, 37.7895, 0, 0, 0, 0, 97.0985, 36.7681, 0, 0, 0, 0, 88.066, 36.7681, 0, 0, 0, 0, 63.2269, 35.7468, 0, 0, 0, 0, 45, 38.3805, 0, 0, 0, 0, 40, 39.3905, 0, 0, 0, 0, 39, 40.4005, 0, 0, 0, 0, 35, 41.4105, 0, 0, 0, 0, 32, 44.4405)
 }
-point_count = 15
+point_count = 49
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dxvtd"]
 load_path = "res://.godot/imported/20.png-4c61d082dd0fef9ca149448542f42246.ctex"
@@ -351,10 +347,9 @@ value = 100.0
 fill_mode = 3
 show_percentage = false
 
-[node name="SpawnerRoot" parent="." node_paths=PackedStringArray("path") instance=ExtResource("9_p52hf")]
+[node name="SpawnerRoot" parent="." instance=ExtResource("9_p52hf")]
 position = Vector2(25, 31)
 rotation = 1.5509
-path = NodePath("../ConveyerBelt")
 spawn_interval = 4.0
 
 [node name="CollectPointRoot" type="Node2D" parent="SpawnerRoot"]
@@ -396,33 +391,7 @@ debug_color = Color(0.992157, 0, 0.239216, 0.419608)
 [node name="SpawnPoint" type="Node2D" parent="SpawnerRoot"]
 position = Vector2(91.2953, -64.1964)
 
-[node name="Env" type="Node2D" parent="."]
-
-[node name="Floor" type="Sprite2D" parent="Env"]
-position = Vector2(90.875, 160)
-scale = Vector2(0.100972, 0.1)
-texture = ExtResource("36_q7wp3")
-
-[node name="Shadow" type="Sprite2D" parent="Env/Floor"]
-texture = ExtResource("15_jjsgd")
-
-[node name="Props" type="Sprite2D" parent="Env"]
-position = Vector2(94, 163)
-scale = Vector2(0.105833, 0.103472)
-texture = ExtResource("16_7j0jo")
-
-[node name="ConveyerBelt" type="Sprite2D" parent="Env"]
-position = Vector2(104, 160)
-scale = Vector2(0.120833, 0.100035)
-texture = ExtResource("15_gsyuw")
-
-[node name="Slide" type="Sprite2D" parent="Env"]
-position = Vector2(93.625, 157)
-scale = Vector2(0.104861, 0.100035)
-texture = ExtResource("16_hl2as")
-
 [node name="PowerUpSpawner" type="Node2D" parent="." node_paths=PackedStringArray("path")]
-visible = false
 position = Vector2(25, 31)
 rotation = 1.5509
 script = ExtResource("10_3iq14")
@@ -437,7 +406,7 @@ position = Vector2(-31.4912, 24.3783)
 rotation = -1.5509
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PowerUpSpawner/PU_DetectionZone"]
-position = Vector2(93, 68)
+position = Vector2(79.75, 14)
 shape = SubResource("RectangleShape2D_fohrn")
 debug_color = Color(0.976471, 0, 0.407843, 0.419608)
 
@@ -451,15 +420,31 @@ shape = SubResource("RectangleShape2D_ie0yw")
 [node name="SpawnPoint" type="Node2D" parent="PowerUpSpawner"]
 position = Vector2(89.7634, 12.7884)
 
+[node name="Env" type="Node2D" parent="."]
+
+[node name="WeatherSystem" type="CanvasModulate" parent="Env"]
+position = Vector2(14, 114)
+
+[node name="PointLight2D" type="PointLight2D" parent="Env"]
+position = Vector2(106, 101)
+color = Color(1, 0.686275, 0.168627, 1)
+energy = 0.33
+texture = ExtResource("16_p7gge")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Env"]
+position = Vector2(94, 243)
+color = Color(1, 0.686275, 0.168627, 1)
+energy = 0.33
+texture = ExtResource("16_p7gge")
+
 [node name="ConveyerBelt" type="Path2D" parent="."]
-visible = false
 position = Vector2(-11, -27)
 scale = Vector2(0.827193, 0.999189)
 curve = SubResource("Curve2D_re8bw")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="ConveyerBelt"]
-position = Vector2(-18.1336, 123.1)
-rotation = -0.0271364
+position = Vector2(32, 44.4405)
+rotation = 2.15421
 
 [node name="Characters" type="Node2D" parent="."]
 position = Vector2(-30, -28)
@@ -485,6 +470,7 @@ position = Vector2(149.078, -119.724)
 rotation = -1.5509
 
 [node name="Pause" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Pause_Overlay" type="Control" parent="Pause"]
 layout_mode = 3
@@ -717,6 +703,7 @@ scale = Vector2(0.047125, 0.047125)
 texture = ExtResource("20_rcf10")
 
 [node name="GameOver" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -839,6 +826,7 @@ texture_normal = SubResource("AtlasTexture_l3twj")
 texture_pressed = SubResource("AtlasTexture_t3q71")
 
 [node name="UpgradeManager" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="UpgradeHud" type="Control" parent="UpgradeManager"]
 layout_mode = 3
@@ -957,6 +945,7 @@ texture_normal = SubResource("AtlasTexture_2nvgf")
 texture_pressed = SubResource("AtlasTexture_t7nab")
 
 [node name="TransitionManager" parent="." instance=ExtResource("30_xouhy")]
+visible = false
 
 [node name="ScoreLabel" type="Label" parent="."]
 anchors_preset = 8
