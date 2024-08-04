@@ -27,6 +27,7 @@ var spawn_timer: float = 0.0
 var powerup_list: Array[PathFollow2D] = []
 var available_powerups: Array = []
 var can_spawn: bool = true
+var _paused: bool = false
 
 func _ready():
 	if not point_frenzy_scene or not luggage_free_for_all_scene or not luggage_automata_scene or not time_slow_scene:
@@ -35,6 +36,9 @@ func _ready():
 	pu_detection_zone.connect("area_entered", Callable(self, "_on_powerup_detected"))
 
 func _process(delta: float) -> void:
+	if _paused:
+		return
+	
 	spawn_timer += delta
 	if spawn_timer >= spawn_interval and can_spawn_powerup() and can_spawn:
 		spawn_powerup()
@@ -49,6 +53,9 @@ func can_spawn_powerup() -> bool:
 	return last_powerup.progress > min_distance and not available_powerups.is_empty()
 
 func spawn_powerup() -> void:
+	if _paused:
+		return
+	
 	if available_powerups.is_empty():
 		reset_available_powerups()
 	
@@ -84,6 +91,9 @@ func get_powerup_scene(powerup_type: PowerupType) -> PackedScene:
 	return null
 
 func move_powerups(delta: float) -> void:
+	if _paused:
+		return
+	
 	var powerups_to_remove = []
 	for path_follow in powerup_list:
 		if path_follow.get_child_count() > 0:
@@ -101,6 +111,9 @@ func move_powerups(delta: float) -> void:
 		path_follow.queue_free()
 
 func _on_powerup_detected(area: Area2D) -> void:
+	if _paused:
+		return
+	
 	var parent = area.get_parent()
 	if parent is PathFollow2D and parent in powerup_list and not area.has_meta("fading"):
 		start_flicker_fade_out(area)
@@ -128,3 +141,29 @@ func reset_available_powerups() -> void:
 		PowerupType.LUGGAGE_AUTOMATA,
 		PowerupType.TIME_SLOW
 	]
+
+func pause_spawner():
+	_paused = true
+	set_process(false)
+	set_physics_process(false)
+	for path_follow in powerup_list:
+		if path_follow.get_child_count() > 0:
+			var powerup = path_follow.get_child(0)
+			if powerup is Node2D:
+				powerup.set_process(false)
+				powerup.set_physics_process(false)
+			if powerup is RigidBody2D:
+				powerup.freeze = true
+
+func resume_spawner():
+	_paused = false
+	set_process(true)
+	set_physics_process(true)
+	for path_follow in powerup_list:
+		if path_follow.get_child_count() > 0:
+			var powerup = path_follow.get_child(0)
+			if powerup is Node2D:
+				powerup.set_process(true)
+				powerup.set_physics_process(true)
+			if powerup is RigidBody2D:
+				powerup.freeze = false

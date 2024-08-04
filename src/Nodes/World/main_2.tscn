@@ -464,13 +464,11 @@ scale = Vector2(1.5, 1.5)
 [node name="SL_Tappy" parent="Characters" instance=ExtResource("16_xvnsr")]
 position = Vector2(186.417, -119.648)
 rotation = -1.5509
-character_type = 2
 
 [node name="SL_Bam" parent="Characters" instance=ExtResource("17_vxx13")]
 position = Vector2(76.3993, -119.837)
 rotation = -1.5509
 scale = Vector2(0.838809, 0.838809)
-character_type = 0
 
 [node name="SL_Biggie" parent="Characters" instance=ExtResource("18_tit7w")]
 position = Vector2(113.738, -119.761)

@@ -549,7 +549,6 @@ texture_normal = SubResource("AtlasTexture_f4fio")
 [node name="FG" type="CanvasLayer" parent="."]
 
 [node name="TransitionManager" parent="." instance=ExtResource("31_t6coi")]
-visible = false
 
 [connection signal="pressed" from="Main/BtnContainer/TPlayBtn" to="ButtonBehavior" method="_on_t_play_btn_pressed"]
 [connection signal="pressed" from="Main/BtnContainer/TSettingsBtn" to="." method="_on_t_settings_btn_pressed"]

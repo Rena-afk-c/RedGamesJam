@@ -12,7 +12,7 @@ signal game_over
 var luggage_count: int = 0
 var max_luggage: int = 20  
 
-
+var GAME_PAUSED:bool = false
 var power_up_used:bool = false
 
 @onready var power_up_effects = $"/root/PowerUpEffects"
